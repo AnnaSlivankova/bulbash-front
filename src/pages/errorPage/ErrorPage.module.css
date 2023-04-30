@@ -1,0 +1,11 @@
+.wrapper {
+    min-height: 100vh;
+}
+.cover {
+    min-height: 100vh;
+    background-image: url("../../assets/imgs/error404.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
