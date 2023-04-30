@@ -32,6 +32,7 @@ export const Categories = () => {
 
 	return (
 		<div className={s.wrapper}>
+			<h1>HELLO</h1>
 			<div className={`${styleContainer.container} ${s.container}`}>
 				{categories.map(el => {
 					const imgPath = 'http://' + el.image_path
