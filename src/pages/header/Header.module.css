@@ -8,3 +8,8 @@
     height: 50px;
     margin-right: 10px;
 }
+.cart {
+    width: 45px;
+    height: 45px;
+    /*border: 1px solid red;*/
+}

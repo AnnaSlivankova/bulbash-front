@@ -1,0 +1,71 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+}
+.wrp {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+}
+
+.leftBlock {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+}
+.leftContainer {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+}
+
+.peopleWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 15px;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+}
+.peopleSubText {
+    margin: 10px;
+}
+
+.rightBlock {
+    width: 75%;
+    display: flex;
+    justify-content: center;
+}
+.rightContainer {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+}
+.subcategories {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 20px;
+}
+.products {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 20px;
+}
+.pagination {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}

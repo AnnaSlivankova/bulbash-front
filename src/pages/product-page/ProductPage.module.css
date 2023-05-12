@@ -1,0 +1,91 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+    /*align-items: center;*/
+    /*border: 1px solid red;*/
+}
+
+.leftBlock {
+    width: 30%;
+    /*background-color: pink;*/
+    display: flex;
+    justify-content: center;
+}
+
+.leftContainer {
+    display: flex;
+    flex-direction: column;
+    /*border: 1px solid red;*/
+    width: 95%;
+
+}
+
+.img {
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+
+}
+
+.rightBlock {
+    width: 40%;
+    /*background-color: powderblue;*/
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.rightContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    font-size: 20px;
+padding: 10px;
+    /*border: 1px solid red;*/
+    width: 95%;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+.title {
+    font-weight: 600;
+    font-size: 28px;
+    text-transform: uppercase;
+    margin: 10px;
+    text-align: center;
+}
+
+.description {
+    margin: 10px;
+font-weight: 300;
+    /*text-align: center;*/
+}
+
+.ingredients {
+    font-size: 15px;
+    margin: 10px;
+}
+
+.orderContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.price {
+}
+
+.counter {
+
+}

@@ -1,0 +1,1 @@
+export const URLPath = 'http://'

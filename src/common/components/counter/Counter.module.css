@@ -1,0 +1,36 @@
+.counterContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.counter {
+    display: flex;
+    align-items: center;
+    /*border: 1px solid red;*/
+}
+
+.counterInput {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+
+    font-size: 17px;
+    text-align: center;
+
+    border: 1px solid #D9D9D9;
+    border-radius: 4px;
+    outline: none;
+}
+
+.counterInput::-webkit-outer-spin-button,
+.counterInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}

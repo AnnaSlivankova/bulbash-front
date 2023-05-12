@@ -1,0 +1,11 @@
+.title {
+    text-transform: uppercase;
+}
+
+.description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* количество строк, которые будут видны */
+    -webkit-box-orient: vertical;
+}

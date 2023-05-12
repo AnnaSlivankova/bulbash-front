@@ -1,0 +1,38 @@
+import React, { useEffect } from 'react'
+import s from '../categories/CategoriesAdmin.module.css'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../app/store'
+import { RequestPostProduct, ResponseFetchProducts } from './products-admin-api'
+import { useActions } from '../../../common/hooks'
+import { adminProductsThunks } from './products-admin-slice'
+import { AddProdModal } from '../../../common/components/modals/add-modals/AddProdModal'
+import { TableComponent } from '../../../common/components/table/Table'
+import { productsData } from '../../../common/data/table-head-data'
+
+export const ProductsAdmin = () => {
+	const products = useSelector<RootState, ResponseFetchProducts[]>(state => state.adminProducts.products)
+	const { fetchProductsList, addNewProduct } = useActions(adminProductsThunks)
+
+	useEffect(() => {
+		fetchProductsList({})
+	}, [])
+
+	const addNewProductHandler = (params: RequestPostProduct, img_file: FormData) => {
+		addNewProduct({ params, img_file })
+	}
+
+	return (
+		<div className={s.wrapper}>
+			{/*<h1>Products</h1>*/}
+			<AddProdModal btnTitle={'add new product'} title={'Add new PRODUCT'} callback={addNewProductHandler} />
+			<TableComponent
+				sort={''}
+				headData={productsData}
+				bodyData={products}
+				deleteTitle={'Delete PRODUCT'}
+				updateTitle={'Update PRODUCT'}
+				type={'PROD'}
+			/>
+		</div>
+	)
+}

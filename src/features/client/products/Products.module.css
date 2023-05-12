@@ -1,0 +1,24 @@
+.title {
+    text-transform: uppercase;
+}
+.description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* количество строк, которые будут видны */
+    -webkit-box-orient: vertical;
+}
+.subContainer {
+    padding: 16px;
+}
+.sub {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.counter {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}

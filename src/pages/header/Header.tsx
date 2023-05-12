@@ -4,9 +4,13 @@ import s from './Header.module.css'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
+import { useNavigate } from 'react-router-dom'
+import { CartBadge } from '../../features/client/cart/cart-badge/CartBadge'
+import { IconButton } from '@mui/material'
 
 export const Header: React.FC = () => {
 	const [isScrolled, setIsScrolled] = useState(false)
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -22,6 +26,13 @@ export const Header: React.FC = () => {
 			window.removeEventListener('scroll', handleScroll)
 		}
 	}, [])
+
+	const redirectToCart = () => {
+		navigate('/cart')
+	}
+	const redirectToHome = () => {
+		navigate('/')
+	}
 
 	return (
 		<AppBar
@@ -48,17 +59,22 @@ export const Header: React.FC = () => {
 					}}
 				>
 					{isScrolled ? (
-						<div className={s.logoContainer}>
+						<span className={s.logoContainer}>
 							<img src={logo} className={s.logoSm} />
-							<div>Bulbash</div>
-						</div>
+							<span onClick={redirectToHome}>Bulbash</span>
+						</span>
 					) : (
 						''
 					)}
-					<div>home</div>
-					<div>about us</div>
-					<div>categories</div>
-					<div>contacts</div>
+					<span onClick={redirectToHome}>home</span>
+					<span>about us</span>
+					<span onClick={redirectToHome}>categories</span>
+					<span>contacts</span>
+					{isScrolled && (
+						<IconButton onClick={redirectToCart} className={s.cart}>
+							<CartBadge />
+						</IconButton>
+					)}
 				</Typography>
 			</Toolbar>
 		</AppBar>

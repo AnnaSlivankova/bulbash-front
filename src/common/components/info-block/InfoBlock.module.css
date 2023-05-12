@@ -1,0 +1,79 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /*min-height: 45vh;*/
+    min-height: 30vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0)), url("../../../assets/imgs/info_res_crop.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    width: 95%;
+    justify-content: space-between;
+}
+
+.logoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    width: 250px;
+    height: 250px;
+}
+
+.btnsContainer {
+    display: flex;
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 100;
+    font-size: 20px;
+    line-height: 1.1;
+    color: #000;
+    height: 250px;
+    justify-content: center;
+
+    width: 800px;
+}
+
+.title {
+    background-color: #A26B2A;
+    background-image: linear-gradient(90deg, #F0E56F, #A26B2A);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    font-weight: 800;
+    font-size: 50px;
+    text-transform: uppercase;
+}
+
+.descriptionHP {
+    font-size: 40px;
+    color: #fff;
+}
+
+.description {
+    text-align: center;
+    font-size: 25px;
+    color: #fff;
+}
+
+.contactsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
