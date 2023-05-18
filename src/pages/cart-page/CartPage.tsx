@@ -20,11 +20,6 @@ export const CartPage = () => {
 		navigate('/')
 	}
 
-	var myArray = [1, 2, 3, 4, 5]
-	var sum = myArray.reduce(function (acc, curr) {
-		return acc + curr
-	}, 0)
-
 	const totalCount = cartProducts.reduce((acc, el) => acc + el.totalPrice, 0)
 
 	return (

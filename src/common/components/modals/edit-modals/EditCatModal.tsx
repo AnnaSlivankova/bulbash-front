@@ -48,8 +48,8 @@ export const EditCatModal: React.FC<EditType> = ({
 			name: prevName,
 			description: prevDescription,
 			status_enabled: prevStatus,
-			position: prevPosition
-			// img_file: prevImg
+			position: prevPosition,
+			img_file: prevImg
 		}
 	})
 

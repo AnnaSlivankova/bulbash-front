@@ -9,7 +9,8 @@ import { cartActions } from '../../../features/client/cart/cart-slice'
 import { CartCounterCustom } from '../../../common/components/counter/cart-counter/CartCounterCustom'
 
 export const InfoCart: React.FC<PropsType> = ({ image_path, title, people, weight, price, count, id, totalPrice }) => {
-	const { deleteCartProduct, setCartProduct } = useActions(cartActions)
+	const { deleteCartProduct, setCartProduct, increaseCartCount, decreaseCartCount, onChangeCartCount } =
+		useActions(cartActions)
 	const deleteProductHandler = () => {
 		deleteCartProduct({ id })
 	}
@@ -18,6 +19,9 @@ export const InfoCart: React.FC<PropsType> = ({ image_path, title, people, weigh
 
 	const setCartProductHandler = (countValue: number) => {
 		const totalCartPrice = countValue * price
+
+		// increaseCartCount({id})
+
 		setCartProduct({
 			cartProduct: {
 				id,
@@ -43,7 +47,15 @@ export const InfoCart: React.FC<PropsType> = ({ image_path, title, people, weigh
 			</div>
 			<div className={s.priceContainer}>
 				<div className={s.price}>{`${price} руб.`}</div>
-				<CartCounter callback={setCartProductHandler} count={count} />
+				<Counter
+					inc={increaseCartCount}
+					dec={decreaseCartCount}
+					count={count}
+					id={id}
+					// callback={setCartProductHandler}
+					callback={onChangeCartCount}
+				/>
+				{/*<CartCounter callback={setCartProductHandler} count={count} />*/}
 				{/*<CartCounterCustom callback={setCartProductHandler} count={count} />*/}
 				<div className={s.count}>{`${totalPrice} руб.`}</div>
 				{/*<div className={s.count}>{`${totalCartPrice} руб.`}</div>*/}
