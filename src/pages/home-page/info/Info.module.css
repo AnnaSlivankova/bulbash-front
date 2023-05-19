@@ -4,6 +4,7 @@
     justify-content: center;
 
     min-height: 45vh;
+    /*min-height: 30vh;*/
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0)), url("../../../assets/imgs/info_res_crop.jpg");
 
     background-size: cover;

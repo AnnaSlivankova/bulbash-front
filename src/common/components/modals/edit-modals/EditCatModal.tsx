@@ -14,6 +14,7 @@ import s from './EditModal.module.css'
 import { IconButton } from '@mui/material'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate'
 import { convertFileToBase64 } from '../../../utils/readImgAsBase64'
+import { CategoryDataType } from '../../../../features/admin/admin-page-types'
 
 const style = {
 	checkbox: {
@@ -43,13 +44,13 @@ export const EditCatModal: React.FC<EditType> = ({
 	const handleOpen = () => setOpen(true)
 	const handleClose = () => setOpen(false)
 
-	const { control, handleSubmit, reset, register } = useForm({
+	const { control, handleSubmit, reset, register, getValues, setValue } = useForm({
 		defaultValues: {
 			name: prevName,
 			description: prevDescription,
 			status_enabled: prevStatus,
-			position: prevPosition,
-			img_file: prevImg
+			position: prevPosition
+			// img_file: prevImg
 		}
 	})
 
@@ -57,15 +58,41 @@ export const EditCatModal: React.FC<EditType> = ({
 	const [formData, setFormData] = useState<FormData>(new FormData())
 
 	const onSubmit: SubmitHandler<any> = data => {
-		const finaldata = { data, category_id: id, img_file: formData }
-		// const finaldata = { data: { name: res.name }, category_id: id }
+		const modifiedData: Partial<CategoryDataType> = {}
+		let modifiedImg
 
-		console.log(finaldata)
+		// { data: Partial<CategoryDataType>; category_id: number; img_file: FormData }
+
+		if (data.name !== prevName) {
+			modifiedData.name = data.name
+		}
+		if (data.description !== prevDescription) {
+			modifiedData.description = data.description
+		}
+		if (data.status_enabled !== prevStatus) {
+			modifiedData.status_enabled = data.status_enabled
+		}
+		if (data.position !== prevPosition) {
+			modifiedData.position = data.position
+		}
+		if (ava !== prevImg) {
+			modifiedImg = formData
+		}
+
+		const finaldata = {
+			data: { ...modifiedData },
+			category_id: id,
+			img_file: modifiedImg
+		}
+		// const finaldata = { data, category_id: id, img_file: formData }
+
+		console.log(finaldata.data)
+
 		callback(finaldata)
 		// addPack(finalData)
 		setOpen(false)
 		handleClose()
-		reset()
+		reset(data)
 	}
 
 	const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -17,6 +17,7 @@ import { WeightSlider } from '../../common/components/slider/weight-slider/Weigh
 import Button from '@mui/material/Button'
 import { changeImgPath } from '../../common/utils/changeImgPath'
 import { CartCounter } from '../../common/components/counter/cart-counter/CartCounter'
+import { SearchByPeople } from '../../common/components/search-by-people/SearchByPeople'
 
 export const ProductsPage = () => {
 	console.log('ProductsPage rendering')
@@ -81,7 +82,7 @@ export const ProductsPage = () => {
 						<div className={s.peopleWrapper}>
 							<div>Сортировать по количеству человек</div>
 							<div className={s.peopleSubText}>{`от ${minPeopleState} чел. - до ${maxPeopleState} чел.`}</div>
-							{/*<CartCounter callback={searchByPeople} count={minPeopleState} />*/}
+							<SearchByPeople callback={searchByPeople} />
 						</div>
 					</div>
 				</div>

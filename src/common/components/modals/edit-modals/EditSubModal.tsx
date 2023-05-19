@@ -39,14 +39,23 @@ export const EditSubModal: React.FC<EditType> = ({ id, prevName, prevStatus, tit
 	})
 
 	const onSubmit: SubmitHandler<any> = data => {
-		const params = { ...data, category_id }
+		const modifiedData: any = {}
+
+		if (data.name !== prevName) {
+			modifiedData.name = data.name
+		}
+		if (data.status_enabled !== prevStatus) {
+			modifiedData.status_enabled = data.status_enabled
+		}
+
+		const params = { ...modifiedData, category_id }
 		const finaldata = { subcategory_id: id, params }
 
 		console.log(finaldata)
 		callback(id, params)
 		setOpen(false)
 		handleClose()
-		reset()
+		reset(data)
 	}
 
 	return (

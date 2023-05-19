@@ -14,6 +14,7 @@ import s from './EditModal.module.css'
 import { IconButton } from '@mui/material'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate'
 import { convertFileToBase64 } from '../../../utils/readImgAsBase64'
+import { RequestPostProduct } from '../../../../features/admin/products/products-admin-api'
 
 const style = {
 	checkbox: {
@@ -60,19 +61,60 @@ export const EditProdModal: React.FC<EditType> = ({
 		}
 	})
 
+	console.log(`prevStatus: ${prevStatus}`)
+
 	const [ava, setAva] = useState(prevImg)
 	const [formData, setFormData] = useState<FormData>(new FormData())
 
 	const onSubmit: SubmitHandler<any> = data => {
-		const finaldata = { data, category_id: id, img_file: formData }
-		// const finaldata = { data: { name: res.name }, category_id: id }
+		const modifiedData: Partial<RequestPostProduct> = {}
+		let modifiedImg
 
-		console.log(finaldata)
-		callback(id, data, formData)
+		if (data.name !== prevName) {
+			modifiedData.name = data.name
+		}
+		if (data.description !== prevDescription) {
+			modifiedData.description = data.description
+		}
+		if (data.ingredients !== prevIngredients) {
+			modifiedData.ingredients = data.ingredients
+		}
+		if (data.people_numbers !== prevPeopleNumbers) {
+			modifiedData.people_numbers = data.people_numbers
+		}
+		if (data.price !== prevPrice) {
+			modifiedData.price = data.price
+		}
+		if (data.weight !== prevWeight) {
+			modifiedData.weight = data.weight
+		}
+		if (data.category_id !== prevCategoryId) {
+			modifiedData.category_id = data.category_id
+		}
+		if (data.subcategory_id !== prevSubcategoryId) {
+			modifiedData.subcategory_id = data.subcategory_id
+		}
+		if (data.status_enabled !== prevStatus) {
+			modifiedData.status_enabled = data.status_enabled
+		}
+		if (ava !== prevImg) {
+			modifiedImg = formData
+		}
+
+		const finaldata = { data: { ...modifiedData }, product_id: id, img_file: modifiedImg }
+		// const finaldata = { data, category_id: id, img_file: formData }
+
+		// console.log(finaldata)
+		// callback(id, data, formData)
+
+		// product_id: number, params: any, img_file: FormData
+
+		callback(id, modifiedData, modifiedImg)
+		// callback(id, data, formData)
 		// addPack(finalData)
 		setOpen(false)
 		handleClose()
-		reset()
+		reset(data)
 	}
 
 	const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -234,7 +276,7 @@ export const EditProdModal: React.FC<EditType> = ({
 					control={control}
 					render={({ field }) => (
 						<label className={s.checkbox}>
-							<Checkbox {...field} color='secondary' />
+							<Checkbox {...field} color='secondary' checked={field.value} />
 							status_enabled
 						</label>
 					)}
@@ -258,7 +300,8 @@ type EditType = {
 	prevName: string
 	title: string
 	prevImg: string
-	callback: (id: number, params: any, img_file: FormData) => void
+	// callback: (id: number, params: any, img_file: FormData) => void
+	callback: (id: number, params: any, img_file: any) => void
 	prevDescription: string
 	prevStatus: boolean
 	prevIngredients: string
