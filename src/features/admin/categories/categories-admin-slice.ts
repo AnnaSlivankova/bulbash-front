@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { createAppAsyncThunk } from 'common/utils/create-app-async-thunk'
 import { CategoryDataType, FetchCategoryResponseType } from '../admin-page-types'
 import { categoriesAdminAPI } from './categories-admin-api'
+import { authActions } from '../../auth/auth-slice'
+import { handleAxiosError } from '../../../common/hooks'
 
 const token = localStorage.getItem('token')
 
@@ -24,9 +26,12 @@ const addNewCategory = createAppAsyncThunk<void, { data: Omit<CategoryDataType, 
 		const { dispatch, rejectWithValue, getState } = thunkAPI
 		try {
 			const res = await categoriesAdminAPI.addNewCategory(data)
+			dispatch(authActions.setMessage({ message: 'Новая категория была успешно создана' }))
+			dispatch(authActions.setSeverity({ severity: 'success' }))
 			dispatch(adminCategoriesThunks.fetchCategoriesList())
 		} catch (e) {
 			console.log(e)
+			handleAxiosError(dispatch, e)
 			return rejectWithValue(null)
 		}
 	}
@@ -39,9 +44,12 @@ const updateCategory = createAppAsyncThunk<
 	const { dispatch, rejectWithValue, getState } = thunkAPI
 	try {
 		const res = await categoriesAdminAPI.updateCategory(args)
+		dispatch(authActions.setMessage({ message: res.detail }))
+		dispatch(authActions.setSeverity({ severity: 'success' }))
 		dispatch(adminCategoriesThunks.fetchCategoriesList())
 	} catch (e) {
 		console.log(e)
+		handleAxiosError(dispatch, e)
 		return rejectWithValue(null)
 	}
 })
@@ -52,9 +60,12 @@ const deleteCategory = createAppAsyncThunk<void, number>(
 		const { dispatch, rejectWithValue, getState } = thunkAPI
 		try {
 			const res = await categoriesAdminAPI.deleteCategory(category_id)
+			dispatch(authActions.setMessage({ message: res.detail }))
+			dispatch(authActions.setSeverity({ severity: 'success' }))
 			dispatch(adminCategoriesThunks.fetchCategoriesList())
 		} catch (e) {
 			console.log(e)
+			handleAxiosError(dispatch, e)
 			return rejectWithValue(null)
 		}
 	}

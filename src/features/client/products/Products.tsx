@@ -8,10 +8,13 @@ import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import { useNavigate } from 'react-router-dom'
-import { useActions } from '../../../common/hooks'
+import { useActions, useAppDispatch } from '../../../common/hooks'
 import { productsActions } from './products-slice'
 import { CartCounter } from '../../../common/components/counter/cart-counter/CartCounter'
 import { cartActions } from '../cart/cart-slice'
+import { userCartThunks } from '../../cart/userCart-slice'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../app/store'
 
 export const Products: React.FC<ProductsType> = ({
 	zoom,
@@ -25,6 +28,12 @@ export const Products: React.FC<ProductsType> = ({
 }) => {
 	const { setProductId } = useActions(productsActions)
 	const { setCartProduct } = useActions(cartActions)
+
+	const { addItemToCard } = useActions(userCartThunks)
+
+	const isLogin = useSelector<RootState, boolean>(state => state.auth.isLogin)
+
+	const dispatch = useAppDispatch()
 
 	const navigate = useNavigate()
 	const redirectToProduct = () => {
@@ -54,6 +63,11 @@ export const Products: React.FC<ProductsType> = ({
 		console.log(count)
 		setCartProduct({ cartProduct })
 		setShowCartBtn(!showCartBtn)
+
+		addItemToCard({
+			product_id: id,
+			quantity: count
+		})
 	}
 
 	const redirectToCart = () => {
@@ -83,18 +97,20 @@ export const Products: React.FC<ProductsType> = ({
 							{`на ${peopleNumber} чел., ${weight} гр.`}
 						</Typography>
 					</div>
-					<div className={s.counter}>
-						<CartCounter callback={setCountHandler} count={1} />
-						{showCartBtn ? (
-							<Button variant='contained' color='secondary' onClick={redirectToCart}>
-								в корзине
-							</Button>
-						) : (
-							<Button variant='contained' onClick={addToCartHandler}>
-								Заказать
-							</Button>
-						)}
-					</div>
+					{isLogin && (
+						<div className={s.counter}>
+							<CartCounter callback={setCountHandler} count={1} />
+							{showCartBtn ? (
+								<Button variant='contained' color='secondary' onClick={redirectToCart}>
+									в корзине
+								</Button>
+							) : (
+								<Button variant='contained' onClick={addToCartHandler}>
+									Заказать
+								</Button>
+							)}
+						</div>
+					)}
 				</div>
 			</Card>
 		</Zoom>

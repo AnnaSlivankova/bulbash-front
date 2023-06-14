@@ -8,6 +8,8 @@ import {
 	ResponseFetchSubcategoryType,
 	subcategoriesAdminAPI
 } from './subcategories-admin-api'
+import { authActions } from '../../auth/auth-slice'
+import { handleAxiosError } from '../../../common/hooks'
 
 const fetchSubcategoriesList = createAppAsyncThunk<ResponseFetchSubcategoryType[], RequestFetchSubCategoriesParamsType>(
 	'adminSubcategories/fetchSubcategoriesList',
@@ -28,9 +30,12 @@ const addNewSubcategory = createAppAsyncThunk<void, RequestPostSubCategoryDataTy
 		const { dispatch, rejectWithValue, getState } = thunkAPI
 		try {
 			const res = await subcategoriesAdminAPI.addNewSubcategory(data)
+			dispatch(authActions.setMessage({ message: 'Новая подкатегория была успешно создана' }))
+			dispatch(authActions.setSeverity({ severity: 'success' }))
 			dispatch(adminSubcategoriesThunks.fetchSubcategoriesList({}))
 		} catch (e) {
 			console.log(e)
+			handleAxiosError(dispatch, e)
 			return rejectWithValue(null)
 		}
 	}
@@ -42,9 +47,12 @@ const updateSubcategory = createAppAsyncThunk<void, { subcategory_id: number; da
 		const { dispatch, rejectWithValue, getState } = thunkAPI
 		try {
 			const res = await subcategoriesAdminAPI.updateSubcategory(arg.subcategory_id, arg.data)
+			dispatch(authActions.setMessage({ message: res.detail }))
+			dispatch(authActions.setSeverity({ severity: 'success' }))
 			dispatch(adminSubcategoriesThunks.fetchSubcategoriesList({}))
 		} catch (e) {
 			console.log(e)
+			handleAxiosError(dispatch, e)
 			return rejectWithValue(null)
 		}
 	}
@@ -57,9 +65,12 @@ const deleteSubcategory = createAppAsyncThunk<void, number>(
 
 		try {
 			const res = await subcategoriesAdminAPI.deleteSubcategory(subcategory_id)
+			dispatch(authActions.setMessage({ message: res.detail }))
+			dispatch(authActions.setSeverity({ severity: 'success' }))
 			dispatch(adminSubcategoriesThunks.fetchSubcategoriesList({}))
 		} catch (e) {
 			console.log(e)
+			handleAxiosError(dispatch, e)
 			return rejectWithValue(null)
 		}
 	}

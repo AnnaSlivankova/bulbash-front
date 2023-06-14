@@ -94,7 +94,7 @@ export const ProductsPage = () => {
 								return <SubcategoryButton key={el.id} name={el.name} callback={() => searchBySubcategory(el.id)} />
 							})}
 						</div>
-						<div>Sort by price/by popularity/</div>
+						{/*<div>Sort by price/by popularity/</div>*/}
 						<div className={s.products}>
 							{products.map(el => {
 								const imgPath = changeImgPath(el.image_path)

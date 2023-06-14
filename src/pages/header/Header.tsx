@@ -47,6 +47,10 @@ export const Header: React.FC = () => {
 	}
 	const logoutHandler = () => {
 		logout({})
+			.unwrap()
+			.then(() => {
+				navigate('/home')
+			})
 	}
 
 	return (

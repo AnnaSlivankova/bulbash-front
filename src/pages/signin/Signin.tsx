@@ -44,6 +44,10 @@ export const Signin = () => {
 	const onSubmit: SubmitHandler<any> = data => {
 		const finaldata = { username: data.email, password: data.password }
 		login(finaldata)
+			.unwrap()
+			.then(() => {
+				navigate('/home')
+			})
 	}
 
 	const redirectToForgotPwdHandler = () => navigate('/forgot-password')

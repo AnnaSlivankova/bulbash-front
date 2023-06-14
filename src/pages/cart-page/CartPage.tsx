@@ -1,3 +1,70 @@
+// import React from 'react'
+// import { Badge, BadgeProps, IconButton, styled } from '@mui/material'
+//
+// import Button from '@mui/material/Button'
+// import { InfoBlock } from '../../common/components/info-block/InfoBlock'
+// import { useNavigate } from 'react-router-dom'
+// import s from './CartPage.module.css'
+// import { InfoCart } from './info-cart/InfoCart'
+// import { useSelector } from 'react-redux'
+// import { RootState } from '../../app/store'
+// import { ProductType } from '../../features/client/products/products-types'
+// import { changeImgPath } from '../../common/utils/changeImgPath'
+// import { CartCounter } from '../../common/components/counter/cart-counter/CartCounter'
+// import { CartProductType } from 'features/client/cart/cart-slice'
+// import { ResponseGetCartItemsType } from '../../features/cart/userCart-api'
+//
+// export const CartPage = () => {
+// 	const cartProducts = useSelector<RootState, ResponseGetCartItemsType[]>(state => state.userCart.cartItems)
+// 	const navigate = useNavigate()
+// 	const redirectToCategories = () => {
+// 		navigate('/')
+// 	}
+//
+// 	// const totalCount = cartProducts.reduce((acc, el) => acc + el.totalPrice, 0)
+//
+// 	return (
+// 		<div>
+// 			<InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>
+// 				{/*{<Button onClick={redirectToCategories}>Назад</Button>}*/}
+// 			</InfoBlock>
+//
+// 			<div className={s.wrapper}>
+// 				<div className={s.infoContainer}>
+// 					<div className={s.mainTitle}>Ваш заказ</div>
+// 					{cartProducts?.map(el => {
+// 						return (
+// 							<InfoCart
+// 								key={el.id}
+// 								id={el.id}
+// 								// image_path={el.image_path}
+// 								title={el.name}
+// 								people={el.people_numbers}
+// 								weight={el.weight}
+// 								price={el.price}
+// 								count={el.count}
+// 								totalPrice={el.totalPrice}
+// 							/>
+// 						)
+// 					})}
+//
+// 					<Button variant='contained' color='secondary' onClick={() => navigate('/')} sx={{ m: 2 }}>
+// 						Продолжить покупки
+// 					</Button>
+// 				</div>
+// 				<div className={s.countContainer}>
+// 					<div className={s.mainTitle}>Стоимость</div>
+// 					{/*<div className={s.totalPrice}>{`Итого: ${totalCount} руб.`}</div>*/}
+// 					<div className={s.totalPrice}>{`Итого: ${0} руб.`}</div>
+// 					<Button variant='contained' sx={{ mb: 2 }}>
+// 						Оформить
+// 					</Button>
+// 				</div>
+// 			</div>
+// 		</div>
+// 	)
+// }
+
 import React from 'react'
 import { Badge, BadgeProps, IconButton, styled } from '@mui/material'
 

@@ -4,6 +4,8 @@ import { createAppAsyncThunk } from '../../../common/utils/create-app-async-thun
 import { categoriesAdminAPI } from '../categories/categories-admin-api'
 import { CategoryDataType } from '../admin-page-types'
 import { adminCategoriesThunks } from '../categories/categories-admin-slice'
+import { authActions } from '../../auth/auth-slice'
+import { handleAxiosError } from '../../../common/hooks'
 
 const fetchProductsList = createAppAsyncThunk<ResponseFetchProducts[], void>(
 	'adminProducts/fetchProductsList',
@@ -24,9 +26,12 @@ const addNewProduct = createAppAsyncThunk<void, { params: RequestPostProduct; im
 		const { dispatch, rejectWithValue, getState } = thunkAPI
 		try {
 			const res = await productsAdminAPI.addNewProduct(arg.params, arg.img_file)
+			dispatch(authActions.setMessage({ message: 'Новый продукт был успешно создан' }))
+			dispatch(authActions.setSeverity({ severity: 'success' }))
 			dispatch(adminProductsThunks.fetchProductsList())
 		} catch (e) {
 			console.log(e)
+			handleAxiosError(dispatch, e)
 			return rejectWithValue(null)
 		}
 	}
@@ -39,9 +44,12 @@ const updateProduct = createAppAsyncThunk<
 	const { dispatch, rejectWithValue, getState } = thunkAPI
 	try {
 		const res = await productsAdminAPI.updateProduct(arg.product_id, arg.params, arg.img_file)
+		dispatch(authActions.setMessage({ message: res.detail }))
+		dispatch(authActions.setSeverity({ severity: 'success' }))
 		dispatch(adminProductsThunks.fetchProductsList())
 	} catch (e) {
 		console.log(e)
+		handleAxiosError(dispatch, e)
 		return rejectWithValue(null)
 	}
 })
@@ -50,9 +58,12 @@ const deleteProduct = createAppAsyncThunk<void, number>('adminProducts/deletePro
 	const { dispatch, rejectWithValue, getState } = thunkAPI
 	try {
 		const res = await productsAdminAPI.deleteProduct(product_id)
+		dispatch(authActions.setMessage({ message: res.detail }))
+		dispatch(authActions.setSeverity({ severity: 'success' }))
 		dispatch(adminProductsThunks.fetchProductsList())
 	} catch (e) {
 		console.log(e)
+		handleAxiosError(dispatch, e)
 		return rejectWithValue(null)
 	}
 })

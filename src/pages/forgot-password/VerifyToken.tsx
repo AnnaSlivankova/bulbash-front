@@ -1,7 +1,7 @@
 import { useAppDispatch } from 'common/hooks'
 import React, { useEffect, useState } from 'react'
 import { authThunks } from '../../features/auth/auth-slice'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { AuthForm } from '../../common/components/auth-form/AuthForm'
 import s from '../signin/Signin.module.css'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
@@ -36,6 +36,7 @@ export const VerifyToken = () => {
 	// debugger
 	// const { token } = useParams()
 	const dispatch = useAppDispatch()
+	const navigate = useNavigate()
 
 	const location = useLocation()
 	const queryParams = new URLSearchParams(location.search)
@@ -66,6 +67,10 @@ export const VerifyToken = () => {
 			token: localStorage.getItem('token') as string
 		}
 		dispatch(authThunks.setNewPassword(finalData))
+			.unwrap()
+			.then(() => {
+				navigate('/home')
+			})
 	}
 
 	useEffect(() => {

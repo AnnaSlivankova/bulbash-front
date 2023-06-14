@@ -71,6 +71,10 @@ export const Signup = () => {
 			confirm_password: data.confirm_password
 		}
 		signup(data)
+			.unwrap()
+			.then(() => {
+				navigate('/home')
+			})
 	}
 
 	const redirectToSigninHandler = () => {

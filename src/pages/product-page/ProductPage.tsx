@@ -16,6 +16,8 @@ export const ProductPage = () => {
 	const product = useSelector<RootState, ResponseFetchProduct>(state => state.products.product)
 	const category_id = useSelector<RootState, number>(state => state.products.category_id)
 	const product_id = useSelector<RootState, number>(state => state.products.product_id)
+	const isLogin = useSelector<RootState, boolean>(state => state.auth.isLogin)
+
 	const navigate = useNavigate()
 	const { fetchProduct } = useActions(productsThunks)
 	const { setCartProduct } = useActions(cartActions)
@@ -77,19 +79,24 @@ export const ProductPage = () => {
 						<div className={s.ingredients}>{`Состав: ${product.ingredients}`}</div>
 						<div className={s.ingredients}>{`на ${product.people_numbers} чел., ${product.weight} гр.`}</div>
 
-						<div className={s.orderContainer}>
-							<div className={s.price}>{`Цена ${product.price} руб. `}</div>
-							<CartCounter callback={setCountHandler} count={1} />
-							{showCartBtn ? (
-								<Button variant='contained' color='secondary' onClick={redirectToCart}>
-									в корзине
-								</Button>
-							) : (
-								<Button variant='contained' onClick={addToCartHandler}>
-									Заказать
-								</Button>
-							)}
-						</div>
+						{!isLogin ? (
+							<div className={s.price} style={{ margin: '10px' }}>{`Цена ${product.price} руб. `}</div>
+						) : (
+							<div className={s.orderContainer}>
+								<div className={s.price}>{`Цена ${product.price} руб. `}</div>
+
+								<CartCounter callback={setCountHandler} count={1} />
+								{showCartBtn ? (
+									<Button variant='contained' color='secondary' onClick={redirectToCart}>
+										в корзине
+									</Button>
+								) : (
+									<Button variant='contained' onClick={addToCartHandler}>
+										Заказать
+									</Button>
+								)}
+							</div>
+						)}
 					</div>
 				</div>
 			</div>
