@@ -67,7 +67,7 @@ export const AddSubModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 						<TextField
 							multiline
 							fullWidth
-							label='name'
+							label='название'
 							variant='outlined'
 							color='secondary'
 							{...field}
@@ -82,7 +82,7 @@ export const AddSubModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 					render={({ field }) => (
 						<label className={s.checkbox}>
 							<Checkbox {...field} color='secondary' />
-							status_enabled
+							статус доступности
 						</label>
 					)}
 				/>
@@ -92,7 +92,7 @@ export const AddSubModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 					render={({ field }) => (
 						<TextField
 							fullWidth
-							label='category_id'
+							label='id категории'
 							type='number'
 							variant='outlined'
 							color='secondary'
@@ -109,7 +109,7 @@ export const AddSubModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 					// className={s.btn}
 					sx={style.btn}
 				>
-					save
+					сохранить
 				</Button>
 			</form>
 		</BaseModal>

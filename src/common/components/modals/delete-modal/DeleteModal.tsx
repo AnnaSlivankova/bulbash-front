@@ -29,11 +29,12 @@ export const DeleteModal: React.FC<DeleteType> = ({ id, prevName, callback, dele
 			button={<DeleteOutlineIcon color='secondary' />}
 		>
 			<div>
-				Do you really want to remove <span className={s.text}>{prevName}</span>? All information will be deleted.
+				Вы уверены, что хотите удалить <span className={s.text}>{prevName}</span>? Вся информация об этой позиции будет
+				удалена.
 			</div>
 			<div className={s.btnWrapper}>
 				<Button onClick={deletePackHandler} variant='contained' color='error'>
-					delete
+					удалить
 				</Button>
 			</div>
 		</BaseModal>

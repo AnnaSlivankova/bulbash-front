@@ -26,14 +26,14 @@ export const SubcategoriesAdmin = () => {
 	return (
 		<div className={s.wrapper}>
 			{/*<h1>Subcategories</h1>*/}
-			<AddSubModal title={'Add new SUBCATEGORY'} btnTitle={'add new subcategory'} callback={onClickHandler} />
+			<AddSubModal title={'Добавить новую подкатегорию'} btnTitle={'Добавить подкатегорию'} callback={onClickHandler} />
 			<TableComponent
 				type={'SUB'}
 				sort={''}
 				headData={subcategoriesData}
 				bodyData={subcategories}
-				deleteTitle={'Delete SUBCATEGORY'}
-				updateTitle={'Update SUBCATEGORY'}
+				deleteTitle={'Удалить подкатегорию'}
+				updateTitle={'Обновить подкатегорию'}
 			/>
 		</div>
 	)

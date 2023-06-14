@@ -14,25 +14,11 @@ import { Navigate, useNavigate } from 'react-router-dom'
 
 import s from './Signin.module.css'
 import { useActions } from 'common/hooks'
+import { authThunks } from '../../features/auth/auth-slice'
+import { RequestLoginType } from '../../features/auth/auth-api'
+import { AuthForm } from '../../common/components/auth-form/AuthForm'
 
 const style = {
-	wrapper: {
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
-		minHeight: '100vh', // установка минимальной высоты на весь экран
-		flexWrap: 'wrap'
-	},
-	container: {
-		display: 'flex',
-		alignItems: 'center',
-		flexDirection: 'column',
-		padding: ' 0 33px 35px 33px',
-		backgroundColor: 'white',
-		borderRadius: 10,
-		boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.1)', // добавляем тень для контейнера
-		width: 347 // задаем ширину контейнера
-	},
 	email: { margin: '24px 0 12px 0' },
 	password: { margin: '12px 0 24px 0' }
 }
@@ -40,7 +26,7 @@ const style = {
 export const Signin = () => {
 	// const authIsSignin = useSelector(selectAuthIsSignin)
 
-	// const { signin } = useActions(authThunks)
+	const { login } = useActions(authThunks)
 
 	const navigate = useNavigate()
 
@@ -56,71 +42,79 @@ export const Signin = () => {
 	})
 	// const onSubmit: SubmitHandler<SigninParamsType> = data => {
 	const onSubmit: SubmitHandler<any> = data => {
-		// signin(data)
+		const finaldata = { username: data.email, password: data.password }
+		login(finaldata)
 	}
 
-	// const redirectToForgotPwdHandler = () => navigate('/forgotpassword')
-	// const redirectToSignupHandler = () => navigate('/signup')
+	const redirectToForgotPwdHandler = () => navigate('/forgot-password')
+	const redirectToSignupHandler = () => navigate('/signup')
 
 	// if (authIsSignin) {
 	//   return <Navigate to={'/admin'} />
 	// }
 
 	return (
-		<Box sx={style.wrapper}>
-			<Paper elevation={3} sx={style.container}>
-				<h1 style={{ marginTop: '20px' }}>Sign in</h1>
-				<form onSubmit={handleSubmit(onSubmit)} className={s.formWrapper}>
-					<Controller
-						name='email'
-						control={control}
-						render={({ field }) => <TextField fullWidth label='Email' variant='standard' {...field} sx={style.email} />}
-					/>
-					<Controller
-						name='password'
-						control={control}
-						render={({ field }) => (
-							<TextField
-								fullWidth
-								label='Password'
-								type={passwordShown ? 'text' : 'password'}
-								variant='standard'
-								{...field}
-								sx={style.password}
-								InputProps={{
-									endAdornment: (
-										<InputAdornment position='end'>
-											<IconButton onClick={togglePassword}>
-												{passwordShown ? <VisibilityOff /> : <Visibility />}
-											</IconButton>
-										</InputAdornment>
-									)
-								}}
-							/>
-						)}
-					/>
-					<div className={s.rememberMeWrapper}>
+		<AuthForm title={'Войти'}>
+			{
+				<>
+					<form onSubmit={handleSubmit(onSubmit)} className={s.formWrapper}>
 						<Controller
-							name='rememberMe'
+							name='email'
 							control={control}
 							render={({ field }) => (
-								<label className={s.label}>
-									<Checkbox {...field} />
-									Remember me
-								</label>
+								<TextField fullWidth label='Email' variant='standard' {...field} sx={style.email} />
 							)}
 						/>
-					</div>
-					<div className={s.forgotPasswordWrapper}>
-						{/*<div className={s.linkFPWD} onClick={redirectToForgotPwdHandler}>*/}
-						{/*  Forgot Password?*/}
+						<Controller
+							name='password'
+							control={control}
+							render={({ field }) => (
+								<TextField
+									fullWidth
+									label='Пароль'
+									type={passwordShown ? 'text' : 'password'}
+									variant='standard'
+									{...field}
+									sx={style.password}
+									InputProps={{
+										endAdornment: (
+											<InputAdornment position='end'>
+												<IconButton onClick={togglePassword}>
+													{passwordShown ? <VisibilityOff /> : <Visibility />}
+												</IconButton>
+											</InputAdornment>
+										)
+									}}
+								/>
+							)}
+						/>
+						{/*<div className={s.rememberMeWrapper}>*/}
+						{/*	<Controller*/}
+						{/*		name='rememberMe'*/}
+						{/*		control={control}*/}
+						{/*		render={({ field }) => (*/}
+						{/*			<label className={s.label}>*/}
+						{/*				<Checkbox {...field} />*/}
+						{/*				Remember me*/}
+						{/*			</label>*/}
+						{/*		)}*/}
+						{/*	/>*/}
 						{/*</div>*/}
+						<div className={s.forgotPasswordWrapper}>
+							<div className={s.linkFPWD} onClick={redirectToForgotPwdHandler}>
+								Забыли пароль?
+							</div>
+						</div>
+						<Button type='submit' variant='contained' fullWidth>
+							Войти
+						</Button>
+					</form>
+					<div>Еще нет аккаунта?</div>
+					<div onClick={redirectToSignupHandler} className={s.linkSUP}>
+						Зарегестрироваться
 					</div>
-					<Button type='submit' variant='contained' fullWidth>
-						Sign In
-					</Button>
-				</form>
-			</Paper>
-		</Box>
+				</>
+			}
+		</AuthForm>
 	)
 }

@@ -6,14 +6,27 @@ import App from 'app/App'
 import reportWebVitals from './reportWebVitals'
 import './index.css'
 import { PersistGate } from 'redux-persist/integration/react'
+import { createTheme, ThemeProvider } from '@mui/material'
 
 const container = document.getElementById('root')!
 const root = createRoot(container)
+const theme = createTheme({
+	palette: {
+		primary: {
+			main: '#F0E56F'
+		},
+		secondary: {
+			main: '#A26B2A'
+		}
+	}
+})
 
 root.render(
 	<Provider store={store}>
 		<PersistGate loading={null} persistor={persistor}>
-			<App />
+			<ThemeProvider theme={theme}>
+				<App />
+			</ThemeProvider>
 		</PersistGate>
 	</Provider>
 )

@@ -1,27 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import 'app/App.css'
 import { Layout } from 'pages/layout/Layout'
 import { BrowserRouter } from 'react-router-dom'
 import { Header } from 'pages/header/Header'
-import { createTheme, ThemeProvider } from '@mui/material'
+import { SnackBar } from '../common/components/snack-bar/SnackBar'
+import { authThunks } from '../features/auth/auth-slice'
+import { useAppDispatch } from '../common/hooks'
 
 function App() {
-	const theme = createTheme({
-		palette: {
-			primary: {
-				main: '#F0E56F'
-			},
-			secondary: {
-				main: '#A26B2A'
-			}
-		}
-	})
+	const dispatch = useAppDispatch()
+
+	useEffect(() => {
+		dispatch(authThunks.me())
+	}, [])
+
 	return (
 		<BrowserRouter>
-			<ThemeProvider theme={theme}>
-				<Header />
-				<Layout />
-			</ThemeProvider>
+			<SnackBar />
+			<Header />
+			<Layout />
 		</BrowserRouter>
 	)
 }

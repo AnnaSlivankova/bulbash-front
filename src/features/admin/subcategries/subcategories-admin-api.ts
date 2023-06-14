@@ -1,23 +1,24 @@
 import { instance } from '../../../app'
+import { instanceUser } from '../../../app/common-api'
 
 export const subcategoriesAdminAPI = {
 	fetchSubcategories(params: RequestFetchSubCategoriesParamsType) {
-		return instance
+		return instanceUser
 			.get<ResponseFetchSubcategoryType[]>('/api/v1/bulbash_admin/get_list_subcategories', { params })
 			.then(res => res.data)
 	},
 	addNewSubcategory(data: RequestPostSubCategoryDataType) {
-		return instance
+		return instanceUser
 			.post<ResponsePostSubcategoryType>('/api/v1/bulbash_admin/create_subcategory', data)
 			.then(res => res.data)
 	},
 	updateSubcategory(subcategory_id: number, data: RequestPatchSubCategoryDataType) {
-		return instance
+		return instanceUser
 			.patch<ResponseChangeSubcategoryType>(`/api/v1/bulbash_admin/update_subcategory_${subcategory_id}`, data)
 			.then(res => res.data)
 	},
 	deleteSubcategory(subcategory_id: number) {
-		return instance
+		return instanceUser
 			.delete<ResponseChangeSubcategoryType>(`/api/v1/bulbash_admin/delete_subcategory_${subcategory_id}`)
 			.then(res => res.data)
 	}

@@ -86,7 +86,7 @@ export const AddProdModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 			}
 		>
 			<div style={{ margin: '10px 0 10px 0' }}>
-				<img src={ava || defaultAva} style={{ width: '100px' }} alt='ava' />
+				<img src={ava || defaultAva} style={{ width: '100px' }} alt='picture' />
 				<label>
 					<input type='file' onChange={handleFileUpload} style={{ display: 'none' }} />
 					<IconButton component='span'>
@@ -103,7 +103,7 @@ export const AddProdModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 						<TextField
 							multiline
 							fullWidth
-							label='name'
+							label='название'
 							variant='outlined'
 							color='secondary'
 							{...field}
@@ -118,7 +118,7 @@ export const AddProdModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 						<TextField
 							multiline
 							fullWidth
-							label='description'
+							label='описание'
 							variant='outlined'
 							color='secondary'
 							{...field}
@@ -133,7 +133,7 @@ export const AddProdModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 						<TextField
 							multiline
 							fullWidth
-							label='ingredients'
+							label='ингридиенты'
 							variant='outlined'
 							color='secondary'
 							{...field}
@@ -147,7 +147,7 @@ export const AddProdModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 					render={({ field }) => (
 						<TextField
 							fullWidth
-							label='people_numbers'
+							label='кол-во человек'
 							type='number'
 							variant='outlined'
 							color='secondary'
@@ -162,7 +162,7 @@ export const AddProdModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 					render={({ field }) => (
 						<TextField
 							fullWidth
-							label='price'
+							label='цена'
 							type='number'
 							variant='outlined'
 							color='secondary'
@@ -177,7 +177,7 @@ export const AddProdModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 					render={({ field }) => (
 						<TextField
 							fullWidth
-							label='weight'
+							label='вес'
 							type='number'
 							variant='outlined'
 							color='secondary'
@@ -192,7 +192,7 @@ export const AddProdModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 					render={({ field }) => (
 						<TextField
 							fullWidth
-							label='category_id'
+							label='id категории'
 							type='number'
 							variant='outlined'
 							color='secondary'
@@ -207,7 +207,7 @@ export const AddProdModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 					render={({ field }) => (
 						<TextField
 							fullWidth
-							label='subcategory_id'
+							label='id подкатегории'
 							type='number'
 							variant='outlined'
 							color='secondary'
@@ -222,12 +222,12 @@ export const AddProdModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 					render={({ field }) => (
 						<label className={s.checkbox}>
 							<Checkbox {...field} color='secondary' />
-							status_enabled
+							статус доступности
 						</label>
 					)}
 				/>
 				<Button type='submit' variant='contained' color='secondary' sx={style.btn}>
-					save
+					сохранить
 				</Button>
 			</form>
 		</BaseModal>

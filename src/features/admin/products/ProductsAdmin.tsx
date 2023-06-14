@@ -24,13 +24,13 @@ export const ProductsAdmin = () => {
 	return (
 		<div className={s.wrapper}>
 			{/*<h1>Products</h1>*/}
-			<AddProdModal btnTitle={'add new product'} title={'Add new PRODUCT'} callback={addNewProductHandler} />
+			<AddProdModal btnTitle={'Добавить продукт'} title={'Добавить новый продукт'} callback={addNewProductHandler} />
 			<TableComponent
 				sort={''}
 				headData={productsData}
 				bodyData={products}
-				deleteTitle={'Delete PRODUCT'}
-				updateTitle={'Update PRODUCT'}
+				deleteTitle={'Удалить продукт'}
+				updateTitle={'Обновить продукт'}
 				type={'PROD'}
 			/>
 		</div>

@@ -3,6 +3,8 @@ import { createAppAsyncThunk } from 'common/utils/create-app-async-thunk'
 import { CategoryDataType, FetchCategoryResponseType } from '../admin-page-types'
 import { categoriesAdminAPI } from './categories-admin-api'
 
+const token = localStorage.getItem('token')
+
 const fetchCategoriesList = createAppAsyncThunk<FetchCategoryResponseType[], void>(
 	'adminCategories/fetchCategoriesList',
 	async (_, thunkAPI) => {

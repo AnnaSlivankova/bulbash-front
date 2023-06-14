@@ -10,6 +10,7 @@ import { adminSubcategoriesSlice } from '../features/admin/subcategries/subcateg
 import { adminProductsSlice } from '../features/admin/products/products-admin-slice'
 import { productsParamsSlice } from '../features/client/products/products-params-slice'
 import { cartSlice } from '../features/client/cart/cart-slice'
+import { authSlice } from '../features/auth/auth-slice'
 
 const persistConfig = {
 	key: 'root',
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
 	cart: cartSlice,
 	adminCategories: adminCategoriesSlice,
 	adminSubcategories: adminSubcategoriesSlice,
-	adminProducts: adminProductsSlice
+	adminProducts: adminProductsSlice,
+	auth: authSlice
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

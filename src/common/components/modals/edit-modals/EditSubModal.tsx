@@ -74,7 +74,7 @@ export const EditSubModal: React.FC<EditType> = ({ id, prevName, prevStatus, tit
 						<TextField
 							multiline
 							fullWidth
-							label='name'
+							label='название'
 							variant='outlined'
 							color='secondary'
 							{...field}
@@ -88,12 +88,12 @@ export const EditSubModal: React.FC<EditType> = ({ id, prevName, prevStatus, tit
 					render={({ field }) => (
 						<label className={s.checkbox}>
 							<Checkbox {...field} color='secondary' checked={field.value} />
-							status_enabled
+							статус доступности
 						</label>
 					)}
 				/>
 				<Button type='submit' variant='contained' color='secondary' sx={style.btn}>
-					save
+					сохранить
 				</Button>
 			</form>
 		</BaseModal>

@@ -10,6 +10,11 @@ import { ProductsAdmin } from '../features/admin/products/ProductsAdmin'
 import { ProductPage } from '../pages/product-page/ProductPage'
 import { Signin } from '../pages/signin/Signin'
 import { CartPage } from '../pages/cart-page/CartPage'
+import { Signup } from '../pages/signup/Signup'
+import { ForgotPassword } from '../pages/forgot-password/ForgotPassword'
+import { CheckEmail } from '../pages/check-email/check-email'
+import { VerifyToken } from '../pages/forgot-password/VerifyToken'
+import { VerifyEmail } from '../pages/signup/VerifyEmail'
 
 export const Routers = () => {
 	return (
@@ -22,9 +27,14 @@ export const Routers = () => {
 			{/*<Route path={'/products/:id'} element={<ProductPage />} />*/}
 			<Route path={'/admin'} element={<AdminPage />} />
 			<Route path={'/signin'} element={<Signin />} />
-			<Route path={'/admin_categories'} element={<CategoriesAdmin />} />
-			<Route path={'/admin_subcategories'} element={<SubcategoriesAdmin />} />
-			<Route path={'/admin_products'} element={<ProductsAdmin />} />
+			<Route path={'/signup'} element={<Signup />} />
+			<Route path={'/forgot-password'} element={<ForgotPassword />} />
+			<Route path={'/check-email'} element={<CheckEmail />} />
+			<Route path={'/api/v1/users/restore-password'} element={<VerifyToken />} />
+			<Route path={'/api/v1/users/verify-email'} element={<VerifyEmail />} />
+			<Route path={'/admin-categories'} element={<CategoriesAdmin />} />
+			<Route path={'/admin-subcategories'} element={<SubcategoriesAdmin />} />
+			<Route path={'/admin-products'} element={<ProductsAdmin />} />
 			<Route path={'/404'} element={<ErrorPage />} />
 			<Route path={'*'} element={<Navigate to={'/404'} />} />
 		</Routes>

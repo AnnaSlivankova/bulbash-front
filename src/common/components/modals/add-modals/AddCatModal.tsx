@@ -84,7 +84,7 @@ export const AddCatModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 			}
 		>
 			<div style={{ margin: '10px 0 10px 0' }}>
-				<img src={ava || defaultAva} style={{ width: '100px' }} alt='ava' />
+				<img src={ava || defaultAva} style={{ width: '100px' }} alt='picture' />
 				<label>
 					<input type='file' onChange={handleFileUpload} style={{ display: 'none' }} />
 					<IconButton component='span'>
@@ -101,7 +101,7 @@ export const AddCatModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 						<TextField
 							multiline
 							fullWidth
-							label='name'
+							label='название'
 							variant='outlined'
 							color='secondary'
 							{...field}
@@ -117,7 +117,7 @@ export const AddCatModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 						<TextField
 							multiline
 							fullWidth
-							label='description'
+							label='описание'
 							variant='outlined'
 							color='secondary'
 							{...field}
@@ -132,7 +132,7 @@ export const AddCatModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 					render={({ field }) => (
 						<label className={s.checkbox}>
 							<Checkbox {...field} color='secondary' />
-							status_enabled
+							статус доступности
 						</label>
 					)}
 				/>
@@ -163,7 +163,7 @@ export const AddCatModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 					// className={s.btn}
 					sx={style.btn}
 				>
-					save
+					сохранить
 				</Button>
 			</form>
 		</BaseModal>

@@ -28,26 +28,26 @@ export const AdminPage = () => {
 
 	return (
 		<div className={s.wrapper}>
-			<h1>AdminPage</h1>
+			<h1>Страница администратора</h1>
 			<div className={s.linksContainer}>
 				{/*<div className={`${s.link} ${s.active}`}>*/}
-				{/*	<NavLink to={'/admin_categories'}>Categories</NavLink>*/}
+				{/*	<NavLink to={'/admin-categories'}>Categories</NavLink>*/}
 				{/*</div>*/}
 				{/*<div className={`${s.link} ${s.active}`}>*/}
-				{/*	<NavLink to={'/admin_subcategories'}>Subcategories</NavLink>*/}
+				{/*	<NavLink to={'/admin-subcategories'}>Subcategories</NavLink>*/}
 				{/*</div>*/}
 				{/*<div className={`${s.link} ${s.active}`}>*/}
-				{/*	<NavLink to={'/admin_products'}>Products</NavLink>*/}
+				{/*	<NavLink to={'/admin-products'}>Products</NavLink>*/}
 				{/*</div>*/}
 				{/*<div className={`${s.link} ${s.active}`} onClick={showCategoriesHandler}>*/}
 				<div className={categories ? s.activeLink : s.link} onClick={showCategoriesHandler}>
-					Categories
+					Категории
 				</div>
 				<div className={subcategories ? s.activeLink : s.link} onClick={showSubcategoriesHandler}>
-					Subcategories
+					Подкатегории
 				</div>
 				<div className={products ? s.activeLink : s.link} onClick={showProductsHandler}>
-					Products
+					Продукты
 				</div>
 			</div>
 			<div>

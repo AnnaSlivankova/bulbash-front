@@ -24,14 +24,14 @@ export const CategoriesAdmin = () => {
 	return (
 		<div className={s.wrapper}>
 			{/*<h1>Categories</h1>*/}
-			<AddCatModal btnTitle={'add new category'} title={'Add new CATEGORY'} callback={onClickHandler} />
+			<AddCatModal btnTitle={'Добавить категорию'} title={'Добавить новую категорию'} callback={onClickHandler} />
 			<TableComponent
 				type={'CAT'}
 				headData={categoriesData}
 				bodyData={categories}
 				sort={''}
-				deleteTitle={'Delete CATEGORY'}
-				updateTitle={'Update CATEGORY'}
+				deleteTitle={'Удалить категорию'}
+				updateTitle={'Обновить категорию'}
 			/>
 		</div>
 	)

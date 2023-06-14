@@ -141,7 +141,7 @@ export const EditProdModal: React.FC<EditType> = ({
 			button={<BorderColorIcon color='secondary' />}
 		>
 			<div style={{ margin: '10px 0 10px 0' }}>
-				<img src={ava || prevImg} style={{ width: '100px' }} alt='ava' />
+				<img src={ava || prevImg} style={{ width: '100px' }} alt='picture' />
 				<label>
 					<input type='file' onChange={handleFileUpload} style={{ display: 'none' }} />
 					<IconButton component='span'>
@@ -158,7 +158,7 @@ export const EditProdModal: React.FC<EditType> = ({
 						<TextField
 							multiline
 							fullWidth
-							label='name'
+							label='название'
 							variant='outlined'
 							color='secondary'
 							{...field}
@@ -173,7 +173,7 @@ export const EditProdModal: React.FC<EditType> = ({
 						<TextField
 							multiline
 							fullWidth
-							label='description'
+							label='описание'
 							variant='outlined'
 							color='secondary'
 							{...field}
@@ -188,7 +188,7 @@ export const EditProdModal: React.FC<EditType> = ({
 						<TextField
 							multiline
 							fullWidth
-							label='ingredients'
+							label='ингридиенты'
 							variant='outlined'
 							color='secondary'
 							{...field}
@@ -202,7 +202,7 @@ export const EditProdModal: React.FC<EditType> = ({
 					render={({ field }) => (
 						<TextField
 							fullWidth
-							label='people_numbers'
+							label='кол-во человек'
 							type='number'
 							variant='outlined'
 							color='secondary'
@@ -217,7 +217,7 @@ export const EditProdModal: React.FC<EditType> = ({
 					render={({ field }) => (
 						<TextField
 							fullWidth
-							label='price'
+							label='цена'
 							type='number'
 							variant='outlined'
 							color='secondary'
@@ -232,7 +232,7 @@ export const EditProdModal: React.FC<EditType> = ({
 					render={({ field }) => (
 						<TextField
 							fullWidth
-							label='weight'
+							label='вес'
 							type='number'
 							variant='outlined'
 							color='secondary'
@@ -247,7 +247,7 @@ export const EditProdModal: React.FC<EditType> = ({
 					render={({ field }) => (
 						<TextField
 							fullWidth
-							label='category_id'
+							label='id категории'
 							type='number'
 							variant='outlined'
 							color='secondary'
@@ -262,7 +262,7 @@ export const EditProdModal: React.FC<EditType> = ({
 					render={({ field }) => (
 						<TextField
 							fullWidth
-							label='subcategory_id'
+							label='id подкатегории'
 							type='number'
 							variant='outlined'
 							color='secondary'
@@ -277,7 +277,7 @@ export const EditProdModal: React.FC<EditType> = ({
 					render={({ field }) => (
 						<label className={s.checkbox}>
 							<Checkbox {...field} color='secondary' checked={field.value} />
-							status_enabled
+							статус доступности
 						</label>
 					)}
 				/>
@@ -288,7 +288,7 @@ export const EditProdModal: React.FC<EditType> = ({
 					// className={s.btn}
 					sx={style.btn}
 				>
-					save
+					сохранить
 				</Button>
 			</form>
 		</BaseModal>
