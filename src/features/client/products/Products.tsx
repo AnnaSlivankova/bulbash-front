@@ -27,7 +27,6 @@ export const Products: React.FC<ProductsType> = ({
 	weight
 }) => {
 	const { setProductId } = useActions(productsActions)
-	const { setCartProduct } = useActions(cartActions)
 
 	const { addItemToCard } = useActions(userCartThunks)
 
@@ -38,7 +37,8 @@ export const Products: React.FC<ProductsType> = ({
 	const navigate = useNavigate()
 	const redirectToProduct = () => {
 		setProductId({ product_id: id })
-		navigate('/product')
+		// navigate('/product')
+		navigate(`/product?product_id=${id}`)
 	}
 
 	const [showCartBtn, setShowCartBtn] = useState(false)
@@ -49,21 +49,7 @@ export const Products: React.FC<ProductsType> = ({
 	}
 
 	const addToCartHandler = () => {
-		const totalPrice = count * price
-		const cartProduct = {
-			id,
-			name,
-			people_numbers: peopleNumber,
-			weight,
-			price,
-			image_path: imgPath,
-			count,
-			totalPrice
-		}
-		console.log(count)
-		setCartProduct({ cartProduct })
 		setShowCartBtn(!showCartBtn)
-
 		addItemToCard({
 			product_id: id,
 			quantity: count
@@ -102,7 +88,7 @@ export const Products: React.FC<ProductsType> = ({
 							<CartCounter callback={setCountHandler} count={1} />
 							{showCartBtn ? (
 								<Button variant='contained' color='secondary' onClick={redirectToCart}>
-									в корзине
+									в корзину
 								</Button>
 							) : (
 								<Button variant='contained' onClick={addToCartHandler}>

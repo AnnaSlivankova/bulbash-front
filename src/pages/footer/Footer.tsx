@@ -12,8 +12,8 @@ export const Footer = () => {
 			</p>
 			<div className={s.textBox}>
 				<h3>+7 (495) 221-87-34 </h3>
-				<p>bulbash@gmail.com</p>
-				<p>Пн-Пт 08:00-21:00 Сб-Вс 10:00-21:00</p>
+				<div>bulbash@gmail.com</div>
+				<div>Пн-Пт 08:00-21:00 Сб-Вс 10:00-21:00</div>
 			</div>
 			<p className={s.textBox}>© 2023 БУЛЬБАШ — Кейтеринг.</p>
 			{/*<Button onClick={() => navigate('/admin')} color='error'>*/}

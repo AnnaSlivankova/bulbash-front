@@ -10,66 +10,54 @@ import { changeImgPath } from '../../common/utils/changeImgPath'
 import Button from '@mui/material/Button'
 import { useNavigate } from 'react-router-dom'
 import { CartCounter } from '../../common/components/counter/cart-counter/CartCounter'
-import { cartActions } from '../../features/client/cart/cart-slice'
+import { userCartThunks } from '../../features/cart/userCart-slice'
 
 export const ProductPage = () => {
 	const product = useSelector<RootState, ResponseFetchProduct>(state => state.products.product)
-	const category_id = useSelector<RootState, number>(state => state.products.category_id)
-	const product_id = useSelector<RootState, number>(state => state.products.product_id)
 	const isLogin = useSelector<RootState, boolean>(state => state.auth.isLogin)
 
 	const navigate = useNavigate()
 	const { fetchProduct } = useActions(productsThunks)
-	const { setCartProduct } = useActions(cartActions)
+	const { addItemToCard } = useActions(userCartThunks)
 
 	const image_path = changeImgPath(product.image_path)
 
-	useEffect(() => {
-		fetchProduct(product_id)
-	}, [])
-
 	const redirectToProducts = () => {
-		navigate(`/products?category_id=${category_id}`)
+		navigate(`/products?category_id=${product.category_id}`)
 	}
 
 	const [showCartBtn, setShowCartBtn] = useState(false)
 	const [count, setCount] = useState(1)
 	const setCountHandler = (countValue: number) => {
 		setCount(countValue)
-		// console.log(countValue)
-		// count = countValue
 	}
 
 	const addToCartHandler = () => {
-		const totalPrice = count * product.price
-		const cartProduct = {
-			id: product.id,
-			name: product.name,
-			people_numbers: product.people_numbers,
-			weight: product.weight,
-			price: product.price,
-			image_path: image_path,
-			count,
-			totalPrice
-		}
-		// console.log(count)
-		setCartProduct({ cartProduct })
 		setShowCartBtn(!showCartBtn)
+		addItemToCard({ product_id: product.id, quantity: count })
 	}
 
 	const redirectToCart = () => {
 		navigate('/cart')
 	}
 
+	useEffect(() => {
+		fetchProduct(product.id)
+	}, [])
+
 	return (
 		<div className={s.wrapper}>
 			<InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>
-				{<Button onClick={redirectToProducts}>Назад</Button>}
+				{
+					<Button onClick={redirectToProducts} variant='contained' color='secondary'>
+						Назад
+					</Button>
+				}
 			</InfoBlock>
 			<div className={s.container}>
 				<div className={s.leftBlock}>
 					<div className={s.leftContainer}>
-						<img src={image_path} className={s.img} />
+						<img src={image_path} className={s.img} alt='pruduct picture' />
 					</div>
 				</div>
 				<div className={s.rightBlock}>
@@ -88,7 +76,7 @@ export const ProductPage = () => {
 								<CartCounter callback={setCountHandler} count={1} />
 								{showCartBtn ? (
 									<Button variant='contained' color='secondary' onClick={redirectToCart}>
-										в корзине
+										в корзину
 									</Button>
 								) : (
 									<Button variant='contained' onClick={addToCartHandler}>

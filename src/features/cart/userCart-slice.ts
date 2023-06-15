@@ -2,12 +2,18 @@ import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit'
 import { handleAxiosError } from 'common/hooks'
 
 import { createAppAsyncThunk } from '../../common/utils/create-app-async-thunk'
-import { RequestAddItemType, RequestUpdateItemType, ResponseGetCartItemsType, userCartApi } from './userCart-api'
+import {
+	CartItemType,
+	RequestAddItemType,
+	RequestUpdateItemType,
+	ResponseGetCartItemsType,
+	userCartApi
+} from './userCart-api'
 import { authActions, authThunks } from '../auth/auth-slice'
 import { productsAdminAPI } from '../admin/products/products-admin-api'
 import { adminProductsThunks } from '../admin/products/products-admin-slice'
 
-const getCardItems = createAppAsyncThunk<ResponseGetCartItemsType[], void>('userCart/getItems', async (_, thunkAPI) => {
+const getCardItems = createAppAsyncThunk<ResponseGetCartItemsType, void>('userCart/getItems', async (_, thunkAPI) => {
 	const { dispatch, rejectWithValue } = thunkAPI
 
 	try {
@@ -72,7 +78,7 @@ const deleteCardItem = createAppAsyncThunk<void, number>('userCart/deleteItem', 
 const slice = createSlice({
 	name: 'userCart',
 	initialState: {
-		cartItems: [] as ResponseGetCartItemsType[]
+		userCart: {} as ResponseGetCartItemsType
 	},
 	reducers: {
 		// setIsInitialized: (state, action: PayloadAction<{ isInitialized: boolean }>) => {
@@ -81,7 +87,7 @@ const slice = createSlice({
 	},
 	extraReducers: builder => {
 		builder.addCase(getCardItems.fulfilled, (state, action) => {
-			state.cartItems = action.payload
+			state.userCart = action.payload
 		})
 	}
 })

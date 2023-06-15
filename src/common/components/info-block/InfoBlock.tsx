@@ -16,26 +16,28 @@ export const InfoBlock: React.FC<InfoBlockType> = ({ title, description, childre
 	return (
 		<div className={s.wrapper}>
 			<div className={s.container}>
-				<div className={s.logoContainer}>
-					<img src={logo} className={s.logo} />
-					<div className={s.btnsContainer}>
-						<ContactsBtn>
-							<InstagramIcon />
-						</ContactsBtn>
-						<ContactsBtn>
-							<TelegramIcon />
-						</ContactsBtn>
-						<ContactsBtn>
-							<AppleIcon />
-						</ContactsBtn>
-						<ContactsBtn>
-							<AndroidIcon />
-						</ContactsBtn>
+				<div className={s.medContainer}>
+					<div className={s.logoContainer}>
+						<img src={logo} className={s.logo} alt='logo picture' />
+						<div className={s.btnsContainer}>
+							<ContactsBtn>
+								<InstagramIcon />
+							</ContactsBtn>
+							<ContactsBtn>
+								<TelegramIcon />
+							</ContactsBtn>
+							<ContactsBtn>
+								<AppleIcon />
+							</ContactsBtn>
+							<ContactsBtn>
+								<AndroidIcon />
+							</ContactsBtn>
+						</div>
 					</div>
-				</div>
-				<div className={s.titleContainer}>
-					<div className={s.title}>{title}</div>
-					<div className={finalClassName}>{description}</div>
+					<div className={s.titleContainer}>
+						<div className={s.title}>{title}</div>
+						<div className={finalClassName}>{description}</div>
+					</div>
 				</div>
 				<div className={s.contactsContainer}>
 					{contactsData.map(el => {
@@ -43,14 +45,14 @@ export const InfoBlock: React.FC<InfoBlockType> = ({ title, description, childre
 							return (
 								<ContactsBtn key={el.id}>
 									<LocalPhoneIcon />
-									<span>{el.contact}</span>
+									<span className={s.ContactBTN}>{el.contact}</span>
 								</ContactsBtn>
 							)
 						} else {
 							return (
 								<ContactsBtn key={el.id}>
 									<MailOutlineIcon />
-									<span>{el.contact}</span>
+									<span className={s.ContactBTN}>{el.contact}</span>
 								</ContactsBtn>
 							)
 						}

@@ -5,7 +5,7 @@ import { useActions } from '../../common/hooks'
 import { productsThunks } from '../../features/client/products/products-slice'
 import { useSelector } from 'react-redux'
 import { selectCategory, selectProducts, selectSubcategories } from '../../features/client/products/products-selectors'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { SubcategoryButton } from '../../common/components/subcategory-button/subcategoryButton'
 import { InfoBlock } from '../../common/components/info-block/InfoBlock'
 import { RootState } from '../../app/store'
@@ -42,7 +42,7 @@ export const ProductsPage = () => {
 	const [searchParams, setSearchParams] = useSearchParams()
 	const { setProductsSearchParams } = useActions(productsParamsActions)
 	const stateParams = useSelector<RootState, Partial<ProductsListParamsType>>(state => state.productsSearchParams)
-
+	const navigate = useNavigate()
 	const params = Object.fromEntries(searchParams)
 	// const category_id = searchParams.get('category_id')
 
@@ -67,10 +67,19 @@ export const ProductsPage = () => {
 			...Object.fromEntries(searchParams)
 		})
 	}
+	const redirectToHome = () => {
+		navigate('/')
+	}
 
 	return (
 		<div className={s.container}>
-			<InfoBlock title={category_name} description={category_description}></InfoBlock>
+			<InfoBlock title={category_name} description={category_description}>
+				{
+					<Button onClick={redirectToHome} variant='contained' color='secondary'>
+						Назад
+					</Button>
+				}
+			</InfoBlock>
 			<div className={s.wrp}>
 				<div className={s.leftBlock}>
 					<div className={s.leftContainer}>

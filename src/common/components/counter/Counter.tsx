@@ -6,28 +6,25 @@ import Button from '@mui/material/Button'
 import s from './Counter.module.css'
 import { useDebounce } from '../../hooks'
 
-export const Counter: React.FC<PropsType> = ({ dec, inc, id, count, callback }) => {
+export const Counter: React.FC<PropsType> = ({ count, callback }) => {
 	const [counterValue, setCounterValue] = useState(count)
 	const debouncedValue = useDebounce(counterValue)
 
 	const incCounterValue = () => {
 		setCounterValue(prevCount => prevCount + 1)
-		inc({ id })
 	}
 	const decCounterValue = () => {
 		if (counterValue > 1) {
 			setCounterValue(prevCount => prevCount - 1)
 		}
-		dec({ id })
 	}
 
 	const onChangeValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		setCounterValue(+e.currentTarget.value)
-		// callback(+e.currentTarget.value)
 	}
 
 	useEffect(() => {
-		callback({ id, count: debouncedValue })
+		callback(debouncedValue)
 	}, [debouncedValue])
 
 	return (
@@ -47,10 +44,6 @@ export const Counter: React.FC<PropsType> = ({ dec, inc, id, count, callback }) 
 }
 
 type PropsType = {
-	inc: (a: { id: number }) => void
-	dec: (a: { id: number }) => void
-	id: number
 	count: number
-	callback: (a: { id: number; count: number }) => void
-	// callback: (countValue: number) => void
+	callback: (countValue: number) => void
 }

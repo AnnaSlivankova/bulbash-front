@@ -30,7 +30,7 @@
 .titleContainer {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     width: 250px;
     margin: 5px;
     height: 100%;

@@ -10,6 +10,7 @@ import {
 	RequestSignupType,
 	ResponseSetNewPassword
 } from './auth-api'
+import { userCartThunks } from '../cart/userCart-slice'
 
 const me = createAppAsyncThunk<void, void>('auth/me', async (_, thunkAPI) => {
 	const { dispatch, rejectWithValue } = thunkAPI
@@ -17,6 +18,7 @@ const me = createAppAsyncThunk<void, void>('auth/me', async (_, thunkAPI) => {
 	try {
 		const res = await authAPI.me()
 		dispatch(authActions.setLogin({ isLogin: true }))
+		dispatch(userCartThunks.getCardItems())
 	} catch (e) {
 		// handleAxiosError(dispatch, e)
 
@@ -36,6 +38,7 @@ const login = createAppAsyncThunk<any, RequestLoginType>('auth/login', async (da
 		dispatch(authActions.setMessage({ message: 'Вы успешно вошли в свою учетную запись' }))
 		dispatch(authActions.setSeverity({ severity: 'success' }))
 		dispatch(authActions.setLogin({ isLogin: true }))
+		dispatch(userCartThunks.getCardItems())
 
 		// dispatch(authActions.loginSuccess(token))
 	} catch (e) {

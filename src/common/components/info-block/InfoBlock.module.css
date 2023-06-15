@@ -19,12 +19,25 @@
     align-items: center;
     width: 95%;
     justify-content: space-between;
+
+    border: 1px solid red;
+}
+.medContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    border: 1px solid red;
+
 }
 
 .logoContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    border: 1px solid red;
+
 }
 
 .logo {
@@ -48,6 +61,9 @@
     justify-content: center;
 
     width: 800px;
+
+    border: 1px solid red;
+
 }
 
 .title {
@@ -76,4 +92,44 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
+    border: 1px solid red;
+
+}
+
+.ContactBTN {
+    font-size: 25px;
+}
+
+@media screen and (max-width: 1030px) {
+    .logo {
+        width: 150px;
+        height: 150px;
+        border: 1px solid red;
+    }
+    .contactsContainer {
+        font-size: 10px;
+    }
+    .ContactBTN {
+        font-size: 14px;
+    }
+}
+@media  screen and (max-width: 820px) {
+    .descriptionHP {
+        font-size: 20px;
+    }
+    .description {
+        font-size: 15px;
+    }
+    .container {
+        flex-direction: column;
+    }
+    .contactsContainer {
+        flex-direction: row;
+        gap: 20px;
+    }
+    .medContainer {
+        height: 70%;
+    }
+
 }

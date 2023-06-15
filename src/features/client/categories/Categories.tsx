@@ -12,6 +12,7 @@ import { productsActions } from '../products/products-slice'
 import { productsParamsActions } from '../products/products-params-slice'
 
 export const Categories = () => {
+	console.log('render Categories')
 	const { fetchCategories } = useActions(categoriesThunks)
 	const { setCategoryId, setCategoryName, setCategoryDescription } = useActions(productsActions)
 	const { setProductsSearchParams } = useActions(productsParamsActions)

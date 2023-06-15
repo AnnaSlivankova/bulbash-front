@@ -79,7 +79,7 @@ export const Header: React.FC = () => {
 				>
 					{isScrolled && (
 						<span className={s.logoContainer}>
-							<img src={logo} className={s.logoSm} />
+							<img src={logo} className={s.logoSm} alt='logo picture' />
 							<span onClick={redirectToHome}>Bulbash</span>
 						</span>
 					)}
