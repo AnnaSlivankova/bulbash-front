@@ -5,7 +5,7 @@ import { useActions } from '../../common/hooks'
 import { productsThunks } from '../../features/client/products/products-slice'
 import { useSelector } from 'react-redux'
 import { selectCategory, selectProducts, selectSubcategories } from '../../features/client/products/products-selectors'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { SubcategoryButton } from '../../common/components/subcategory-button/subcategoryButton'
 import { InfoBlock } from '../../common/components/info-block/InfoBlock'
 import { RootState } from '../../app/store'
@@ -46,11 +46,6 @@ export const ProductsPage = () => {
 	const params = Object.fromEntries(searchParams)
 	// const category_id = searchParams.get('category_id')
 
-	useEffect(() => {
-		fetchSubCategories({ ...Object.fromEntries(searchParams) })
-		fetchProductsList({ ...Object.fromEntries(searchParams) })
-	}, [searchParams])
-
 	const searchBySubcategory = (subcategory_id: number) => {
 		setSearchParams({ ...Object.fromEntries(searchParams), subcategory_id: subcategory_id.toString() })
 	}
@@ -70,6 +65,11 @@ export const ProductsPage = () => {
 	const redirectToHome = () => {
 		navigate('/')
 	}
+
+	useEffect(() => {
+		fetchSubCategories({ ...Object.fromEntries(searchParams) })
+		fetchProductsList({ ...Object.fromEntries(searchParams) })
+	}, [searchParams])
 
 	return (
 		<div className={s.container}>

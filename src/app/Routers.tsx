@@ -15,6 +15,8 @@ import { ForgotPassword } from '../pages/forgot-password/ForgotPassword'
 import { CheckEmail } from '../pages/check-email/check-email'
 import { VerifyToken } from '../pages/forgot-password/VerifyToken'
 import { VerifyEmail } from '../pages/signup/VerifyEmail'
+import { UserOrdersPage } from 'pages/user-orders-page/UserOrdersPage'
+import { OrdersAdmin } from '../features/admin/orders-admin/OrdersAdmin'
 
 export const Routers = () => {
 	return (
@@ -22,19 +24,24 @@ export const Routers = () => {
 			<Route path={'/'} element={<Navigate to={'/home'} />} />
 			<Route path={'/home'} element={<HomePage />} />
 			<Route path={'/products'} element={<ProductsPage />} />
-			<Route path={'/product'} element={<ProductPage />} />
+			{/*<Route path={'/products/:id'} element={<ProductsPage />} />*/}
+			<Route path={'/product/:id'} element={<ProductPage />} />
+			{/*<Route path={'/product'} element={<ProductPage />} />*/}
 			<Route path={'/cart'} element={<CartPage />} />
+			<Route path={'/user-orders'} element={<UserOrdersPage />} />
+			{/*<Route path={'/user-orders/:id'} element={<UserOrdersPage />} />*/}
 			{/*<Route path={'/products/:id'} element={<ProductPage />} />*/}
-			<Route path={'/admin'} element={<AdminPage />} />
 			<Route path={'/signin'} element={<Signin />} />
 			<Route path={'/signup'} element={<Signup />} />
 			<Route path={'/forgot-password'} element={<ForgotPassword />} />
 			<Route path={'/check-email'} element={<CheckEmail />} />
 			<Route path={'/api/v1/users/restore-password'} element={<VerifyToken />} />
 			<Route path={'/api/v1/users/verify-email'} element={<VerifyEmail />} />
-			<Route path={'/admin-categories'} element={<CategoriesAdmin />} />
-			<Route path={'/admin-subcategories'} element={<SubcategoriesAdmin />} />
-			<Route path={'/admin-products'} element={<ProductsAdmin />} />
+			<Route path={'/bulbash_admin/admin'} element={<AdminPage />} />
+			<Route path={'/bulbash_admin/admin/orders'} element={<OrdersAdmin />} />
+			<Route path={'/bulbash_admin/admin/admin-categories'} element={<CategoriesAdmin />} />
+			<Route path={'/bulbash_admin/admin/admin-subcategories'} element={<SubcategoriesAdmin />} />
+			<Route path={'/bulbash_admin/admin/admin-products'} element={<ProductsAdmin />} />
 			<Route path={'/404'} element={<ErrorPage />} />
 			<Route path={'*'} element={<Navigate to={'/404'} />} />
 		</Routes>

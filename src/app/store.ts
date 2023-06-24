@@ -13,6 +13,8 @@ import { cartSlice } from '../features/client/cart/cart-slice'
 import { authSlice } from '../features/auth/auth-slice'
 import { userCartApi } from '../features/cart/userCart-api'
 import { userCartSlice } from '../features/cart/userCart-slice'
+import { orderSlice } from '../features/order/order-slice'
+import { orderAdminSlice } from '../features/admin/orders-admin/orders-admin-slice'
 
 const persistConfig = {
 	key: 'root',
@@ -28,8 +30,10 @@ const rootReducer = combineReducers({
 	adminCategories: adminCategoriesSlice,
 	adminSubcategories: adminSubcategoriesSlice,
 	adminProducts: adminProductsSlice,
+	adminOrders: orderAdminSlice,
 	auth: authSlice,
-	userCart: userCartSlice
+	userCart: userCartSlice,
+	order: orderSlice
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

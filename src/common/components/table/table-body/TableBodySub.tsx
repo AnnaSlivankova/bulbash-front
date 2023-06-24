@@ -21,6 +21,8 @@ import {
 import { EditSubModal } from '../../modals/edit-modals/EditSubModal'
 import { adminSubcategoriesThunks } from '../../../../features/admin/subcategries/subcategories-admin-slice'
 import { ResponseFetchProducts } from '../../../../features/admin/products/products-admin-api'
+import { OrderType } from '../../../../features/order/order-api'
+import { OrderAdminType } from '../../../../features/admin/orders-admin/orders-admin-api'
 
 const style = {
 	tableRow: {
@@ -89,7 +91,12 @@ export const TableBodySubComponent: React.FC<Type> = ({ bodyData, deleteTitle, u
 }
 
 type Type = {
-	bodyData: FetchCategoryResponseType[] | ResponseFetchSubcategoryType[] | ResponseFetchProducts[]
+	bodyData:
+		| FetchCategoryResponseType[]
+		| ResponseFetchSubcategoryType[]
+		| ResponseFetchProducts[]
+		| OrderType[]
+		| OrderAdminType[]
 	updateTitle: string
 	deleteTitle: string
 }

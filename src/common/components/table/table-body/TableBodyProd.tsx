@@ -18,6 +18,8 @@ import { ResponseFetchSubcategoryType } from '../../../../features/admin/subcate
 import { adminProductsThunks } from '../../../../features/admin/products/products-admin-slice'
 import { ResponseFetchProducts } from '../../../../features/admin/products/products-admin-api'
 import { EditProdModal } from '../../modals/edit-modals/EditProdModal'
+import { OrderType } from '../../../../features/order/order-api'
+import { OrderAdminType } from '../../../../features/admin/orders-admin/orders-admin-api'
 
 const style = {
 	tableRow: {
@@ -103,7 +105,12 @@ export const TableBodyProdComponent: React.FC<Type> = ({ bodyData, deleteTitle, 
 }
 
 type Type = {
-	bodyData: FetchCategoryResponseType[] | ResponseFetchSubcategoryType[] | ResponseFetchProducts[]
+	bodyData:
+		| FetchCategoryResponseType[]
+		| ResponseFetchSubcategoryType[]
+		| ResponseFetchProducts[]
+		| OrderType[]
+		| OrderAdminType[]
 	updateTitle: string
 	deleteTitle: string
 }

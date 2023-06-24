@@ -16,7 +16,7 @@ export const Footer = () => {
 				<div>Пн-Пт 08:00-21:00 Сб-Вс 10:00-21:00</div>
 			</div>
 			<p className={s.textBox}>© 2023 БУЛЬБАШ — Кейтеринг.</p>
-			{/*<Button onClick={() => navigate('/admin')} color='error'>*/}
+			{/*<Button onClick={() => navigate('/bulbash_admin/admin')} color='error'>*/}
 			{/*	admin*/}
 			{/*</Button>*/}
 		</div>

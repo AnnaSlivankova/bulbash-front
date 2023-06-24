@@ -9,7 +9,7 @@ export const CartBadge = () => {
 	const cartProducts = useSelector<RootState, CartItemType[]>(state => state.userCart.userCart.data)
 
 	return (
-		<Badge badgeContent={cartProducts.length} color='secondary' max={10}>
+		<Badge badgeContent={cartProducts ? cartProducts.length : 0} color='secondary' max={10}>
 			<ShoppingCartIcon style={{ color: 'black' }} />
 		</Badge>
 	)

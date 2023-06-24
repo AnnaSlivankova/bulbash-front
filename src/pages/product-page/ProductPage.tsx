@@ -8,7 +8,7 @@ import { useActions } from '../../common/hooks'
 import { productsThunks } from '../../features/client/products/products-slice'
 import { changeImgPath } from '../../common/utils/changeImgPath'
 import Button from '@mui/material/Button'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { CartCounter } from '../../common/components/counter/cart-counter/CartCounter'
 import { userCartThunks } from '../../features/cart/userCart-slice'
 
@@ -22,7 +22,10 @@ export const ProductPage = () => {
 
 	const image_path = changeImgPath(product.image_path)
 
+	const { id } = useParams()
+
 	const redirectToProducts = () => {
+		// navigate(`/products/${product.category_id}`)
 		navigate(`/products?category_id=${product.category_id}`)
 	}
 
@@ -42,7 +45,8 @@ export const ProductPage = () => {
 	}
 
 	useEffect(() => {
-		fetchProduct(product.id)
+		// fetchProduct(product.id)
+		fetchProduct(Number(id))
 	}, [])
 
 	return (

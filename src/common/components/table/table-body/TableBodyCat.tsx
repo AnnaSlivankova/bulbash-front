@@ -16,6 +16,8 @@ import { changeImgPath } from '../../../utils/changeImgPath'
 import Checkbox from '@mui/material/Checkbox'
 import { ResponseFetchSubcategoryType } from '../../../../features/admin/subcategries/subcategories-admin-api'
 import { ResponseFetchProducts } from '../../../../features/admin/products/products-admin-api'
+import { OrderType } from '../../../../features/order/order-api'
+import { OrderAdminType } from '../../../../features/admin/orders-admin/orders-admin-api'
 
 const style = {
 	tableRow: {
@@ -94,7 +96,12 @@ export const TableBodyCatComponent: React.FC<Type> = ({ bodyData, deleteTitle, u
 }
 
 type Type = {
-	bodyData: FetchCategoryResponseType[] | ResponseFetchSubcategoryType[] | ResponseFetchProducts[]
+	bodyData:
+		| FetchCategoryResponseType[]
+		| ResponseFetchSubcategoryType[]
+		| ResponseFetchProducts[]
+		| OrderType[]
+		| OrderAdminType[]
 	updateTitle: string
 	deleteTitle: string
 }

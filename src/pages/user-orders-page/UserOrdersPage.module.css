@@ -1,0 +1,10 @@
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /*width: 100%;*/
+    /*min-height: 100vh;*/
+    /*justify-content: center;*/
+    align-items: center;
+    margin: 20px;
+}

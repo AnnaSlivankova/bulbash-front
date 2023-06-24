@@ -9,7 +9,10 @@ import { changeImgPath } from '../../common/utils/changeImgPath'
 import { CartItemType } from '../../features/cart/userCart-api'
 import { InfoCart } from './info-cart/InfoCart'
 import { InfoBlock } from 'common/components/info-block/InfoBlock'
-import { useAppDispatch } from '../../common/hooks'
+import { useActions, useAppDispatch } from '../../common/hooks'
+import { CreateNewOrder } from '../../common/components/modals/create-new-order/CreateNewOrder'
+import { adminCategoriesThunks } from '../../features/admin/categories/categories-admin-slice'
+import { orderThunks } from '../../features/order/order-slice'
 
 export const CartPage = () => {
 	const cartProducts = useSelector<RootState, CartItemType[]>(state => state.userCart.userCart.data)
@@ -18,6 +21,20 @@ export const CartPage = () => {
 	const navigate = useNavigate()
 	const redirectToCategories = () => {
 		navigate('/')
+	}
+	const redirectToUserOrders = () => {
+		navigate('/user-orders')
+	}
+	const { createNewOrder } = useActions(orderThunks)
+
+	const onClickHandler = (data: any) => {
+		const products = cartProducts.map(({ id: cart_id, product_id, quantity, product_price: product_cost }) => ({
+			cart_id,
+			product_id,
+			quantity,
+			product_cost
+		}))
+		createNewOrder({ ...data, product_list: products, total_cost: totalPrice })
 	}
 
 	return (
@@ -52,9 +69,8 @@ export const CartPage = () => {
 				<div className={s.countContainer}>
 					<div className={s.mainTitle}>Стоимость</div>
 					<div className={s.totalPrice}>{`Итого: ${totalPrice} руб.`}</div>
-					<Button variant='contained' sx={{ mb: 2 }}>
-						Оформить
-					</Button>
+					<CreateNewOrder btnTitle='Оформить' title='Оформление заказа' callback={onClickHandler} />
+					<div onClick={redirectToUserOrders}>Мои заказы</div>
 				</div>
 			</div>
 		</div>

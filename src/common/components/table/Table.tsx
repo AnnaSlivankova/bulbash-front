@@ -9,6 +9,10 @@ import { ResponseFetchSubcategoryType } from '../../../features/admin/subcategri
 import { TableBodySubComponent } from './table-body/TableBodySub'
 import { ResponseFetchProducts } from '../../../features/admin/products/products-admin-api'
 import { TableBodyProdComponent } from './table-body/TableBodyProd'
+import { OrderType } from '../../../features/order/order-api'
+import { TableBodyUserOrd } from './table-body/TableBodyUserORD'
+import { OrderAdminType } from '../../../features/admin/orders-admin/orders-admin-api'
+import { TableBodyAdminOrd } from './table-body/TableBodyAdminORD'
 
 export const TableComponent: React.FC<Type> = ({ headData, bodyData, sort, deleteTitle, updateTitle, type }) => {
 	return (
@@ -25,6 +29,8 @@ export const TableComponent: React.FC<Type> = ({ headData, bodyData, sort, delet
 					{type === 'PROD' && (
 						<TableBodyProdComponent bodyData={bodyData} updateTitle={updateTitle} deleteTitle={deleteTitle} />
 					)}
+					{type === 'UORD' && <TableBodyUserOrd bodyData={bodyData} />}
+					{type === 'AORD' && <TableBodyAdminOrd bodyData={bodyData} updateTitle={updateTitle} />}
 				</Table>
 			</TableContainer>
 		</>
@@ -34,8 +40,13 @@ export const TableComponent: React.FC<Type> = ({ headData, bodyData, sort, delet
 type Type = {
 	sort: string | undefined
 	headData: categoriesDataType[]
-	bodyData: FetchCategoryResponseType[] | ResponseFetchSubcategoryType[] | ResponseFetchProducts[]
+	bodyData:
+		| FetchCategoryResponseType[]
+		| ResponseFetchSubcategoryType[]
+		| ResponseFetchProducts[]
+		| OrderType[]
+		| OrderAdminType[]
 	deleteTitle: string
 	updateTitle: string
-	type: 'CAT' | 'SUB' | 'PROD'
+	type: 'CAT' | 'SUB' | 'PROD' | 'UORD' | 'AORD'
 }

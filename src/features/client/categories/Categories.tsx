@@ -4,7 +4,7 @@ import { categoriesThunks } from 'features/client/categories/categories-slice'
 import { useSelector } from 'react-redux'
 import { selectCategories } from 'features/client/categories/categories-selectors'
 import s from './Categories.module.css'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 
 import { CategoryCard } from '../../../common/components/cards/admin-card/CategoryCard'
 import { changeImgPath } from '../../../common/utils/changeImgPath'
@@ -22,6 +22,8 @@ export const Categories = () => {
 
 	const [zoom, setZoom] = useState(false)
 
+	const { id } = useParams()
+
 	useEffect(() => {
 		fetchCategories({})
 		setZoom(true)
@@ -31,7 +33,7 @@ export const Categories = () => {
 		setCategoryId({ category_id })
 		setCategoryName({ category_name })
 		setCategoryDescription({ category_description })
-		// navigate('/products')
+		// navigate(`/products/${category_id}`)
 		navigate(`/products?category_id=${category_id}`)
 	}
 

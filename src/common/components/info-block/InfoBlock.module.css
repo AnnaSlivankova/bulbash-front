@@ -20,14 +20,14 @@
     width: 95%;
     justify-content: space-between;
 
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 }
 .medContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 
 }
 
@@ -36,7 +36,7 @@
     flex-direction: column;
     align-items: center;
 
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 
 }
 
@@ -62,7 +62,7 @@
 
     width: 800px;
 
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 
 }
 
@@ -93,7 +93,7 @@
     flex-direction: column;
     align-items: flex-start;
 
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 
 }
 
@@ -105,7 +105,7 @@
     .logo {
         width: 150px;
         height: 150px;
-        border: 1px solid red;
+        /*border: 1px solid red;*/
     }
     .contactsContainer {
         font-size: 10px;

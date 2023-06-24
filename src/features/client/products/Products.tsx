@@ -38,7 +38,7 @@ export const Products: React.FC<ProductsType> = ({
 	const redirectToProduct = () => {
 		setProductId({ product_id: id })
 		// navigate('/product')
-		navigate(`/product?product_id=${id}`)
+		navigate(`/product/${id}`)
 	}
 
 	const [showCartBtn, setShowCartBtn] = useState(false)
