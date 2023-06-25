@@ -18,6 +18,8 @@ const me = createAppAsyncThunk<void, void>('auth/me', async (_, thunkAPI) => {
 	try {
 		const res = await authAPI.me()
 		dispatch(authActions.setLogin({ isLogin: true }))
+		dispatch(authActions.setSeverity({ severity: 'success' }))
+
 		dispatch(userCartThunks.getCardItems())
 	} catch (e) {
 		// handleAxiosError(dispatch, e)
@@ -39,8 +41,6 @@ const login = createAppAsyncThunk<any, RequestLoginType>('auth/login', async (da
 		dispatch(authActions.setSeverity({ severity: 'success' }))
 		dispatch(authActions.setLogin({ isLogin: true }))
 		dispatch(userCartThunks.getCardItems())
-
-		// dispatch(authActions.loginSuccess(token))
 	} catch (e) {
 		handleAxiosError(dispatch, e)
 

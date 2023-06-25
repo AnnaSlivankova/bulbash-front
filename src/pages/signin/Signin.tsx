@@ -17,6 +17,7 @@ import { useActions } from 'common/hooks'
 import { authThunks } from '../../features/auth/auth-slice'
 import { RequestLoginType } from '../../features/auth/auth-api'
 import { AuthForm } from '../../common/components/auth-form/AuthForm'
+import { userCartThunks } from '../../features/cart/userCart-slice'
 
 const style = {
 	email: { margin: '24px 0 12px 0' },
@@ -27,6 +28,7 @@ export const Signin = () => {
 	// const authIsSignin = useSelector(selectAuthIsSignin)
 
 	const { login } = useActions(authThunks)
+	const { getCardItems } = useActions(userCartThunks)
 
 	const navigate = useNavigate()
 
@@ -45,6 +47,10 @@ export const Signin = () => {
 		const finaldata = { username: data.email, password: data.password }
 		login(finaldata)
 			.unwrap()
+			// .then(() => {
+			// 	console.log(`token: ${localStorage.getItem('token')}`)
+			// 	getCardItems({})
+			// })
 			.then(() => {
 				navigate('/home')
 			})

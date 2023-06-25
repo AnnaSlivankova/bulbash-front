@@ -19,7 +19,18 @@ export const authAPI = {
 		return instance.post<{ message: string }>('api/v1/users/register', data).then(res => res.data)
 	},
 	logout() {
-		return instanceUser.post<CommonResponseType>('api/v1/users/logout').then(res => res.data)
+		// return instanceUser.post<CommonResponseType>('api/v1/users/logout').then(res => res.data)
+		return instanceUser
+			.post<CommonResponseType>(
+				'api/v1/users/logout',
+				{},
+				{
+					headers: {
+						Authorization: `Bearer ${localStorage.getItem('token')}`
+					}
+				}
+			)
+			.then(res => res.data)
 	},
 	restorePassword(data: string) {
 		return instance.post<any>('api/v1/users/forgot-your-password', data).then(res => res.data)

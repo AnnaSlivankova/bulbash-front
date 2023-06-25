@@ -22,7 +22,7 @@ const getCardItems = createAppAsyncThunk<ResponseGetCartItemsType, void>('userCa
 		return res
 	} catch (e) {
 		handleAxiosError(dispatch, e)
-
+		console.log(`token req: ${localStorage.getItem('token')}`)
 		return rejectWithValue(null)
 	}
 })

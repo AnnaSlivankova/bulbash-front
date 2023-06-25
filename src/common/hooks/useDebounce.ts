@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
  * @returns {V} - The debounced value of the input.
  */
 
-export const useDebounce = <V>(value: V, timeout = 1000) => {
+export const useDebounce = <V>(value: V, timeout = 500) => {
 	const [debouncedValue, setDebouncedValue] = useState<V>(value)
 
 	useEffect(() => {

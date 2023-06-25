@@ -4,7 +4,14 @@ import { CommonResponseType } from '../auth/auth-api'
 
 export const userCartApi = {
 	getCartItems() {
-		return instanceUser.get<ResponseGetCartItemsType>('/api/v1/cart/get-items-from-cart').then(res => res.data)
+		// return instanceUser.get<ResponseGetCartItemsType>('/api/v1/cart/get-items-from-cart').then(res => res.data)
+		return instance
+			.get<ResponseGetCartItemsType>('/api/v1/cart/get-items-from-cart', {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
+			})
+			.then(res => res.data)
 	},
 	addItemToCard(data: RequestAddItemType) {
 		return instanceUser.post<ResponseAddItemType>('api/v1/cart/add-item-to-cart', data).then(res => res.data)

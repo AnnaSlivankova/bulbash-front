@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import Button from '@mui/material/Button'
 import { useNavigate } from 'react-router-dom'
@@ -13,12 +13,15 @@ import { useActions, useAppDispatch } from '../../common/hooks'
 import { CreateNewOrder } from '../../common/components/modals/create-new-order/CreateNewOrder'
 import { adminCategoriesThunks } from '../../features/admin/categories/categories-admin-slice'
 import { orderThunks } from '../../features/order/order-slice'
+import { userCartThunks } from '../../features/cart/userCart-slice'
 
 export const CartPage = () => {
 	const cartProducts = useSelector<RootState, CartItemType[]>(state => state.userCart.userCart.data)
 	const totalPrice = useSelector<RootState, number>(state => state.userCart.userCart.total_price)
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
+	const { getCardItems } = useActions(userCartThunks)
+
 	const redirectToCategories = () => {
 		navigate('/')
 	}
@@ -36,6 +39,10 @@ export const CartPage = () => {
 		}))
 		createNewOrder({ ...data, product_list: products, total_cost: totalPrice })
 	}
+
+	// useEffect(() => {
+	// 	getCardItems({})
+	// }, [])
 
 	return (
 		<div>

@@ -29,7 +29,7 @@ export function SnackBar() {
 	const isOpen = message !== null || error !== null
 
 	return (
-		<Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose}>
+		<Snackbar open={isOpen} autoHideDuration={2500} onClose={handleClose}>
 			{/*<Snackbar open={true} autoHideDuration={6000} onClose={handleClose}>*/}
 			<Alert onClose={handleClose} severity={severity}>
 				{message || error}
