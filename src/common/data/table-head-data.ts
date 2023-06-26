@@ -48,12 +48,12 @@ export const userOrdersData = [
 
 export const adminOrdersData = [
 	{ id: 'id', label: '№ заказа', isSortable: true, size: '10%' },
-	{ id: 'user_uuid', label: 'User id', isSortable: true, size: '10%' },
-	{ id: 'payment_method', label: 'Способ оплаты', isSortable: true, size: '10%' },
+	// { id: 'user_uuid', label: 'User id', isSortable: true, size: '10%' },
+	{ id: 'payment_method', label: 'Способ оплаты', isSortable: true, size: '15%' },
 	{ id: 'total_cost', label: 'Стоимость', isSortable: true, size: '20%' },
 	{ id: 'status', label: 'Статус', isSortable: true, size: '20%' },
-	{ id: 'date_created', label: 'Дата добавления', isSortable: true, size: '15%' },
-	{ id: 'details', label: '', isSortable: false, size: '15%' }
+	{ id: 'date_created', label: 'Дата добавления', isSortable: true, size: '20%' },
+	{ id: 'details', label: 'Действия', isSortable: false, size: '15%' }
 ]
 
 export type categoriesDataType = {

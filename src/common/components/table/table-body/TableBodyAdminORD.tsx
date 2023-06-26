@@ -5,7 +5,6 @@ import { changeOrderStatusTitle } from '../../../utils/change-order-status-title
 import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
 import s from './TableBody.module.css'
-import { OrderUserModal } from '../../modals/order-modal/OrderUserModal'
 import { FetchCategoryResponseType } from '../../../../features/admin/admin-page-types'
 import { ResponseFetchSubcategoryType } from '../../../../features/admin/subcategries/subcategories-admin-api'
 import { ResponseFetchProducts } from '../../../../features/admin/products/products-admin-api'
@@ -41,7 +40,7 @@ export const TableBodyAdminOrd: React.FC<Type> = ({ bodyData, updateTitle }) => 
 						<TableCell className={s.nameCell} component='th' scope='row'>
 							{el.id}
 						</TableCell>
-						<TableCell>{el.user_uuid}</TableCell>
+						{/*<TableCell>{el.user_uuid}</TableCell>*/}
 						<TableCell>{paymentMethod}</TableCell>
 						<TableCell>{`${el.total_cost} byn`}</TableCell>
 						<TableCell>{orderStatus}</TableCell>
