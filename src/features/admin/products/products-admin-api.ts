@@ -45,6 +45,9 @@ export type ResponseFetchProducts = {
 	image_path: string
 	date_created: string
 	date_updated: string
+
+	category_name: string
+	subcategory_name: string
 }
 
 export type RequestPostProduct = {

@@ -7,6 +7,11 @@ export const subcategoriesAdminAPI = {
 			.get<ResponseFetchSubcategoryType[]>('/api/v1/bulbash_admin/get_list_subcategories', { params })
 			.then(res => res.data)
 	},
+	fetchShortSubcategories() {
+		return instanceUser
+			.get<ResponseFetchShortSubcategoryType[]>('/api/v1/bulbash_admin/get-list-short-subcategories')
+			.then(res => res.data)
+	},
 	addNewSubcategory(data: RequestPostSubCategoryDataType) {
 		return instanceUser
 			.post<ResponsePostSubcategoryType>('/api/v1/bulbash_admin/create_subcategory', data)
@@ -37,6 +42,8 @@ export type ResponseFetchSubcategoryType = {
 	category_id: number
 	date_created: string
 	date_updated: string
+
+	category_name: string
 }
 
 export type RequestPostSubCategoryDataType = {
@@ -44,6 +51,12 @@ export type RequestPostSubCategoryDataType = {
 	status_enabled: boolean
 	category_id: number
 }
+
+export type ResponseFetchShortSubcategoryType = {
+	id: number
+	name: string
+}
+
 export type ResponsePostSubcategoryType = {
 	name: string
 	status_enabled: boolean

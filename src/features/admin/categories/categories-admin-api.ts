@@ -12,6 +12,11 @@ export const categoriesAdminAPI = {
 			.get<FetchCategoryResponseType[]>('/api/v1/bulbash_admin/get_list_categories', {})
 			.then(res => res.data)
 	},
+	fetchShortCategories() {
+		return instanceUser
+			.get<ResponseFetchShortCategories[]>('/api/v1/bulbash_admin/get-list-short-categories')
+			.then(res => res.data)
+	},
 	addNewCategory(args: { data: Omit<CategoryDataType, 'img_file'>; img_file: FormData }) {
 		return instanceUser
 			.post<AddNewCategoryResponseType>('/api/v1/bulbash_admin/create_category', args.img_file, {
@@ -39,4 +44,9 @@ export const categoriesAdminAPI = {
 			.delete<ChangeCategoryResponseType>(`/api/v1/bulbash_admin/delete_category_${category_id}`)
 			.then(res => res.data)
 	}
+}
+
+export type ResponseFetchShortCategories = {
+	id: number
+	name: string
 }

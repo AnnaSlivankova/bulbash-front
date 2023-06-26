@@ -46,9 +46,9 @@ export const TableBodyCatComponent: React.FC<Type> = ({ bodyData, deleteTitle, u
 
 				return (
 					<TableRow key={el.id} sx={style.tableRow} hover>
-						<TableCell className={s.nameCell} component='th' scope='row'>
-							{el.id}
-						</TableCell>
+						{/*<TableCell className={s.nameCell} component='th' scope='row'>*/}
+						{/*	{el.id}*/}
+						{/*</TableCell>*/}
 						<TableCell>
 							{/*{el.image_path}*/}
 							<img src={image_path} style={{ width: '50%', height: '50%' }} alt='ava' />

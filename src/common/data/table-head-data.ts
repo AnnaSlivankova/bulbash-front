@@ -1,8 +1,8 @@
 export const categoriesData = [
-	{ id: 'id', label: 'id', isSortable: true, size: '5%' },
+	// { id: 'id', label: 'id', isSortable: true, size: '5%' },
 	{ id: 'image_path', label: 'Картинка', isSortable: false, size: '10%' },
 	{ id: 'name', label: 'Название', isSortable: true, size: '15%' },
-	{ id: 'description', label: 'Описание', isSortable: true, size: '30%' },
+	{ id: 'description', label: 'Описание', isSortable: true, size: '35%' },
 	{ id: 'status_enabled', label: 'Статус', isSortable: true, size: '5%' },
 	{ id: 'position', label: 'Position', isSortable: true, size: '5%' },
 	{ id: 'date_created', label: 'Дата добавления', isSortable: true, size: '10%' },
@@ -11,9 +11,9 @@ export const categoriesData = [
 ]
 
 export const subcategoriesData = [
-	{ id: 'category_id', label: 'id категории', isSortable: true, size: '10%' },
-	{ id: 'id', label: 'id', isSortable: true, size: '10%' },
-	{ id: 'name', label: 'Название', isSortable: true, size: '40%' },
+	{ id: 'category_id', label: 'Категория', isSortable: true, size: '15%' },
+	// { id: 'id', label: 'id', isSortable: true, size: '10%' },
+	{ id: 'name', label: 'Название', isSortable: true, size: '45%' },
 	{ id: 'status_enabled', label: 'Статус', isSortable: true, size: '10%' },
 	{ id: 'date_created', label: 'Дата добавления', isSortable: true, size: '10%' },
 	{ id: 'date_updated', label: 'Дата обновления', isSortable: true, size: '10%' },
@@ -21,9 +21,9 @@ export const subcategoriesData = [
 ]
 
 export const productsData = [
-	{ id: 'category_id', label: 'id категории', isSortable: true, size: '5%' },
-	{ id: 'subcategory_id', label: 'id подкатегории', isSortable: true, size: '5%' },
-	{ id: 'id', label: 'id', isSortable: true, size: '5%' },
+	{ id: 'category_id', label: 'Категория', isSortable: true, size: '5%' },
+	{ id: 'subcategory_id', label: 'Подкатегория', isSortable: true, size: '10%' },
+	// { id: 'id', label: 'id', isSortable: true, size: '5%' },
 	{ id: 'image_path', label: 'Картинка', isSortable: false, size: '10%' },
 	{ id: 'name', label: 'Название', isSortable: true, size: '5%' },
 	{ id: 'description', label: 'Описание', isSortable: true, size: '25%' },

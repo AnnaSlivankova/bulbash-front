@@ -10,12 +10,15 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { BaseModal } from '../BaseModal'
 
 import s from './AddModal.module.css'
-import { IconButton } from '@mui/material'
+import { FormControlLabel, IconButton, Radio, RadioGroup } from '@mui/material'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate'
 import { CategoryDataType } from '../../../../features/admin/admin-page-types'
 import { convertFileToBase64 } from '../../../utils/readImgAsBase64'
 import { createFormData } from '../../../utils/createFormData'
 import { RequestPostProduct } from '../../../../features/admin/products/products-admin-api'
+import { useAppSelector } from '../../../hooks'
+import { ResponseFetchShortCategories } from '../../../../features/admin/categories/categories-admin-api'
+import { ResponseFetchShortSubcategoryType } from '../../../../features/admin/subcategries/subcategories-admin-api'
 
 const style = {
 	checkbox: {
@@ -29,6 +32,13 @@ const style = {
 	}
 }
 export const AddProdModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
+	const shortCategoriesList = useAppSelector<ResponseFetchShortCategories[]>(
+		state => state.adminCategories.shortCategoriesList
+	)
+	const shortSubcategiriesList = useAppSelector<ResponseFetchShortSubcategoryType[]>(
+		state => state.adminSubcategories.shortSubcategoriesList
+	)
+
 	const [open, setOpen] = useState(false)
 	const handleOpen = () => setOpen(true)
 	const handleClose = () => setOpen(false)
@@ -52,7 +62,8 @@ export const AddProdModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 	const [formData, setFormData] = useState<FormData>(new FormData())
 
 	const onSubmit: SubmitHandler<RequestPostProduct> = data => {
-		callback(data, formData)
+		// callback(data, formData)
+		callback({ ...data, category_id: +data.category_id, subcategory_id: +data.subcategory_id }, formData)
 		setOpen(false)
 		handleClose()
 		reset()
@@ -186,34 +197,62 @@ export const AddProdModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 						/>
 					)}
 				/>
+				{/*<Controller*/}
+				{/*	name='category_id'*/}
+				{/*	control={control}*/}
+				{/*	render={({ field }) => (*/}
+				{/*		<TextField*/}
+				{/*			fullWidth*/}
+				{/*			label='id категории'*/}
+				{/*			type='number'*/}
+				{/*			variant='outlined'*/}
+				{/*			color='secondary'*/}
+				{/*			{...field}*/}
+				{/*			sx={style.textfield}*/}
+				{/*		/>*/}
+				{/*	)}*/}
+				{/*/>*/}
 				<Controller
-					name='category_id'
 					control={control}
+					name='category_id'
 					render={({ field }) => (
-						<TextField
-							fullWidth
-							label='id категории'
-							type='number'
-							variant='outlined'
-							color='secondary'
-							{...field}
-							sx={style.textfield}
-						/>
+						<>
+							<h3 style={style.btn}>Выберите категорию</h3>
+							<RadioGroup row {...field}>
+								{shortCategoriesList.map(el => {
+									return <FormControlLabel control={<Radio />} label={el.name} value={el.id} />
+								})}
+							</RadioGroup>
+						</>
 					)}
 				/>
+				{/*<Controller*/}
+				{/*	name='subcategory_id'*/}
+				{/*	control={control}*/}
+				{/*	render={({ field }) => (*/}
+				{/*		<TextField*/}
+				{/*			fullWidth*/}
+				{/*			label='id подкатегории'*/}
+				{/*			type='number'*/}
+				{/*			variant='outlined'*/}
+				{/*			color='secondary'*/}
+				{/*			{...field}*/}
+				{/*			sx={style.textfield}*/}
+				{/*		/>*/}
+				{/*	)}*/}
+				{/*/>*/}
 				<Controller
-					name='subcategory_id'
 					control={control}
+					name='subcategory_id'
 					render={({ field }) => (
-						<TextField
-							fullWidth
-							label='id подкатегории'
-							type='number'
-							variant='outlined'
-							color='secondary'
-							{...field}
-							sx={style.textfield}
-						/>
+						<>
+							<h3 style={style.btn}>Выберите подкатегорию</h3>
+							<RadioGroup row {...field}>
+								{shortSubcategiriesList.map(el => {
+									return <FormControlLabel control={<Radio />} label={el.name} value={el.id} />
+								})}
+							</RadioGroup>
+						</>
 					)}
 				/>
 				<Controller

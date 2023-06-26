@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useAppDispatch } from '../../common/hooks'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { authThunks } from '../../features/auth/auth-slice'
 
 export const VerifyEmail = () => {
@@ -10,8 +10,11 @@ export const VerifyEmail = () => {
 	const queryParams = new URLSearchParams(location.search)
 	const token = queryParams.get('token')
 
+	// const token = useParams()
+
 	useEffect(() => {
 		if (token) {
+			debugger
 			dispatch(authThunks.verifyEmail(token))
 			// localStorage.setItem('token', token)
 		}

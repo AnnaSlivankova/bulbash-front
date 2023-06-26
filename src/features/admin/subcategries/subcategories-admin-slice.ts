@@ -5,6 +5,7 @@ import {
 	RequestFetchSubCategoriesParamsType,
 	RequestPatchSubCategoryDataType,
 	RequestPostSubCategoryDataType,
+	ResponseFetchShortSubcategoryType,
 	ResponseFetchSubcategoryType,
 	subcategoriesAdminAPI
 } from './subcategories-admin-api'
@@ -17,6 +18,19 @@ const fetchSubcategoriesList = createAppAsyncThunk<ResponseFetchSubcategoryType[
 		const { dispatch, rejectWithValue, getState } = thunkAPI
 		try {
 			return await subcategoriesAdminAPI.fetchSubcategories(params)
+		} catch (e) {
+			console.log(e)
+			return rejectWithValue(null)
+		}
+	}
+)
+
+const fetchShortSubcategoriesList = createAppAsyncThunk<ResponseFetchShortSubcategoryType[], void>(
+	'adminSubcategories/fetchShortSubcategoriesList',
+	async (_, thunkAPI) => {
+		const { dispatch, rejectWithValue, getState } = thunkAPI
+		try {
+			return await subcategoriesAdminAPI.fetchShortSubcategories()
 		} catch (e) {
 			console.log(e)
 			return rejectWithValue(null)
@@ -79,13 +93,18 @@ const deleteSubcategory = createAppAsyncThunk<void, number>(
 const slice = createSlice({
 	name: 'adminSubcategories',
 	initialState: {
-		subcategories: [] as ResponseFetchSubcategoryType[]
+		subcategories: [] as ResponseFetchSubcategoryType[],
+		shortSubcategoriesList: [] as ResponseFetchShortSubcategoryType[]
 	},
 	reducers: {},
 	extraReducers: builder => {
-		builder.addCase(fetchSubcategoriesList.fulfilled, (state, action) => {
-			state.subcategories = action.payload
-		})
+		builder
+			.addCase(fetchSubcategoriesList.fulfilled, (state, action) => {
+				state.subcategories = action.payload
+			})
+			.addCase(fetchShortSubcategoriesList.fulfilled, (state, action) => {
+				state.shortSubcategoriesList = action.payload
+			})
 	}
 })
 
@@ -93,6 +112,7 @@ export const adminSubcategoriesSlice = slice.reducer
 export const adminSubcategoriesActions = slice.actions
 export const adminSubcategoriesThunks = {
 	fetchSubcategoriesList,
+	fetchShortSubcategoriesList,
 	addNewSubcategory,
 	updateSubcategory,
 	deleteSubcategory

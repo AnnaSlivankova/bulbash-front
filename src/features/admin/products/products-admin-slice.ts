@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { productsAdminAPI, RequestPostProduct, ResponseFetchProducts } from './products-admin-api'
 import { createAppAsyncThunk } from '../../../common/utils/create-app-async-thunk'
 import { categoriesAdminAPI } from '../categories/categories-admin-api'
@@ -74,9 +74,14 @@ const slice = createSlice({
 		products: [] as ResponseFetchProducts[]
 	},
 	reducers: {
-		// setMinPrice: (state, action: PayloadAction<{ minPrice: number }>) => {
-		// 	state.minPrice = action.payload.minPrice
-		// },
+		// setAdditionalInfo: (state, action: PayloadAction<ResponseFetchProducts[]>) => {
+		// 	state.additionalInfo = action.payload.map(obj => ({
+		// 		category_id: obj.category_id,
+		// 		category_name: obj.category_name,
+		// 		subcategory_name: obj.subcategory_name,
+		// 		subcategory_id: obj.subcategory_id
+		// 	}))
+		// }
 	},
 	extraReducers: builder => {
 		builder.addCase(fetchProductsList.fulfilled, (state, action) => {

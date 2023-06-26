@@ -49,10 +49,14 @@ export const TableBodyProdComponent: React.FC<Type> = ({ bodyData, deleteTitle, 
 				return (
 					<TableRow key={el.id} sx={style.tableRow} hover>
 						<TableCell className={s.nameCell} component='th' scope='row'>
-							{el.category_id}
+							{/*{el.category_id}*/}
+							{el.category_name}
 						</TableCell>
-						<TableCell>{el.subcategory_id}</TableCell>
-						<TableCell>{el.id}</TableCell>
+						<TableCell>
+							{/*{el.subcategory_id}*/}
+							{el.subcategory_name}
+						</TableCell>
+						{/*<TableCell>{el.id}</TableCell>*/}
 						<TableCell>
 							<img src={image_path} style={{ width: '50%', height: '50%' }} alt='ava' />
 						</TableCell>

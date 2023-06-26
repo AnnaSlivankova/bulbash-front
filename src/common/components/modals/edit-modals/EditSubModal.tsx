@@ -9,9 +9,12 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { BaseModal } from '../BaseModal'
 
 import s from './EditModal.module.css'
-import { IconButton } from '@mui/material'
+import { FormControlLabel, IconButton, Radio, RadioGroup } from '@mui/material'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate'
 import { convertFileToBase64 } from '../../../utils/readImgAsBase64'
+import { useAppSelector } from '../../../hooks'
+import { ResponseFetchShortSubcategoryType } from '../../../../features/admin/subcategries/subcategories-admin-api'
+import { ResponseFetchShortCategories } from '../../../../features/admin/categories/categories-admin-api'
 
 const style = {
 	checkbox: {
@@ -26,13 +29,17 @@ const style = {
 }
 
 export const EditSubModal: React.FC<EditType> = ({ id, prevName, prevStatus, title, callback, category_id }) => {
+	const shortCategoriesList = useAppSelector<ResponseFetchShortCategories[]>(
+		state => state.adminCategories.shortCategoriesList
+	)
+
 	const [open, setOpen] = useState(false)
 	const handleOpen = () => setOpen(true)
 	const handleClose = () => setOpen(false)
 
 	const { control, handleSubmit, reset, register } = useForm({
 		defaultValues: {
-			// category_id: categoryId,
+			category_id: category_id,
 			name: prevName,
 			status_enabled: prevStatus
 		}
@@ -47,8 +54,11 @@ export const EditSubModal: React.FC<EditType> = ({ id, prevName, prevStatus, tit
 		if (data.status_enabled !== prevStatus) {
 			modifiedData.status_enabled = data.status_enabled
 		}
+		if (data.category_id !== category_id) {
+			modifiedData.category_id = data.category_id
+		}
 
-		const params = { ...modifiedData, category_id }
+		const params = { ...modifiedData, category_id: Number(modifiedData.category_id) }
 		const finaldata = { subcategory_id: id, params }
 
 		console.log(finaldata)
@@ -92,6 +102,22 @@ export const EditSubModal: React.FC<EditType> = ({ id, prevName, prevStatus, tit
 						</label>
 					)}
 				/>
+				<Controller
+					control={control}
+					name='category_id'
+					defaultValue={category_id}
+					render={({ field }) => (
+						<>
+							<h3 style={style.btn}>Выберите категорию</h3>
+							<RadioGroup row {...field}>
+								{shortCategoriesList.map(el => {
+									return <FormControlLabel control={<Radio />} label={el.name} value={el.id} />
+								})}
+							</RadioGroup>
+						</>
+					)}
+				/>
+
 				<Button type='submit' variant='contained' color='secondary' sx={style.btn}>
 					сохранить
 				</Button>

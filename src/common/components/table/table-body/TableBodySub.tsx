@@ -51,9 +51,10 @@ export const TableBodySubComponent: React.FC<Type> = ({ bodyData, deleteTitle, u
 				return (
 					<TableRow key={el.id} sx={style.tableRow} hover>
 						<TableCell className={s.nameCell} component='th' scope='row'>
-							{el.category_id}
+							{/*{el.category_id}*/}
+							{el.category_name}
 						</TableCell>
-						<TableCell>{el.id}</TableCell>
+						{/*<TableCell>{el.id}</TableCell>*/}
 						<TableCell>{el.name}</TableCell>
 						<TableCell>
 							{el.status_enabled}

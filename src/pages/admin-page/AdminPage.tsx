@@ -1,12 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import s from './AdminPage.module.css'
 import { NavLink } from 'react-router-dom'
 import { CategoriesAdmin } from '../../features/admin/categories/CategoriesAdmin'
 import { SubcategoriesAdmin } from '../../features/admin/subcategries/SubcategoriesAdmin'
 import { ProductsAdmin } from '../../features/admin/products/ProductsAdmin'
 import { OrdersAdmin } from '../../features/admin/orders-admin/OrdersAdmin'
+import { useActions } from '../../common/hooks'
+import { adminCategoriesThunks } from '../../features/admin/categories/categories-admin-slice'
+import { adminSubcategoriesThunks } from '../../features/admin/subcategries/subcategories-admin-slice'
 
 export const AdminPage = () => {
+	const { fetchShortCategoriesList } = useActions(adminCategoriesThunks)
+	const { fetchShortSubcategoriesList } = useActions(adminSubcategoriesThunks)
+
 	const [categories, setCategories] = useState(false)
 	const [subcategories, setSubcategories] = useState(false)
 	const [products, setProducts] = useState(false)
@@ -36,6 +42,11 @@ export const AdminPage = () => {
 		setSubcategories(false)
 		setCategories(false)
 	}
+
+	useEffect(() => {
+		fetchShortCategoriesList({})
+		fetchShortSubcategoriesList({})
+	}, [])
 
 	return (
 		<div className={s.wrapper}>

@@ -10,11 +10,14 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { BaseModal } from '../BaseModal'
 
 import s from './AddModal.module.css'
-import { IconButton } from '@mui/material'
+import { FormControlLabel, IconButton, Radio, RadioGroup } from '@mui/material'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate'
 import { CategoryDataType } from '../../../../features/admin/admin-page-types'
 import { convertFileToBase64 } from '../../../utils/readImgAsBase64'
 import { createFormData } from '../../../utils/createFormData'
+import { useAppSelector } from '../../../hooks'
+import { ResponseFetchShortSubcategoryType } from '../../../../features/admin/subcategries/subcategories-admin-api'
+import { ResponseFetchShortCategories } from '../../../../features/admin/categories/categories-admin-api'
 
 const style = {
 	checkbox: {
@@ -28,6 +31,10 @@ const style = {
 	}
 }
 export const AddSubModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
+	const shortCategoriesList = useAppSelector<ResponseFetchShortCategories[]>(
+		state => state.adminCategories.shortCategoriesList
+	)
+
 	const [open, setOpen] = useState(false)
 	const handleOpen = () => setOpen(true)
 	const handleClose = () => setOpen(false)
@@ -41,7 +48,11 @@ export const AddSubModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 	})
 
 	const onSubmit: SubmitHandler<any> = data => {
-		callback(data)
+		const finalData = {
+			...data,
+			category_id: Number(data.category_id)
+		}
+		callback(finalData)
 		setOpen(false)
 		handleClose()
 		reset()
@@ -86,20 +97,35 @@ export const AddSubModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 						</label>
 					)}
 				/>
+				{/*<Controller*/}
+				{/*	name='category_id'*/}
+				{/*	control={control}*/}
+				{/*	render={({ field }) => (*/}
+				{/*		<TextField*/}
+				{/*			fullWidth*/}
+				{/*			label='id категории'*/}
+				{/*			type='number'*/}
+				{/*			variant='outlined'*/}
+				{/*			color='secondary'*/}
+				{/*			{...field}*/}
+				{/*			// className={s.textfield}*/}
+				{/*			sx={style.textfield}*/}
+				{/*		/>*/}
+				{/*	)}*/}
+				{/*/>*/}
 				<Controller
-					name='category_id'
 					control={control}
+					name='category_id'
+					// defaultValue={prev_status}
 					render={({ field }) => (
-						<TextField
-							fullWidth
-							label='id категории'
-							type='number'
-							variant='outlined'
-							color='secondary'
-							{...field}
-							// className={s.textfield}
-							sx={style.textfield}
-						/>
+						<>
+							<h3 style={style.btn}>Выберите категорию</h3>
+							<RadioGroup row {...field}>
+								{shortCategoriesList.map(el => {
+									return <FormControlLabel control={<Radio />} label={el.name} value={el.id} />
+								})}
+							</RadioGroup>
+						</>
 					)}
 				/>
 				<Button

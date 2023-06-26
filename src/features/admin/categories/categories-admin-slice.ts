@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { createAppAsyncThunk } from 'common/utils/create-app-async-thunk'
 import { CategoryDataType, FetchCategoryResponseType } from '../admin-page-types'
-import { categoriesAdminAPI } from './categories-admin-api'
+import { categoriesAdminAPI, ResponseFetchShortCategories } from './categories-admin-api'
 import { authActions } from '../../auth/auth-slice'
 import { handleAxiosError } from '../../../common/hooks'
 
@@ -13,6 +13,19 @@ const fetchCategoriesList = createAppAsyncThunk<FetchCategoryResponseType[], voi
 		const { dispatch, rejectWithValue, getState } = thunkAPI
 		try {
 			return await categoriesAdminAPI.fetchCategories()
+		} catch (e) {
+			console.log(e)
+			return rejectWithValue(null)
+		}
+	}
+)
+
+const fetchShortCategoriesList = createAppAsyncThunk<ResponseFetchShortCategories[], void>(
+	'adminCategories/fetchShortCategoriesList',
+	async (_, thunkAPI) => {
+		const { dispatch, rejectWithValue, getState } = thunkAPI
+		try {
+			return await categoriesAdminAPI.fetchShortCategories()
 		} catch (e) {
 			console.log(e)
 			return rejectWithValue(null)
@@ -74,7 +87,8 @@ const deleteCategory = createAppAsyncThunk<void, number>(
 const slice = createSlice({
 	name: 'adminCategories',
 	initialState: {
-		categories: [] as FetchCategoryResponseType[]
+		categories: [] as FetchCategoryResponseType[],
+		shortCategoriesList: [] as ResponseFetchShortCategories[]
 	},
 	reducers: {
 		// setMinPrice: (state, action: PayloadAction<{ minPrice: number }>) => {
@@ -82,12 +96,22 @@ const slice = createSlice({
 		// },
 	},
 	extraReducers: builder => {
-		builder.addCase(fetchCategoriesList.fulfilled, (state, action) => {
-			state.categories = action.payload
-		})
+		builder
+			.addCase(fetchCategoriesList.fulfilled, (state, action) => {
+				state.categories = action.payload
+			})
+			.addCase(fetchShortCategoriesList.fulfilled, (state, action) => {
+				state.shortCategoriesList = action.payload
+			})
 	}
 })
 
 export const adminCategoriesSlice = slice.reducer
 export const adminCategoriesActions = slice.actions
-export const adminCategoriesThunks = { fetchCategoriesList, addNewCategory, updateCategory, deleteCategory }
+export const adminCategoriesThunks = {
+	fetchCategoriesList,
+	fetchShortCategoriesList,
+	addNewCategory,
+	updateCategory,
+	deleteCategory
+}
