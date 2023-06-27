@@ -44,6 +44,7 @@ const addNewSubcategory = createAppAsyncThunk<void, RequestPostSubCategoryDataTy
 		const { dispatch, rejectWithValue, getState } = thunkAPI
 		try {
 			const res = await subcategoriesAdminAPI.addNewSubcategory(data)
+			dispatch(adminSubcategoriesThunks.fetchShortSubcategoriesList())
 			dispatch(authActions.setMessage({ message: 'Новая подкатегория была успешно создана' }))
 			dispatch(authActions.setSeverity({ severity: 'success' }))
 			dispatch(adminSubcategoriesThunks.fetchSubcategoriesList({}))
@@ -61,6 +62,7 @@ const updateSubcategory = createAppAsyncThunk<void, { subcategory_id: number; da
 		const { dispatch, rejectWithValue, getState } = thunkAPI
 		try {
 			const res = await subcategoriesAdminAPI.updateSubcategory(arg.subcategory_id, arg.data)
+			dispatch(adminSubcategoriesThunks.fetchShortSubcategoriesList())
 			dispatch(authActions.setMessage({ message: res.detail }))
 			dispatch(authActions.setSeverity({ severity: 'success' }))
 			dispatch(adminSubcategoriesThunks.fetchSubcategoriesList({}))
@@ -79,6 +81,7 @@ const deleteSubcategory = createAppAsyncThunk<void, number>(
 
 		try {
 			const res = await subcategoriesAdminAPI.deleteSubcategory(subcategory_id)
+			dispatch(adminSubcategoriesThunks.fetchShortSubcategoriesList())
 			dispatch(authActions.setMessage({ message: res.detail }))
 			dispatch(authActions.setSeverity({ severity: 'success' }))
 			dispatch(adminSubcategoriesThunks.fetchSubcategoriesList({}))

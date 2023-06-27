@@ -39,6 +39,7 @@ const addNewCategory = createAppAsyncThunk<void, { data: Omit<CategoryDataType, 
 		const { dispatch, rejectWithValue, getState } = thunkAPI
 		try {
 			const res = await categoriesAdminAPI.addNewCategory(data)
+			dispatch(adminCategoriesThunks.fetchShortCategoriesList())
 			dispatch(authActions.setMessage({ message: 'Новая категория была успешно создана' }))
 			dispatch(authActions.setSeverity({ severity: 'success' }))
 			dispatch(adminCategoriesThunks.fetchCategoriesList())
@@ -57,6 +58,7 @@ const updateCategory = createAppAsyncThunk<
 	const { dispatch, rejectWithValue, getState } = thunkAPI
 	try {
 		const res = await categoriesAdminAPI.updateCategory(args)
+		dispatch(adminCategoriesThunks.fetchShortCategoriesList())
 		dispatch(authActions.setMessage({ message: res.detail }))
 		dispatch(authActions.setSeverity({ severity: 'success' }))
 		dispatch(adminCategoriesThunks.fetchCategoriesList())
@@ -73,6 +75,7 @@ const deleteCategory = createAppAsyncThunk<void, number>(
 		const { dispatch, rejectWithValue, getState } = thunkAPI
 		try {
 			const res = await categoriesAdminAPI.deleteCategory(category_id)
+			dispatch(adminCategoriesThunks.fetchShortCategoriesList())
 			dispatch(authActions.setMessage({ message: res.detail }))
 			dispatch(authActions.setSeverity({ severity: 'success' }))
 			dispatch(adminCategoriesThunks.fetchCategoriesList())
