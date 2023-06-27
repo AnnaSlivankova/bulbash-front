@@ -220,7 +220,7 @@ export const AddProdModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 							<h3 style={style.btn}>Выберите категорию</h3>
 							<RadioGroup row {...field}>
 								{shortCategoriesList.map(el => {
-									return <FormControlLabel control={<Radio />} label={el.name} value={el.id} />
+									return <FormControlLabel control={<Radio />} label={el.name} value={el.id} key={el.id} />
 								})}
 							</RadioGroup>
 						</>
@@ -249,7 +249,7 @@ export const AddProdModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 							<h3 style={style.btn}>Выберите подкатегорию</h3>
 							<RadioGroup row {...field}>
 								{shortSubcategiriesList.map(el => {
-									return <FormControlLabel control={<Radio />} label={el.name} value={el.id} />
+									return <FormControlLabel control={<Radio />} label={el.name} value={el.id} key={el.id} />
 								})}
 							</RadioGroup>
 						</>
