@@ -37,6 +37,7 @@ const login = createAppAsyncThunk<any, RequestLoginType>('auth/login', async (da
 		const res = await authAPI.login(data)
 		localStorage.setItem('token', res.access_token)
 
+		dispatch(authThunks.me())
 		dispatch(authActions.setMessage({ message: 'Вы успешно вошли в свою учетную запись' }))
 		dispatch(authActions.setSeverity({ severity: 'success' }))
 		dispatch(authActions.setLogin({ isLogin: true }))
