@@ -43,6 +43,8 @@ export const Products: React.FC<ProductsType> = ({
 
 	const [showCartBtn, setShowCartBtn] = useState(false)
 
+	const [isDisabled, setIsDisabled] = useState(false)
+
 	const [count, setCount] = useState(1)
 	const setCountHandler = (countValue: number) => {
 		setCount(countValue)
@@ -50,6 +52,7 @@ export const Products: React.FC<ProductsType> = ({
 
 	const addToCartHandler = () => {
 		setShowCartBtn(!showCartBtn)
+		setIsDisabled(true)
 		addItemToCard({
 			product_id: id,
 			quantity: count
@@ -85,7 +88,7 @@ export const Products: React.FC<ProductsType> = ({
 					</div>
 					{isLogin && (
 						<div className={s.counter}>
-							<CartCounter callback={setCountHandler} count={1} />
+							<CartCounter callback={setCountHandler} count={1} isDisabled={isDisabled} />
 							{showCartBtn ? (
 								<Button variant='contained' color='secondary' onClick={redirectToCart}>
 									в корзину

@@ -5,7 +5,7 @@ import RemoveIcon from '@mui/icons-material/Remove'
 import AddIcon from '@mui/icons-material/Add'
 import { useDebounce } from '../../../hooks'
 
-export const CartCounter: React.FC<PropsType> = ({ callback, count }) => {
+export const CartCounter: React.FC<PropsType> = ({ callback, count, isDisabled }) => {
 	const [counterValue, setCounterValue] = useState(count)
 	const debouncedValue = useDebounce(counterValue)
 
@@ -28,11 +28,17 @@ export const CartCounter: React.FC<PropsType> = ({ callback, count }) => {
 
 	return (
 		<div className={s.counter}>
-			<IconButton onClick={decCounterValue}>
+			<IconButton onClick={decCounterValue} disabled={isDisabled}>
 				<RemoveIcon />
 			</IconButton>
-			<input type='number' value={counterValue} className={s.counterInput} onChange={onChangeValueHandler} />
-			<IconButton onClick={incCounterValue}>
+			<input
+				disabled={isDisabled}
+				type='number'
+				value={counterValue}
+				className={s.counterInput}
+				onChange={onChangeValueHandler}
+			/>
+			<IconButton onClick={incCounterValue} disabled={isDisabled}>
 				<AddIcon />
 			</IconButton>
 		</div>
@@ -42,4 +48,5 @@ export const CartCounter: React.FC<PropsType> = ({ callback, count }) => {
 type PropsType = {
 	callback: (countValue: number) => void
 	count: number
+	isDisabled?: boolean
 }
