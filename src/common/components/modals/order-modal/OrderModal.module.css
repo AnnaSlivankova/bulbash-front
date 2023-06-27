@@ -6,3 +6,9 @@
     font-weight: 300;
     font-size: 18px;
 }
+.details {
+    cursor: pointer;
+}
+.details:hover {
+    font-weight: 600;
+}

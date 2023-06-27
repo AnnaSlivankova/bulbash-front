@@ -9,15 +9,21 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone'
 import MailOutlineIcon from '@mui/icons-material/MailOutline'
 import { ContactsBtn } from '../contacts-btn/ContactsBtn'
 import { contactsData } from '../../data/info-data'
+import { useNavigate } from 'react-router-dom'
 
 export const InfoBlock: React.FC<InfoBlockType> = ({ title, description, children, type }) => {
+	const navigate = useNavigate()
 	const finalClassName = type === 'HomePage' ? `${s.descriptionHP}` : `${s.description}`
+
+	const redirectToHomePage = () => {
+		navigate('/home')
+	}
 
 	return (
 		<div className={s.wrapper}>
 			<div className={s.container}>
 				<div className={s.medContainer}>
-					<div className={s.logoContainer}>
+					<div className={s.logoContainer} onClick={redirectToHomePage}>
 						<img src={logo} className={s.logo} alt='logo picture' />
 						<div className={s.btnsContainer}>
 							<ContactsBtn>

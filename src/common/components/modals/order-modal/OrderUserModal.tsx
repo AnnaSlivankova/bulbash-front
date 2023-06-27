@@ -28,7 +28,7 @@ export const OrderUserModal: React.FC<Type> = ({ id }) => {
 		<BaseModal
 			open={open}
 			title={`Заказ номер ${id}`}
-			button={<div> Подробнее </div>}
+			button={<div className={s.details}> Подробнее </div>}
 			handleClose={handleClose}
 			handleOpen={handleOpen}
 		>

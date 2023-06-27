@@ -33,7 +33,7 @@ export const OrderAdminModal: React.FC<Type> = ({ id, payment_method, status, da
 		<BaseModal
 			open={open}
 			title={`Заказ номер ${id}`}
-			button={<div> Подробнее </div>}
+			button={<div className={s.details}> Подробнее </div>}
 			handleClose={handleClose}
 			handleOpen={handleOpen}
 		>

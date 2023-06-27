@@ -8,7 +8,7 @@ import Checkbox from '@mui/material/Checkbox'
 import Button from '@mui/material/Button'
 import { CategoryDataType } from '../../../../features/admin/admin-page-types'
 import { RequestUpdateOrderDataType } from '../../../../features/admin/orders-admin/orders-admin-api'
-import { FormControlLabel, Radio, RadioGroup } from '@mui/material'
+import { FormControlLabel, IconButton, Radio, RadioGroup } from '@mui/material'
 
 const style = {
 	field: {
@@ -74,7 +74,11 @@ export const EditOrderAdminModal: React.FC<Type> = ({
 			handleOpen={handleOpen}
 			handleClose={handleClose}
 			title={`${title} № ${id}`}
-			button={<BorderColorIcon color='secondary' />}
+			button={
+				<IconButton color='primary'>
+					<BorderColorIcon color='secondary' />
+				</IconButton>
+			}
 		>
 			<form onSubmit={handleSubmit(onSubmit)} style={{ margin: '10px 0 10px 0' }} className={s.formWrapper}>
 				<Controller
