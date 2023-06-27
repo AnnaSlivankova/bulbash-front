@@ -6,11 +6,18 @@ import { TableComponent } from '../../common/components/table/Table'
 import { userOrdersData } from '../../common/data/table-head-data'
 import s from './UserOrdersPage.module.css'
 import { InfoBlock } from '../../common/components/info-block/InfoBlock'
+import Button from '@mui/material/Button'
+import { useNavigate } from 'react-router-dom'
 
 export const UserOrdersPage = () => {
+	const navigate = useNavigate()
 	const orders = useAppSelector<OrderType[]>(state => state.order.orders)
 	const { getAllUserOrders } = useActions(orderThunks)
 	const params = {}
+
+	const redirectToCart = () => {
+		navigate('/cart')
+	}
 
 	useEffect(() => {
 		getAllUserOrders(params)
@@ -18,7 +25,11 @@ export const UserOrdersPage = () => {
 	return (
 		<>
 			<InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>
-				{/*{<Button onClick={redirectToCategories}>Назад</Button>}*/}
+				{
+					<Button onClick={redirectToCart} variant='contained' color='secondary'>
+						Назад
+					</Button>
+				}
 			</InfoBlock>
 
 			<div className={s.wrapper}>
