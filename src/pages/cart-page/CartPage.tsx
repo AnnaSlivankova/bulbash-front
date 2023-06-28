@@ -76,7 +76,12 @@ export const CartPage = () => {
 				<div className={s.countContainer}>
 					<div className={s.mainTitle}>Стоимость</div>
 					<div className={s.totalPrice}>{`Итого: ${totalPrice} руб.`}</div>
-					<CreateNewOrder btnTitle='Оформить' title='Оформление заказа' callback={onClickHandler} />
+					<CreateNewOrder
+						btnTitle='Оформить'
+						title='Оформление заказа'
+						callback={onClickHandler}
+						disabled={cartProducts.length === 0}
+					/>
 					<div onClick={redirectToUserOrders} className={s.myOrders}>
 						Мои заказы
 					</div>

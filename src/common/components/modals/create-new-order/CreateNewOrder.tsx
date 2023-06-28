@@ -19,7 +19,7 @@ const style = {
 	}
 }
 
-export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, callback }) => {
+export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, callback, disabled }) => {
 	const [open, setOpen] = useState(false)
 	const handleOpen = () => setOpen(true)
 	const handleClose = () => setOpen(false)
@@ -30,13 +30,11 @@ export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, callback }) =>
 		} as Omit<RequestNewOrderType, 'total_cost' | 'product_list'>
 	})
 
-	const onSubmit: SubmitHandler<any> = data => {
-		console.log(data)
-		// const finalData = { ...data, total_cost, product_list }
+	const onSubmit: SubmitHandler<any> = async data => {
 		callback(data)
 		setOpen(false)
 		handleClose()
-		reset()
+		// reset()
 	}
 
 	return (
@@ -46,7 +44,7 @@ export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, callback }) =>
 			handleClose={handleClose}
 			title={title}
 			button={
-				<Button variant='contained' color='secondary'>
+				<Button variant='contained' color='secondary' disabled={disabled}>
 					{btnTitle}
 				</Button>
 			}
@@ -108,7 +106,7 @@ export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, callback }) =>
 							required
 							multiline
 							fullWidth
-							label='Номер телефона'
+							label='Номер телефона в формате 375 XX XXX XX XX'
 							variant='outlined'
 							color='secondary'
 							{...field}
@@ -178,4 +176,5 @@ type Type = {
 	btnTitle: string
 	title: string
 	callback: (data: any) => void
+	disabled: boolean
 }
