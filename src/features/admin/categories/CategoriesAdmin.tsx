@@ -8,6 +8,7 @@ import { useActions } from '../../../common/hooks'
 import { adminCategoriesThunks } from './categories-admin-slice'
 import s from './CategoriesAdmin.module.css'
 import { AddCatModal } from '../../../common/components/modals/add-modals/AddCatModal'
+import { SubFiters } from '../subcategries/sub-filters/SubFiters'
 
 export const CategoriesAdmin = () => {
 	const categories = useSelector<RootState, FetchCategoryResponseType[]>(state => state.adminCategories.categories)

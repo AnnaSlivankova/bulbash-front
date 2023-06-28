@@ -1,5 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { productsAdminAPI, RequestPostProduct, ResponseFetchProducts } from './products-admin-api'
+import {
+	productsAdminAPI,
+	RequestFetchProductsParamsType,
+	RequestPostProduct,
+	ResponseFetchProducts
+} from './products-admin-api'
 import { createAppAsyncThunk } from '../../../common/utils/create-app-async-thunk'
 import { categoriesAdminAPI } from '../categories/categories-admin-api'
 import { CategoryDataType } from '../admin-page-types'
@@ -7,12 +12,12 @@ import { adminCategoriesThunks } from '../categories/categories-admin-slice'
 import { authActions } from '../../auth/auth-slice'
 import { handleAxiosError } from '../../../common/hooks'
 
-const fetchProductsList = createAppAsyncThunk<ResponseFetchProducts[], void>(
+const fetchProductsList = createAppAsyncThunk<ResponseFetchProducts[], RequestFetchProductsParamsType>(
 	'adminProducts/fetchProductsList',
-	async (_, thunkAPI) => {
+	async (params, thunkAPI) => {
 		const { dispatch, rejectWithValue, getState } = thunkAPI
 		try {
-			return await productsAdminAPI.fetchProducts()
+			return await productsAdminAPI.fetchProducts(params)
 		} catch (e) {
 			console.log(e)
 			return rejectWithValue(null)
@@ -28,7 +33,7 @@ const addNewProduct = createAppAsyncThunk<void, { params: RequestPostProduct; im
 			const res = await productsAdminAPI.addNewProduct(arg.params, arg.img_file)
 			dispatch(authActions.setMessage({ message: 'Новый продукт был успешно создан' }))
 			dispatch(authActions.setSeverity({ severity: 'success' }))
-			dispatch(adminProductsThunks.fetchProductsList())
+			dispatch(adminProductsThunks.fetchProductsList({}))
 		} catch (e) {
 			console.log(e)
 			handleAxiosError(dispatch, e)
@@ -46,7 +51,7 @@ const updateProduct = createAppAsyncThunk<
 		const res = await productsAdminAPI.updateProduct(arg.product_id, arg.params, arg.img_file)
 		dispatch(authActions.setMessage({ message: res.detail }))
 		dispatch(authActions.setSeverity({ severity: 'success' }))
-		dispatch(adminProductsThunks.fetchProductsList())
+		dispatch(adminProductsThunks.fetchProductsList({}))
 	} catch (e) {
 		console.log(e)
 		handleAxiosError(dispatch, e)
@@ -60,7 +65,7 @@ const deleteProduct = createAppAsyncThunk<void, number>('adminProducts/deletePro
 		const res = await productsAdminAPI.deleteProduct(product_id)
 		dispatch(authActions.setMessage({ message: res.detail }))
 		dispatch(authActions.setSeverity({ severity: 'success' }))
-		dispatch(adminProductsThunks.fetchProductsList())
+		dispatch(adminProductsThunks.fetchProductsList({}))
 	} catch (e) {
 		console.log(e)
 		handleAxiosError(dispatch, e)

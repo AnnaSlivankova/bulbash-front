@@ -2,8 +2,10 @@ import { instance } from '../../../app'
 import { instanceUser } from '../../../app/common-api'
 
 export const productsAdminAPI = {
-	fetchProducts() {
-		return instanceUser.get<ResponseFetchProducts[]>('/api/v1/bulbash_admin/get_list_products').then(res => res.data)
+	fetchProducts(params: RequestFetchProductsParamsType) {
+		return instanceUser
+			.get<ResponseFetchProducts[]>('/api/v1/bulbash_admin/get_list_products', { params })
+			.then(res => res.data)
 	},
 	addNewProduct(params: RequestPostProduct, img_file: FormData) {
 		return instanceUser
@@ -29,6 +31,12 @@ export const productsAdminAPI = {
 			.delete<ResponseChangeProduct>(`/api/v1/bulbash_admin/delete_product_${product_id}`)
 			.then(res => res.data)
 	}
+}
+
+export type RequestFetchProductsParamsType = {
+	status_enabled?: boolean
+	category_id?: number
+	subcategory_id?: number
 }
 
 export type ResponseFetchProducts = {

@@ -8,11 +8,15 @@ import { adminSubcategoriesThunks } from './subcategories-admin-slice'
 import { AddSubModal } from '../../../common/components/modals/add-modals/AddSubModal'
 import { TableComponent } from '../../../common/components/table/Table'
 import { subcategoriesData } from '../../../common/data/table-head-data'
+import { SelectFilter } from '../../../common/components/select-filter/SelectFilter'
+import { FetchCategoryResponseType } from '../admin-page-types'
+import { SubFiters } from './sub-filters/SubFiters'
 
 export const SubcategoriesAdmin = () => {
 	const subcategories = useSelector<RootState, ResponseFetchSubcategoryType[]>(
 		state => state.adminSubcategories.subcategories
 	)
+
 	const { fetchSubcategoriesList, addNewSubcategory } = useActions(adminSubcategoriesThunks)
 
 	useEffect(() => {
@@ -25,6 +29,7 @@ export const SubcategoriesAdmin = () => {
 
 	return (
 		<div className={s.wrapper}>
+			<SubFiters />
 			{/*<h1>Subcategories</h1>*/}
 			<AddSubModal title={'Добавить новую подкатегорию'} btnTitle={'Добавить подкатегорию'} callback={onClickHandler} />
 			<TableComponent
