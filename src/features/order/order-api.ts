@@ -2,13 +2,33 @@ import { instanceUser } from '../../app/common-api'
 
 export const orderApi = {
 	createNewOrder(data: RequestNewOrderType) {
-		return instanceUser.post<any>('api/v1/order/create-new-order', data).then(res => res.data)
+		// console.log(`create new order ${localStorage.getItem('token')}`)
+		return instanceUser
+			.post<any>('api/v1/order/create-new-order', data, {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
+			})
+			.then(res => res.data)
 	},
 	getAllUserOrders(params: Partial<GetAllOrdersParamsType>) {
-		return instanceUser.get<ResponseGetAllOrders>('/api/v1/order/get-all-user-orders', { params }).then(res => res.data)
+		return instanceUser
+			.get<ResponseGetAllOrders>('/api/v1/order/get-all-user-orders', {
+				params,
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
+			})
+			.then(res => res.data)
 	},
 	getUserOrder(order_id: number) {
-		return instanceUser.get<ResponseGetUserOrderType>(`/api/v1/order/get-user-orders/${order_id}`).then(res => res.data)
+		return instanceUser
+			.get<ResponseGetUserOrderType>(`/api/v1/order/get-user-orders/${order_id}`, {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
+			})
+			.then(res => res.data)
 	}
 }
 

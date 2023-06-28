@@ -14,16 +14,30 @@ export const userCartApi = {
 			.then(res => res.data)
 	},
 	addItemToCard(data: RequestAddItemType) {
-		return instanceUser.post<ResponseAddItemType>('api/v1/cart/add-item-to-cart', data).then(res => res.data)
+		return instanceUser
+			.post<ResponseAddItemType>('api/v1/cart/add-item-to-cart', data, {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
+			})
+			.then(res => res.data)
 	},
 	updateItemQuantity(data: RequestUpdateItemType) {
 		return instanceUser
-			.patch<CommonResponseType>('api/v1/cart/update-quantity-item-in-cart', data)
+			.patch<CommonResponseType>('api/v1/cart/update-quantity-item-in-cart', data, {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
+			})
 			.then(res => res.data)
 	},
 	deleteCartItem(cart_id: number) {
 		return instanceUser
-			.delete<CommonResponseType>(`/api/v1/cart/delete-item-from-cart/${cart_id}`)
+			.delete<CommonResponseType>(`/api/v1/cart/delete-item-from-cart/${cart_id}`, {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
+			})
 			.then(res => res.data)
 	}
 }

@@ -3,7 +3,14 @@ import { instanceUser } from '../../app/common-api'
 
 export const authAPI = {
 	me() {
-		return instanceUser.get<ResponseMeType>('api/v1/users/me').then(res => res.data)
+		// console.log(localStorage.getItem('token'))
+		return instanceUser
+			.get<ResponseMeType>('api/v1/users/me', {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
+			})
+			.then(res => res.data)
 	},
 	login(data: RequestLoginType) {
 		return (
