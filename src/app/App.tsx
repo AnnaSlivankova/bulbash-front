@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import 'app/App.css'
 import { Layout } from 'pages/layout/Layout'
 import { BrowserRouter } from 'react-router-dom'
@@ -8,6 +8,7 @@ import { authThunks } from '../features/auth/auth-slice'
 import { useAppDispatch } from '../common/hooks'
 import { categoriesThunks } from '../features/client/categories/categories-slice'
 import { productsThunks } from '../features/client/products/products-slice'
+import { CookieConsent } from 'react-cookie-consent'
 
 function App() {
 	const dispatch = useAppDispatch()
@@ -18,6 +19,11 @@ function App() {
 
 	return (
 		<BrowserRouter>
+			<CookieConsent buttonText='Принять' overlay={true} buttonStyle={{ backgroundColor: '#F0E56F' }}>
+				Наш сайт использует файлы cookie для улучшения пользовательского опыта, сбора статистики и представления
+				персонализированных рекомендаций. Нажав «Принять», вы даете согласие на обработку файлов cookie в соответствии с
+				Политикой обработки файлов cookie.
+			</CookieConsent>
 			<SnackBar />
 			<Header />
 			<Layout />
