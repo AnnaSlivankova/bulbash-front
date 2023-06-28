@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useActions, useAppSelector } from '../../../common/hooks'
 import { orderAdminThunks } from './orders-admin-slice'
 import { TableComponent } from '../../../common/components/table/Table'

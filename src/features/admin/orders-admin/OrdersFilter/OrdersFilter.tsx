@@ -6,11 +6,9 @@ import { orderAdminThunks } from '../orders-admin-slice'
 import { paymentMethodData } from '../../../../common/data/payment-method-data'
 import { statusOrderData } from '../../../../common/data/status-order-data'
 import { SelectFilterStr } from '../../../../common/components/select-filter/SelectFilterStr'
-import { authActions } from '../../../auth/auth-slice'
 
 export const OrdersFilter = () => {
 	const { getAllOrders } = useActions(orderAdminThunks)
-	const { setIsAdmin } = useActions(authActions)
 
 	const [searchParams, setSearchParams] = useSearchParams()
 

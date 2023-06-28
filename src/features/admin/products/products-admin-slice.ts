@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import {
 	productsAdminAPI,
 	RequestFetchProductsParamsType,
@@ -6,9 +6,6 @@ import {
 	ResponseFetchProducts
 } from './products-admin-api'
 import { createAppAsyncThunk } from '../../../common/utils/create-app-async-thunk'
-import { categoriesAdminAPI } from '../categories/categories-admin-api'
-import { CategoryDataType } from '../admin-page-types'
-import { adminCategoriesThunks } from '../categories/categories-admin-slice'
 import { authActions } from '../../auth/auth-slice'
 import { handleAxiosError } from '../../../common/hooks'
 
@@ -30,7 +27,7 @@ const addNewProduct = createAppAsyncThunk<void, { params: RequestPostProduct; im
 	async (arg, thunkAPI) => {
 		const { dispatch, rejectWithValue, getState } = thunkAPI
 		try {
-			const res = await productsAdminAPI.addNewProduct(arg.params, arg.img_file)
+			await productsAdminAPI.addNewProduct(arg.params, arg.img_file)
 			dispatch(authActions.setMessage({ message: 'Новый продукт был успешно создан' }))
 			dispatch(authActions.setSeverity({ severity: 'success' }))
 			dispatch(adminProductsThunks.fetchProductsList({}))

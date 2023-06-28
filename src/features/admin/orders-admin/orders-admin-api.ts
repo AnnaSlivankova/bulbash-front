@@ -1,5 +1,5 @@
 import { instanceUser } from '../../../app/common-api'
-import { GetAllOrdersParamsType, OrderStatusType, PaymentMethodType } from '../../order/order-api'
+import { GetAllOrdersParamsType } from '../../order/order-api'
 
 export const orderAdminApi = {
 	getAllOrders(params: Partial<GetAllOrdersAdminParamsType>) {

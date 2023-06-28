@@ -1,11 +1,9 @@
-import * as React from 'react'
+import React from 'react'
 import Box from '@mui/material/Box'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-import { ResponseFetchSubcategoryType } from '../../../features/admin/subcategries/subcategories-admin-api'
-import { FetchCategoryResponseType } from '../../../features/admin/admin-page-types'
 
 export const SelectFilter: React.FC<Type> = ({ callback, data, title }) => {
 	const handleChange = (event: SelectChangeEvent) => {
@@ -32,7 +30,6 @@ export const SelectFilter: React.FC<Type> = ({ callback, data, title }) => {
 							{el.name}
 						</MenuItem>
 					))}
-					{/*<MenuItem value={10}>Ten</MenuItem>*/}
 				</Select>
 			</FormControl>
 		</Box>

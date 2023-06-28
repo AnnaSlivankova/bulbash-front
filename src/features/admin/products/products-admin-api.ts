@@ -1,4 +1,3 @@
-import { instance } from '../../../app'
 import { instanceUser } from '../../../app/common-api'
 
 export const productsAdminAPI = {

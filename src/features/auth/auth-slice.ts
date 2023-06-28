@@ -1,4 +1,4 @@
-import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { handleAxiosError } from 'common/hooks'
 
 import { createAppAsyncThunk } from '../../common/utils/create-app-async-thunk'
@@ -17,7 +17,7 @@ const me = createAppAsyncThunk<void, void>('auth/me', async (_, thunkAPI) => {
 	const { dispatch, rejectWithValue } = thunkAPI
 
 	try {
-		const res = await authAPI.me()
+		await authAPI.me()
 		dispatch(authActions.setLogin({ isLogin: true }))
 		dispatch(authActions.setSeverity({ severity: 'success' }))
 

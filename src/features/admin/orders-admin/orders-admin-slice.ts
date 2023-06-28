@@ -7,7 +7,6 @@ import {
 	orderAdminApi,
 	OrderAdminType,
 	RequestUpdateOrderDataType,
-	ResponseGetAllOrdersType,
 	ResponseGetOrderAdminType
 } from './orders-admin-api'
 import { authActions } from '../../auth/auth-slice'
@@ -37,8 +36,7 @@ const getOrder = createAppAsyncThunk<ResponseGetOrderAdminType, number>(
 		const { dispatch, rejectWithValue } = thunkAPI
 
 		try {
-			const res = await orderAdminApi.getOrder(order_id)
-			return res
+			return await orderAdminApi.getOrder(order_id)
 		} catch (e) {
 			// handleAxiosError(dispatch, e)
 

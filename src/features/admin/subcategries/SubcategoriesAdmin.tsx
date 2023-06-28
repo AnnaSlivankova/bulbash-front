@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import s from './SubcategoriesAdmin.module.css'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../app/store'
@@ -8,8 +8,6 @@ import { adminSubcategoriesThunks } from './subcategories-admin-slice'
 import { AddSubModal } from '../../../common/components/modals/add-modals/AddSubModal'
 import { TableComponent } from '../../../common/components/table/Table'
 import { subcategoriesData } from '../../../common/data/table-head-data'
-import { SelectFilter } from '../../../common/components/select-filter/SelectFilter'
-import { FetchCategoryResponseType } from '../admin-page-types'
 import { SubFiters } from './sub-filters/SubFiters'
 
 export const SubcategoriesAdmin = () => {

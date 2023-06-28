@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import Button from '@mui/material/Button'
 import { useNavigate } from 'react-router-dom'
@@ -9,16 +9,14 @@ import { changeImgPath } from '../../common/utils/changeImgPath'
 import { CartItemType } from '../../features/cart/userCart-api'
 import { InfoCart } from './info-cart/InfoCart'
 import { InfoBlock } from 'common/components/info-block/InfoBlock'
-import { useActions, useAppDispatch } from '../../common/hooks'
+import { useActions } from '../../common/hooks'
 import { CreateNewOrder } from '../../common/components/modals/create-new-order/CreateNewOrder'
-import { adminCategoriesThunks } from '../../features/admin/categories/categories-admin-slice'
 import { orderThunks } from '../../features/order/order-slice'
 import { userCartThunks } from '../../features/cart/userCart-slice'
 
 export const CartPage = () => {
 	const cartProducts = useSelector<RootState, CartItemType[]>(state => state.userCart.userCart.data)
 	const totalPrice = useSelector<RootState, number>(state => state.userCart.userCart.total_price)
-	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 	const { getCardItems } = useActions(userCartThunks)
 
