@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import s from './AdminPage.module.css'
-import { NavLink } from 'react-router-dom'
 import { CategoriesAdmin } from '../../features/admin/categories/CategoriesAdmin'
 import { SubcategoriesAdmin } from '../../features/admin/subcategries/SubcategoriesAdmin'
 import { ProductsAdmin } from '../../features/admin/products/ProductsAdmin'
 import { OrdersAdmin } from '../../features/admin/orders-admin/OrdersAdmin'
-import { useActions } from '../../common/hooks'
+import { useActions, useAppSelector } from '../../common/hooks'
 import { adminCategoriesThunks } from '../../features/admin/categories/categories-admin-slice'
 import { adminSubcategoriesThunks } from '../../features/admin/subcategries/subcategories-admin-slice'
+import { Navigate } from 'react-router-dom'
 
 export const AdminPage = () => {
 	const { fetchShortCategoriesList } = useActions(adminCategoriesThunks)
 	const { fetchShortSubcategoriesList } = useActions(adminSubcategoriesThunks)
+
+	const isAdmin = useAppSelector<boolean>(state => state.auth.isAdmin)
 
 	const [categories, setCategories] = useState(false)
 	const [subcategories, setSubcategories] = useState(false)
@@ -47,6 +49,10 @@ export const AdminPage = () => {
 		fetchShortCategoriesList({})
 		fetchShortSubcategoriesList({})
 	}, [])
+
+	if (!isAdmin) {
+		return <Navigate to={'/home'} />
+	}
 
 	return (
 		<div className={s.wrapper}>

@@ -14,9 +14,9 @@ export const ProductsAdmin = () => {
 	const products = useSelector<RootState, ResponseFetchProducts[]>(state => state.adminProducts.products)
 	const { fetchProductsList, addNewProduct } = useActions(adminProductsThunks)
 
-	useEffect(() => {
-		fetchProductsList({})
-	}, [])
+	// useEffect(() => {
+	// 	fetchProductsList({})
+	// }, [])
 
 	const addNewProductHandler = (params: RequestPostProduct, img_file: FormData) => {
 		addNewProduct({ params, img_file })

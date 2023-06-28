@@ -19,9 +19,9 @@ export const SubcategoriesAdmin = () => {
 
 	const { fetchSubcategoriesList, addNewSubcategory } = useActions(adminSubcategoriesThunks)
 
-	useEffect(() => {
-		fetchSubcategoriesList({})
-	}, [])
+	// useEffect(() => {
+	// 	fetchSubcategoriesList({})
+	// }, [])
 
 	const onClickHandler = (data: RequestPostSubCategoryDataType) => {
 		addNewSubcategory(data)

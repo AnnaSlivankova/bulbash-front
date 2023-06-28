@@ -11,6 +11,7 @@ import {
 	ResponseSetNewPassword
 } from './auth-api'
 import { userCartThunks } from '../cart/userCart-slice'
+import { orderAdminThunks } from '../admin/orders-admin/orders-admin-slice'
 
 const me = createAppAsyncThunk<void, void>('auth/me', async (_, thunkAPI) => {
 	const { dispatch, rejectWithValue } = thunkAPI
@@ -21,6 +22,8 @@ const me = createAppAsyncThunk<void, void>('auth/me', async (_, thunkAPI) => {
 		dispatch(authActions.setSeverity({ severity: 'success' }))
 
 		dispatch(userCartThunks.getCardItems())
+
+		dispatch(orderAdminThunks.getAllOrders({}))
 	} catch (e) {
 		// handleAxiosError(dispatch, e)
 
@@ -76,6 +79,7 @@ const logout = createAppAsyncThunk<any, any>('auth/logout', async (_, thunkAPI) 
 		dispatch(authActions.setMessage({ message: res.message }))
 		dispatch(authActions.setSeverity({ severity: 'success' }))
 		dispatch(authActions.setLogin({ isLogin: false }))
+		dispatch(authActions.setIsAdmin({ isAdmin: false }))
 	} catch (e) {
 		handleAxiosError(dispatch, e)
 
@@ -138,14 +142,14 @@ const slice = createSlice({
 	name: 'auth',
 	initialState: {
 		token: localStorage.getItem('token'),
-		// refreshToken: localStorage.getItem('refreshToken'),
 		isLogin: false,
 		isSignup: false,
 		isInitialized: false as boolean | undefined,
 		error: null as string | null,
 		authStatus: 'idle' as RequestStatusType,
 		message: null as string | null,
-		severity: '' as SeverityType
+		severity: '' as SeverityType,
+		isAdmin: true
 	},
 	reducers: {
 		setIsInitialized: (state, action: PayloadAction<{ isInitialized: boolean }>) => {
@@ -162,6 +166,9 @@ const slice = createSlice({
 		},
 		setError: (state, action: PayloadAction<{ error: string | null }>) => {
 			state.error = action.payload.error
+		},
+		setIsAdmin: (state, action: PayloadAction<{ isAdmin: boolean }>) => {
+			state.isAdmin = action.payload.isAdmin
 		}
 		// setAuthStatus: (state, action: PayloadAction<{ authStatus: RequestStatusType }>) => {
 		// 	state.authStatus = action.payload.authStatus

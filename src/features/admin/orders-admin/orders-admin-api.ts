@@ -4,7 +4,12 @@ import { GetAllOrdersParamsType, OrderStatusType, PaymentMethodType } from '../.
 export const orderAdminApi = {
 	getAllOrders(params: Partial<GetAllOrdersAdminParamsType>) {
 		return instanceUser
-			.get<ResponseGetAllOrdersType>('/api/v1/bulbash_admin/get-all-orders', { params })
+			.get<ResponseGetAllOrdersType>('/api/v1/bulbash_admin/get-all-orders', {
+				params,
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
+			})
 			.then(res => res.data)
 	},
 	getOrder(order_id: number) {

@@ -9,12 +9,11 @@ import s from './OrdersAdmin.module.css'
 
 export const OrdersAdmin = () => {
 	const orders = useAppSelector<OrderAdminType[]>(state => state.adminOrders.orders)
-	const { getAllOrders, getOrder } = useActions(orderAdminThunks)
-	const params = {}
+	const { getAllOrders } = useActions(orderAdminThunks)
 
-	useEffect(() => {
-		getAllOrders(params)
-	}, [])
+	// useEffect(() => {
+	// 	getAllOrders({})
+	// }, [])
 
 	return (
 		<div className={s.wrapper}>
