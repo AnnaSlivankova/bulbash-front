@@ -15,6 +15,7 @@ import { cartActions } from '../cart/cart-slice'
 import { userCartThunks } from '../../cart/userCart-slice'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../app/store'
+import { useMediaQuery, useTheme } from '@mui/material'
 
 export const Products: React.FC<ProductsType> = ({
 	zoom,
@@ -62,27 +63,76 @@ export const Products: React.FC<ProductsType> = ({
 	const redirectToCart = () => {
 		navigate('/cart')
 	}
+	const theme = useTheme()
+	const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
 
 	return (
 		<Zoom in={zoom} style={{ transitionDuration: '500ms' }}>
-			<Card sx={{ width: 300 }}>
+			{/*<Card sx={{ width: 300 }}>*/}
+			<Card
+				// sx={{ width: 160 }}
+				sx={{
+					width: isSmallScreen ? 160 : 300
+				}}
+			>
 				<CardActionArea onClick={redirectToProduct}>
-					<CardMedia component='img' height='200' image={imgPath} alt={name} />
-					<CardContent>
-						<Typography gutterBottom variant='h6' component='div' align='center' className={s.title}>
+					{/*<CardMedia component='img' height='200' image={imgPath} alt={name} sx={{*/}
+					<CardMedia
+						component='img'
+						height='200'
+						image={imgPath}
+						alt={name}
+						sx={{
+							height: isSmallScreen ? 100 : 200
+						}}
+					/>
+					<CardContent
+						sx={{
+							padding: isSmallScreen ? 1 : 2
+						}}
+					>
+						<Typography
+							gutterBottom
+							variant='h6'
+							component='div'
+							align='center'
+							className={s.title}
+							sx={{
+								fontSize: isSmallScreen ? 10 : 20
+							}}
+						>
 							{name}
 						</Typography>
-						<Typography variant='body2' color='text.secondary' className={s.description}>
+						<Typography
+							variant='body2'
+							color='text.secondary'
+							className={s.description}
+							sx={{
+								fontSize: isSmallScreen ? 8 : 20
+							}}
+						>
 							{description}
 						</Typography>
 					</CardContent>
 				</CardActionArea>
 				<div className={s.subContainer}>
 					<div className={s.sub}>
-						<Typography variant='h6' color='text.secondary'>
+						<Typography
+							variant='h6'
+							color='text.secondary'
+							sx={{
+								fontSize: isSmallScreen ? 10 : 20
+							}}
+						>
 							{`${price} byn`}
 						</Typography>
-						<Typography variant='subtitle1' color='text.secondary'>
+						<Typography
+							variant='subtitle1'
+							color='text.secondary'
+							sx={{
+								fontSize: isSmallScreen ? 10 : 20
+							}}
+						>
 							{`на ${peopleNumber} чел., ${weight} гр.`}
 						</Typography>
 					</div>
@@ -90,11 +140,24 @@ export const Products: React.FC<ProductsType> = ({
 						<div className={s.counter}>
 							<CartCounter callback={setCountHandler} count={1} isDisabled={isDisabled} />
 							{showCartBtn ? (
-								<Button variant='contained' color='secondary' onClick={redirectToCart}>
+								<Button
+									variant='contained'
+									color='secondary'
+									onClick={redirectToCart}
+									sx={{
+										fontSize: isSmallScreen ? 10 : 18
+									}}
+								>
 									в корзину
 								</Button>
 							) : (
-								<Button variant='contained' onClick={addToCartHandler}>
+								<Button
+									variant='contained'
+									onClick={addToCartHandler}
+									sx={{
+										fontSize: isSmallScreen ? 10 : 18
+									}}
+								>
 									Заказать
 								</Button>
 							)}

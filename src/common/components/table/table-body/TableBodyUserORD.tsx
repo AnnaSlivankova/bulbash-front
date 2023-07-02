@@ -11,14 +11,27 @@ import { OrderUserModal } from '../../modals/order-modal/OrderUserModal'
 import { changePaymentMethodTitle } from 'common/utils/change-payment-method-title'
 import { changeOrderStatusTitle } from '../../../utils/change-order-status-title'
 import { OrderAdminType } from '../../../../features/admin/orders-admin/orders-admin-api'
+import { useMediaQuery, useTheme } from '@mui/material'
 
-const style = {
-	tableRow: {
-		'&:last-child td, &:last-child th': { border: 0 }
-	}
-}
+// const style = {
+// 	tableRow: {
+// 		'&:last-child td, &:last-child th': { border: 0 }
+// 	}
+// }
 
 export const TableBodyUserOrd: React.FC<Type> = ({ bodyData }) => {
+	const theme = useTheme()
+	const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
+	const style = {
+		tableRow: {
+			'&:last-child td, &:last-child th': { border: 0 }
+		},
+		cell: {
+			fontSize: isSmallScreen ? 8 : 14,
+			padding: isSmallScreen ? 0.5 : 2
+		}
+	}
+
 	return (
 		<TableBody>
 			{bodyData.map((el: any) => {
@@ -28,14 +41,14 @@ export const TableBodyUserOrd: React.FC<Type> = ({ bodyData }) => {
 
 				return (
 					<TableRow key={el.id} sx={style.tableRow} hover>
-						<TableCell className={s.nameCell} component='th' scope='row'>
+						<TableCell className={s.nameCell} component='th' scope='row' sx={style.cell}>
 							{el.id}
 						</TableCell>
-						<TableCell>{paymentMethod}</TableCell>
-						<TableCell>{`${el.total_cost} byn`}</TableCell>
-						<TableCell>{orderStatus}</TableCell>
-						<TableCell>{formatedDateCreated}</TableCell>
-						<TableCell>
+						<TableCell sx={style.cell}>{paymentMethod}</TableCell>
+						<TableCell sx={style.cell}>{`${el.total_cost} byn`}</TableCell>
+						<TableCell sx={style.cell}>{orderStatus}</TableCell>
+						<TableCell sx={style.cell}>{formatedDateCreated}</TableCell>
+						<TableCell sx={style.cell}>
 							<OrderUserModal id={el.id} />
 						</TableCell>
 					</TableRow>

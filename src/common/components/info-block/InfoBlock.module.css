@@ -93,7 +93,8 @@
 
 .contactsContainer {
     display: flex;
-    flex-direction: column;
+    /*flex-direction: column;*/
+    flex-direction: row;
     align-items: flex-start;
 
     /*border: 1px solid red;*/
@@ -101,7 +102,12 @@
 }
 
 .ContactBTN {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     font-size: 25px;
+    color: var(--primary-color);
+    justify-content: center;
 }
 
 @media screen and (max-width: 1030px) {

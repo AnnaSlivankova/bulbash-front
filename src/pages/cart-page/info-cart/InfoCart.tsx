@@ -5,6 +5,7 @@ import { IconButton } from '@mui/material'
 import s from './InfoCart.module.css'
 import { useActions } from '../../../common/hooks'
 import { userCartThunks } from '../../../features/cart/userCart-slice'
+import sprite from '../../../assets/styles/sprite.svg'
 
 export const InfoCart: React.FC<PropsType> = ({ image_path, title, weight, price, count, id, productPrice }) => {
 	const { deleteCardItem, updateCardItem } = useActions(userCartThunks)
@@ -25,7 +26,7 @@ export const InfoCart: React.FC<PropsType> = ({ image_path, title, weight, price
 
 	return (
 		<div className={s.container}>
-			<img src={image_path} className={s.img} alt='product picture' />
+			<img src={image_path} className={s.img} alt={`product-${id}`} />
 			<div className={s.titleContainer}>
 				<div className={s.title}>{title}</div>
 				<div className={s.weightPeople}>{`${weight} гр.`}</div>
@@ -35,9 +36,12 @@ export const InfoCart: React.FC<PropsType> = ({ image_path, title, weight, price
 				<Counter count={count} callback={onChangeCartCount} />
 				<div className={s.count}>{`${productPrice} руб.`}</div>
 			</div>
-			<IconButton sx={{ width: '40px', height: '40px' }} className={s.delete} onClick={deleteProductHandler}>
-				<ClearIcon />
-			</IconButton>
+			<svg className={s.icon} onClick={deleteProductHandler}>
+				<use xlinkHref={`${sprite}#delete`} />
+			</svg>
+			{/*<IconButton sx={{ width: '40px', height: '40px' }} className={s.delete} onClick={deleteProductHandler}>*/}
+			{/*	<ClearIcon />*/}
+			{/*</IconButton>*/}
 		</div>
 	)
 }

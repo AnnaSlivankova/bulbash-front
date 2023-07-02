@@ -10,3 +10,17 @@
     margin: 20px;
 
 }
+
+@media  screen and (max-width: 820px) {
+ .container {
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     font-size: 10px;
+ }
+    .textBox {
+        margin: 10px;
+        text-align: center;
+    }
+
+}

@@ -17,7 +17,7 @@ export const SliderField: React.FC<PropsType> = ({
 }) => {
 	return (
 		<div className={s.sliderWrapper}>
-			<div>{title}</div>
+			<div className={s.title}>{title}</div>
 			<div className={s.valuesContainer}>
 				<div>
 					<div>от</div>

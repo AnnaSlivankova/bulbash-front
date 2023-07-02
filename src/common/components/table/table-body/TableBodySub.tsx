@@ -23,12 +23,13 @@ import { adminSubcategoriesThunks } from '../../../../features/admin/subcategrie
 import { ResponseFetchProducts } from '../../../../features/admin/products/products-admin-api'
 import { OrderType } from '../../../../features/order/order-api'
 import { OrderAdminType } from '../../../../features/admin/orders-admin/orders-admin-api'
+import { useMediaQuery, useTheme } from '@mui/material'
 
-const style = {
-	tableRow: {
-		'&:last-child td, &:last-child th': { border: 0 }
-	}
-}
+// const style = {
+// 	tableRow: {
+// 		'&:last-child td, &:last-child th': { border: 0 }
+// 	}
+// }
 
 export const TableBodySubComponent: React.FC<Type> = ({ bodyData, deleteTitle, updateTitle }) => {
 	const { updateSubcategory, deleteSubcategory } = useActions(adminSubcategoriesThunks)
@@ -40,6 +41,24 @@ export const TableBodySubComponent: React.FC<Type> = ({ bodyData, deleteTitle, u
 	const onClickDelete = (subcategory_id: number) => {
 		deleteSubcategory(subcategory_id)
 	}
+	const theme = useTheme()
+	const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
+	const style = {
+		tableRow: {
+			'&:last-child td, &:last-child th': { border: 0 }
+		},
+		cell: {
+			fontSize: isSmallScreen ? 8 : 14,
+			padding: isSmallScreen ? 0.5 : 2
+		},
+		btn: {
+			height: isSmallScreen ? 20 : 40,
+			width: isSmallScreen ? 20 : 40,
+			// fontSize: isSmallScreen ? 10 : 18,
+			padding: 0.5,
+			margin: isSmallScreen ? 0 : 1
+		}
+	}
 
 	return (
 		<TableBody>
@@ -50,18 +69,18 @@ export const TableBodySubComponent: React.FC<Type> = ({ bodyData, deleteTitle, u
 
 				return (
 					<TableRow key={el.id} sx={style.tableRow} hover>
-						<TableCell className={s.nameCell} component='th' scope='row'>
+						<TableCell className={s.nameCell} component='th' scope='row' sx={style.cell}>
 							{/*{el.category_id}*/}
 							{el.category_name}
 						</TableCell>
 						{/*<TableCell>{el.id}</TableCell>*/}
-						<TableCell>{el.name}</TableCell>
-						<TableCell>
+						<TableCell sx={style.cell}>{el.name}</TableCell>
+						<TableCell sx={style.cell}>
 							{el.status_enabled}
 							<Checkbox color='secondary' checked={el.status_enabled} />
 						</TableCell>
-						<TableCell>{formatedDateCreated}</TableCell>
-						<TableCell>{formatedDateUpdated}</TableCell>
+						<TableCell sx={style.cell}>{formatedDateCreated}</TableCell>
+						<TableCell sx={style.cell}>{formatedDateUpdated}</TableCell>
 						<TableCell>
 							<div className={s.btnsWrapper}>
 								<IconButton color='primary'>

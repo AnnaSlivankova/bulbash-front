@@ -5,6 +5,7 @@ import { persistor, store } from 'app/store'
 import App from 'app/App'
 import reportWebVitals from './reportWebVitals'
 import './index.css'
+import './assets/styles/theme.css'
 import { PersistGate } from 'redux-persist/integration/react'
 import { createTheme, ThemeProvider } from '@mui/material'
 

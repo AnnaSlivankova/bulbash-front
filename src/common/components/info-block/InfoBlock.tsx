@@ -7,9 +7,9 @@ import AndroidIcon from '@mui/icons-material/Android'
 import TelegramIcon from '@mui/icons-material/Telegram'
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone'
 import MailOutlineIcon from '@mui/icons-material/MailOutline'
-import { ContactsBtn } from '../contacts-btn/ContactsBtn'
 import { contactsData } from '../../data/info-data'
 import { useNavigate } from 'react-router-dom'
+import { IconButton } from '@mui/material'
 
 export const InfoBlock: React.FC<InfoBlockType> = ({ title, description, children, type }) => {
 	const navigate = useNavigate()
@@ -24,20 +24,33 @@ export const InfoBlock: React.FC<InfoBlockType> = ({ title, description, childre
 			<div className={s.container}>
 				<div className={s.medContainer}>
 					<div className={s.logoContainer} onClick={redirectToHomePage}>
-						<img src={logo} className={s.logo} alt='logo picture' />
+						<img src={logo} className={s.logo} alt='logo' />
 						<div className={s.btnsContainer}>
-							<ContactsBtn>
-								<InstagramIcon />
-							</ContactsBtn>
-							<ContactsBtn>
-								<TelegramIcon />
-							</ContactsBtn>
-							<ContactsBtn>
-								<AppleIcon />
-							</ContactsBtn>
-							<ContactsBtn>
-								<AndroidIcon />
-							</ContactsBtn>
+							<IconButton color='primary'>
+								<a
+									target={'_blank'}
+									rel='noreferrer'
+									href={'https://www.instagram.com/kirill_babaryka/?igshid=MzRlODBiNWFlZA%3D%3D'}
+									style={{ color: 'inherit' }}
+								>
+									<InstagramIcon />
+								</a>
+							</IconButton>
+							<IconButton color='primary'>
+								<a>
+									<TelegramIcon />
+								</a>
+							</IconButton>
+							<IconButton color='primary'>
+								<a>
+									<AppleIcon />
+								</a>
+							</IconButton>
+							<IconButton color='primary'>
+								<a>
+									<AndroidIcon />
+								</a>
+							</IconButton>
 						</div>
 					</div>
 					<div className={s.titleContainer}>
@@ -49,17 +62,25 @@ export const InfoBlock: React.FC<InfoBlockType> = ({ title, description, childre
 					{contactsData.map(el => {
 						if (el.type === 'phone') {
 							return (
-								<ContactsBtn key={el.id}>
+								// <ContactsBtn key={el.id}>
+								// 	<LocalPhoneIcon />
+								// 	<span className={s.ContactBTN}>{el.contact}</span>
+								// </ContactsBtn>
+								<span key={el.id} className={s.ContactBTN}>
 									<LocalPhoneIcon />
-									<span className={s.ContactBTN}>{el.contact}</span>
-								</ContactsBtn>
+									<span>{el.contact}</span>
+								</span>
 							)
 						} else {
 							return (
-								<ContactsBtn key={el.id}>
+								// <ContactsBtn key={el.id}>
+								// 	<MailOutlineIcon />
+								// 	<span className={s.ContactBTN}>{el.contact}</span>
+								// </ContactsBtn>
+								<span key={el.id} className={s.ContactBTN}>
 									<MailOutlineIcon />
-									<span className={s.ContactBTN}>{el.contact}</span>
-								</ContactsBtn>
+									<span>{el.contact}</span>
+								</span>
 							)
 						}
 					})}

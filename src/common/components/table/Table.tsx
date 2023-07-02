@@ -17,7 +17,8 @@ import { TableBodyAdminOrd } from './table-body/TableBodyAdminORD'
 export const TableComponent: React.FC<Type> = ({ headData, bodyData, sort, deleteTitle, updateTitle, type }) => {
 	return (
 		<>
-			<TableContainer component={Paper} sx={{ width: '95%' }}>
+			{/*<TableContainer component={Paper} sx={{ width: '95%' }}>*/}
+			<TableContainer component={Paper} sx={{ width: '95vw' }}>
 				<Table aria-label='simple table'>
 					<TableHeadComponent sort={sort} headData={headData} />
 					{type === 'SUB' && (

@@ -18,6 +18,9 @@ import Button from '@mui/material/Button'
 import { changeImgPath } from '../../common/utils/changeImgPath'
 import { CartCounter } from '../../common/components/counter/cart-counter/CartCounter'
 import { SearchByPeople } from '../../common/components/search-by-people/SearchByPeople'
+import { _InfoBlock } from '../../common/components/info-block/test/_InfoBlock'
+import { makeStyles, useMediaQuery, useTheme } from '@mui/material'
+import { ButtonBack } from '../../common/components/button-back/ButtonBack'
 
 export const ProductsPage = () => {
 	console.log('ProductsPage rendering')
@@ -73,23 +76,21 @@ export const ProductsPage = () => {
 
 	return (
 		<div className={s.container}>
-			<InfoBlock title={category_name} description={category_description}>
-				{
-					<Button onClick={redirectToHome} variant='contained' color='secondary'>
-						Назад
-					</Button>
-				}
-			</InfoBlock>
+			<_InfoBlock title={category_name} description={category_description} type={''}>
+				{/*<InfoBlock title={category_name} description={category_description}>*/}
+				{<ButtonBack callback={redirectToHome} />}
+				{/*</InfoBlock>*/}
+			</_InfoBlock>
 			<div className={s.wrp}>
 				<div className={s.leftBlock}>
 					<div className={s.leftContainer}>
-						<Button variant='contained' onClick={resetFilterHandler} style={{ margin: '10px' }}>
+						<Button variant='contained' onClick={resetFilterHandler} style={{ margin: '8px' }}>
 							Сбросить фильтр
 						</Button>
 						<PriceSlider minPriceState={minPriceState} maxPriceState={maxPriceState} />
 						<WeightSlider minWeightState={minWeightState} maxWeightState={maxWeightState} />
 						<div className={s.peopleWrapper}>
-							<div>Сортировать по количеству человек</div>
+							<div className={s.peopleTitle}>Сортировать по количеству человек</div>
 							<div className={s.peopleSubText}>{`от ${minPeopleState} чел. - до ${maxPeopleState} чел.`}</div>
 							<SearchByPeople callback={searchByPeople} />
 						</div>

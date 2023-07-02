@@ -14,18 +14,31 @@ import { OrderAdminModal } from '../../modals/order-modal/OrderAdminModal'
 import { EditOrderAdminModal } from '../../modals/order-modal/EditOrderAdminModal'
 import { useActions } from '../../../hooks'
 import { orderAdminThunks } from '../../../../features/admin/orders-admin/orders-admin-slice'
+import { useMediaQuery, useTheme } from '@mui/material'
 
-const style = {
-	tableRow: {
-		'&:last-child td, &:last-child th': { border: 0 }
-	}
-}
+// const style = {
+// 	tableRow: {
+// 		'&:last-child td, &:last-child th': { border: 0 }
+// 	}
+// }
 
 export const TableBodyAdminOrd: React.FC<Type> = ({ bodyData, updateTitle }) => {
 	const { updateUserOrder } = useActions(orderAdminThunks)
 
 	const updateUserOrderHandler = (data: RequestUpdateOrderDataType) => {
 		updateUserOrder(data)
+	}
+
+	const theme = useTheme()
+	const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
+	const style = {
+		tableRow: {
+			'&:last-child td, &:last-child th': { border: 0 }
+		},
+		cell: {
+			fontSize: isSmallScreen ? 8 : 14,
+			padding: isSmallScreen ? 0.5 : 2
+		}
 	}
 
 	return (
@@ -37,15 +50,15 @@ export const TableBodyAdminOrd: React.FC<Type> = ({ bodyData, updateTitle }) => 
 
 				return (
 					<TableRow key={el.id} sx={style.tableRow} hover>
-						<TableCell className={s.nameCell} component='th' scope='row'>
+						<TableCell className={s.nameCell} component='th' scope='row' sx={style.cell}>
 							{el.id}
 						</TableCell>
 						{/*<TableCell>{el.user_uuid}</TableCell>*/}
-						<TableCell>{paymentMethod}</TableCell>
-						<TableCell>{`${el.total_cost} byn`}</TableCell>
-						<TableCell>{orderStatus}</TableCell>
-						<TableCell>{formatedDateCreated}</TableCell>
-						<TableCell>
+						<TableCell sx={style.cell}>{paymentMethod}</TableCell>
+						<TableCell sx={style.cell}>{`${el.total_cost} byn`}</TableCell>
+						<TableCell sx={style.cell}>{orderStatus}</TableCell>
+						<TableCell sx={style.cell}>{formatedDateCreated}</TableCell>
+						<TableCell sx={style.cell}>
 							<div className={s.btnsWrapper}>
 								<OrderAdminModal
 									id={el.id}

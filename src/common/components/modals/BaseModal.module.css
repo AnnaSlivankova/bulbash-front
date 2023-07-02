@@ -1,6 +1,15 @@
+.container {
+    margin: 30px 0 30px 0;
+}
 .title {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+}
+/*@media screen and (max-width: 685px) {*/
+@media screen and (max-width: 599px) {
+    .container {
+        margin: 10px 0 20px 0;
+    }
 }

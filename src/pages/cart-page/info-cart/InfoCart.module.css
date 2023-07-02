@@ -24,7 +24,7 @@
     object-fit: cover;
     object-position: center;
 
-    margin: 5px;
+    margin: 6px;
 }
 
 .titleContainer {
@@ -32,7 +32,7 @@
     flex-direction: column;
     justify-content: center;
     width: 250px;
-    margin: 5px;
+    margin: 6px;
     height: 100%;
 
 
@@ -57,8 +57,9 @@
 .priceContainer {
     display: flex;
     align-items: center;
+    justify-content: center;
     /*border: 1px solid red;*/
-    margin: 5px;
+    margin: 6px;
 
     gap: 10px;
 
@@ -68,7 +69,6 @@
 
 .price {
     font-weight: 300;
-
 }
 
 .count {
@@ -78,4 +78,66 @@
 .delete {
     /*border: 1px solid red;*/
 
+}
+.icon {
+    width: 35px;
+    height: 33px;
+    margin: 6px;
+    /*stroke: #000000;*/
+    stroke: #363636;
+    fill: #363636;
+    /*border: 1px solid red;*/
+}
+.icon:hover {
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+
+}
+
+@media screen and (max-width: 940px){
+    .container {
+    justify-content: space-between;
+    }
+    .titleContainer {
+        width: 300px;
+        /*border: 1px solid red;*/
+    }
+}
+/*@media screen and (max-width: 685px){*/
+@media screen and (max-width: 599px){
+    .container {
+        margin: 6px 6px 6px 6px;
+    }
+    .img {
+        width: 30px;
+        height: 30px;
+        border-radius: 4px;
+        margin: 4px;
+    }
+    .titleContainer {
+        width: 150px;
+        margin: 4px;
+    }
+    .title {
+        font-size: 10px;
+    }
+    .weightPeople {
+        font-size: 6px;
+    }
+    .price {
+        font-size: 8px;
+    }
+    .count {
+        font-size: 8px;
+    }
+    .icon {
+        width: 20px;
+        height: 19px;
+        margin: 4px;
+    }
+    .priceContainer {
+        gap: 4px;
+        margin: 4px;
+    }
 }

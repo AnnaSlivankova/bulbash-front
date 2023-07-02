@@ -8,6 +8,7 @@ import { SelectFilter } from '../../../../common/components/select-filter/Select
 import { RadioButtonsFilter } from '../../../../common/components/radio-buttons-filter/RadioButtonsFilter'
 import Button from '@mui/material/Button'
 import { statusEnab } from 'common/data/status-enabled-data'
+import s from './ProdFilters.module.css'
 
 export const ProdFilters = () => {
 	const shortCategoriesList = useAppSelector<ResponseFetchShortCategories[]>(
@@ -44,7 +45,7 @@ export const ProdFilters = () => {
 	}, [searchParams])
 
 	return (
-		<div style={{ display: 'flex', gap: '15px' }}>
+		<div className={s.wrapper}>
 			<SelectFilter data={shortCategoriesList} title={'категория'} callback={searchByCategory} />
 			<SelectFilter data={shortSubcategiriesList} title={'подкатегория'} callback={searchBySubcategory} />
 			<RadioButtonsFilter data={statusEnab} title={'доступность'} callback={searchByStatus} />

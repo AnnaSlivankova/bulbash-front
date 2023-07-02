@@ -8,6 +8,7 @@ import { ResponseFetchShortCategories } from '../../categories/categories-admin-
 import { ResponseFetchShortSubcategoryType } from '../subcategories-admin-api'
 import { RadioButtonsFilter } from '../../../../common/components/radio-buttons-filter/RadioButtonsFilter'
 import { statusEnab } from '../../../../common/data/status-enabled-data'
+import s from './SubFilters.module.css'
 
 export const SubFiters = () => {
 	const shortCategoriesList = useAppSelector<ResponseFetchShortCategories[]>(
@@ -44,7 +45,7 @@ export const SubFiters = () => {
 	}, [searchParams])
 
 	return (
-		<div style={{ display: 'flex', gap: '15px' }}>
+		<div className={s.wrapper}>
 			{/*<SelectFilter data={shortSubcategiriesList} title={'название'} />*/}
 			<SelectFilter data={shortCategoriesList} title={'категория'} callback={searchByCategory} />
 			<RadioButtonsFilter data={statusEnab} title={'доступность'} callback={searchByStatus} />

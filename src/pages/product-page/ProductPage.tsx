@@ -11,6 +11,9 @@ import Button from '@mui/material/Button'
 import { useNavigate, useParams } from 'react-router-dom'
 import { CartCounter } from '../../common/components/counter/cart-counter/CartCounter'
 import { userCartThunks } from '../../features/cart/userCart-slice'
+import { _InfoBlock } from '../../common/components/info-block/test/_InfoBlock'
+import { ButtonBack } from '../../common/components/button-back/ButtonBack'
+import { useMediaQuery, useTheme } from '@mui/material'
 
 export const ProductPage = () => {
 	const product = useSelector<RootState, ResponseFetchProduct>(state => state.products.product)
@@ -51,16 +54,21 @@ export const ProductPage = () => {
 		// fetchProduct(product.id)
 		fetchProduct(Number(id))
 	}, [])
+	const theme = useTheme()
+	const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
 
 	return (
 		<div className={s.wrapper}>
-			<InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>
-				{
-					<Button onClick={redirectToProducts} variant='contained' color='secondary'>
-						Назад
-					</Button>
-				}
-			</InfoBlock>
+			{/*<InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>*/}
+			{/*	{*/}
+			{/*		<Button onClick={redirectToProducts} variant='contained' color='secondary'>*/}
+			{/*			Назад*/}
+			{/*		</Button>*/}
+			{/*	}*/}
+			{/*</InfoBlock>*/}
+			<_InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>
+				{<ButtonBack callback={redirectToProducts} />}
+			</_InfoBlock>
 			<div className={s.container}>
 				<div className={s.leftBlock}>
 					<div className={s.leftContainer}>
@@ -82,11 +90,24 @@ export const ProductPage = () => {
 
 								<CartCounter callback={setCountHandler} count={1} isDisabled={isDisabled} />
 								{showCartBtn ? (
-									<Button variant='contained' color='secondary' onClick={redirectToCart}>
+									<Button
+										variant='contained'
+										color='secondary'
+										onClick={redirectToCart}
+										sx={{
+											fontSize: isSmallScreen ? 10 : 18
+										}}
+									>
 										в корзину
 									</Button>
 								) : (
-									<Button variant='contained' onClick={addToCartHandler}>
+									<Button
+										variant='contained'
+										onClick={addToCartHandler}
+										sx={{
+											fontSize: isSmallScreen ? 10 : 18
+										}}
+									>
 										Заказать
 									</Button>
 								)}

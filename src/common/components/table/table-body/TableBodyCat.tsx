@@ -18,12 +18,13 @@ import { ResponseFetchSubcategoryType } from '../../../../features/admin/subcate
 import { ResponseFetchProducts } from '../../../../features/admin/products/products-admin-api'
 import { OrderType } from '../../../../features/order/order-api'
 import { OrderAdminType } from '../../../../features/admin/orders-admin/orders-admin-api'
+import { useMediaQuery, useTheme } from '@mui/material'
 
-const style = {
-	tableRow: {
-		'&:last-child td, &:last-child th': { border: 0 }
-	}
-}
+// const style = {
+// 	tableRow: {
+// 		'&:last-child td, &:last-child th': { border: 0 }
+// 	}
+// }
 
 export const TableBodyCatComponent: React.FC<Type> = ({ bodyData, deleteTitle, updateTitle }) => {
 	const { updateCategory, deleteCategory } = useActions(adminCategoriesThunks)
@@ -34,6 +35,17 @@ export const TableBodyCatComponent: React.FC<Type> = ({ bodyData, deleteTitle, u
 
 	const onClickDelete = (category_id: number) => {
 		deleteCategory(category_id)
+	}
+	const theme = useTheme()
+	const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
+	const style = {
+		tableRow: {
+			'&:last-child td, &:last-child th': { border: 0 }
+		},
+		cell: {
+			fontSize: isSmallScreen ? 8 : 14,
+			padding: isSmallScreen ? 0.5 : 2
+		}
 	}
 
 	return (
@@ -49,21 +61,21 @@ export const TableBodyCatComponent: React.FC<Type> = ({ bodyData, deleteTitle, u
 						{/*<TableCell className={s.nameCell} component='th' scope='row'>*/}
 						{/*	{el.id}*/}
 						{/*</TableCell>*/}
-						<TableCell>
+						<TableCell sx={style.cell}>
 							{/*{el.image_path}*/}
 							<img src={image_path} style={{ width: '50%', height: '50%' }} alt='ava' />
 						</TableCell>
-						<TableCell>{el.name}</TableCell>
-						<TableCell>{el.description}</TableCell>
+						<TableCell sx={style.cell}>{el.name}</TableCell>
+						<TableCell sx={style.cell}>{el.description}</TableCell>
 						{/*<TableCell>{el.status_enabled}</TableCell>*/}
-						<TableCell>
+						<TableCell sx={style.cell}>
 							{el.status_enabled}
 							<Checkbox color='secondary' checked={el.status_enabled} />
 						</TableCell>
-						<TableCell>{el.position}</TableCell>
-						<TableCell>{formatedDateCreated}</TableCell>
-						<TableCell>{formatedDateUpdated}</TableCell>
-						<TableCell>
+						<TableCell sx={style.cell}>{el.position}</TableCell>
+						<TableCell sx={style.cell}>{formatedDateCreated}</TableCell>
+						<TableCell sx={style.cell}>{formatedDateUpdated}</TableCell>
+						<TableCell sx={style.cell}>
 							<div className={s.btnsWrapper}>
 								<IconButton color='primary'>
 									<EditCatModal

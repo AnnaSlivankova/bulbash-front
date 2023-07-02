@@ -7,6 +7,7 @@ import { SnackBar } from '../common/components/snack-bar/SnackBar'
 import { authThunks } from '../features/auth/auth-slice'
 import { useAppDispatch } from '../common/hooks'
 import { CookieConsent } from 'react-cookie-consent'
+import { _Header } from '../pages/header/test/_Header'
 
 function App() {
 	const dispatch = useAppDispatch()
@@ -23,7 +24,8 @@ function App() {
 				Политикой обработки файлов cookie.
 			</CookieConsent>
 			<SnackBar />
-			<Header />
+			{/*<Header />*/}
+			<_Header />
 			<Layout />
 		</BrowserRouter>
 	)

@@ -20,6 +20,7 @@ import { ResponseFetchProducts } from '../../../../features/admin/products/produ
 import { EditProdModal } from '../../modals/edit-modals/EditProdModal'
 import { OrderType } from '../../../../features/order/order-api'
 import { OrderAdminType } from '../../../../features/admin/orders-admin/orders-admin-api'
+import { useMediaQuery, useTheme } from '@mui/material'
 
 const style = {
 	tableRow: {
@@ -37,6 +38,18 @@ export const TableBodyProdComponent: React.FC<Type> = ({ bodyData, deleteTitle, 
 	const onClickDelete = (product_id: number) => {
 		deleteProduct(product_id)
 	}
+	const theme = useTheme()
+	const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
+	// const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'))
+	const style = {
+		tableRow: {
+			'&:last-child td, &:last-child th': { border: 0 }
+		},
+		cell: {
+			fontSize: isSmallScreen ? 8 : 14,
+			padding: isSmallScreen ? 0.5 : 2
+		}
+	}
 
 	return (
 		<TableBody>
@@ -48,31 +61,31 @@ export const TableBodyProdComponent: React.FC<Type> = ({ bodyData, deleteTitle, 
 
 				return (
 					<TableRow key={el.id} sx={style.tableRow} hover>
-						<TableCell className={s.nameCell} component='th' scope='row'>
+						<TableCell className={s.nameCell} component='th' scope='row' sx={style.cell}>
 							{/*{el.category_id}*/}
 							{el.category_name}
 						</TableCell>
-						<TableCell>
+						<TableCell sx={style.cell}>
 							{/*{el.subcategory_id}*/}
 							{el.subcategory_name}
 						</TableCell>
 						{/*<TableCell>{el.id}</TableCell>*/}
-						<TableCell>
+						<TableCell sx={style.cell}>
 							<img src={image_path} style={{ width: '50%', height: '50%' }} alt='ava' />
 						</TableCell>
-						<TableCell>{el.name}</TableCell>
-						<TableCell>{el.description}</TableCell>
-						<TableCell>{el.ingredients}</TableCell>
-						<TableCell>{el.people_numbers}</TableCell>
-						<TableCell>{el.price}</TableCell>
-						<TableCell>{el.weight}</TableCell>
-						<TableCell>
+						<TableCell sx={style.cell}>{el.name}</TableCell>
+						<TableCell sx={style.cell}>{el.description}</TableCell>
+						<TableCell sx={style.cell}>{el.ingredients}</TableCell>
+						<TableCell sx={style.cell}>{el.people_numbers}</TableCell>
+						<TableCell sx={style.cell}>{el.price}</TableCell>
+						<TableCell sx={style.cell}>{el.weight}</TableCell>
+						<TableCell sx={style.cell}>
 							{el.status_enabled}
 							<Checkbox color='secondary' checked={el.status_enabled} />
 						</TableCell>
-						<TableCell>{formatedDateCreated}</TableCell>
-						<TableCell>{formatedDateUpdated}</TableCell>
-						<TableCell>
+						<TableCell sx={style.cell}>{formatedDateCreated}</TableCell>
+						<TableCell sx={style.cell}>{formatedDateUpdated}</TableCell>
+						<TableCell sx={style.cell}>
 							<div className={s.btnsWrapper}>
 								<IconButton color='primary'>
 									<EditProdModal

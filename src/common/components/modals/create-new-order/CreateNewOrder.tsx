@@ -3,7 +3,7 @@ import s from './CreateNewOrder.module.css'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { BaseModal } from '../BaseModal'
 import Button from '@mui/material/Button'
-import { FormControlLabel, Radio, RadioGroup } from '@mui/material'
+import { FormControlLabel, Radio, RadioGroup, useMediaQuery, useTheme } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { RequestNewOrderType } from '../../../../features/order/order-api'
 
@@ -37,6 +37,9 @@ export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, callback, disa
 		// reset()
 	}
 
+	const theme = useTheme()
+	const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
+
 	return (
 		<BaseModal
 			open={open}
@@ -44,7 +47,17 @@ export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, callback, disa
 			handleClose={handleClose}
 			title={title}
 			button={
-				<Button variant='contained' color='secondary' disabled={disabled}>
+				<Button
+					variant='contained'
+					color='secondary'
+					disabled={disabled}
+					sx={{
+						height: isSmallScreen ? 20 : 40,
+						fontSize: isSmallScreen ? 10 : 18,
+						padding: 0.5,
+						margin: isSmallScreen ? 0 : 1
+					}}
+				>
 					{btnTitle}
 				</Button>
 			}
@@ -120,10 +133,9 @@ export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, callback, disa
 					control={control}
 					render={({ field }) => (
 						<TextField
-							required
 							multiline
 							fullWidth
-							label='Email'
+							label='Email (не обязательно)'
 							variant='outlined'
 							color='secondary'
 							{...field}

@@ -5,6 +5,8 @@ import AddIcon from '@mui/icons-material/Add'
 import Button from '@mui/material/Button'
 import s from './Counter.module.css'
 import { useDebounce } from '../../hooks'
+import { useMediaQuery, useTheme } from '@mui/material'
+import sprite from '../../../assets/styles/sprite.svg'
 
 export const Counter: React.FC<PropsType> = ({ count, callback }) => {
 	const [counterValue, setCounterValue] = useState(count)
@@ -27,16 +29,25 @@ export const Counter: React.FC<PropsType> = ({ count, callback }) => {
 		callback(debouncedValue)
 	}, [debouncedValue])
 
+	const theme = useTheme()
+	const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
+
 	return (
 		<div className={s.counterContainer}>
 			<div className={s.counter}>
-				<IconButton onClick={decCounterValue}>
-					<RemoveIcon />
-				</IconButton>
+				<svg className={s.icon} onClick={decCounterValue}>
+					<use xlinkHref={`${sprite}#minus`} />
+				</svg>
+				{/*<IconButton onClick={decCounterValue}>*/}
+				{/*	<RemoveIcon />*/}
+				{/*</IconButton>*/}
 				<input type='number' value={counterValue} className={s.counterInput} onChange={onChangeValueHandler} />
-				<IconButton onClick={incCounterValue}>
-					<AddIcon />
-				</IconButton>
+				<svg className={s.icon} onClick={incCounterValue}>
+					<use xlinkHref={`${sprite}#plus`} />
+				</svg>
+				{/*<IconButton onClick={incCounterValue}>*/}
+				{/*	<AddIcon />*/}
+				{/*</IconButton>*/}
 			</div>
 			{/*<Button variant='contained'>Заказать</Button>*/}
 		</div>

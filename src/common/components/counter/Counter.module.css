@@ -3,13 +3,24 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: 15px;
+    /*margin-top: 15px;*/
 }
 
 .counter {
     display: flex;
     align-items: center;
     /*border: 1px solid red;*/
+}
+.icon {
+    width: 30px;
+    height: 30px;
+    margin: 6px;
+    stroke: #000000;
+}
+.icon:hover {
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
 .counterInput {
@@ -33,4 +44,25 @@
 .counterInput::-webkit-outer-spin-button,
 .counterInput::-webkit-inner-spin-button {
     -webkit-appearance: none;
+}
+@media screen and (max-width: 685px){
+    .counterInput {
+        width: 22px;
+        height: 22px;
+        font-size: 10px;
+    }
+    .counter {
+        display: flex;
+        justify-content: center;
+        /*border: 1px solid red;*/
+    }
+    .counterContainer {
+    margin: 0;
+    }
+    .icon {
+        width: 20px;
+        height: 20px;
+        margin: 4px;
+
+    }
 }

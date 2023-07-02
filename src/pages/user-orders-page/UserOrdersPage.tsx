@@ -8,6 +8,8 @@ import s from './UserOrdersPage.module.css'
 import { InfoBlock } from '../../common/components/info-block/InfoBlock'
 import Button from '@mui/material/Button'
 import { useNavigate } from 'react-router-dom'
+import { _InfoBlock } from '../../common/components/info-block/test/_InfoBlock'
+import { ButtonBack } from '../../common/components/button-back/ButtonBack'
 
 export const UserOrdersPage = () => {
 	const navigate = useNavigate()
@@ -24,16 +26,19 @@ export const UserOrdersPage = () => {
 	}, [])
 	return (
 		<>
-			<InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>
-				{
-					<Button onClick={redirectToCart} variant='contained' color='secondary'>
-						Назад
-					</Button>
-				}
-			</InfoBlock>
+			<_InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>
+				{<ButtonBack callback={redirectToCart} />}
+			</_InfoBlock>
+			{/*<InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>*/}
+			{/*	{*/}
+			{/*		<Button onClick={redirectToCart} variant='contained' color='secondary'>*/}
+			{/*			Назад*/}
+			{/*		</Button>*/}
+			{/*	}*/}
+			{/*</InfoBlock>*/}
 
 			<div className={s.wrapper}>
-				<h2>Мои заказы</h2>
+				<h3>Мои заказы</h3>
 				<TableComponent
 					type='UORD'
 					headData={userOrdersData}

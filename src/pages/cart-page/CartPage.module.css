@@ -1,5 +1,6 @@
 .wrapper {
     min-height: 100vh;
+    /*min-height: 65vh;*/
     display: flex;
     /*width: 100%;*/
     /*min-height: 100vh;*/
@@ -28,6 +29,23 @@
 
 
 }
+.wrapTit {
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center;*/
+    align-items: center;
+    /*border: 1px solid red;*/
+
+}
+.wrapBtns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*justify-content: center;*/
+
+    /*border: 1px solid red;*/
+
+}
 .mainTitle {
     font-weight: 800;
     font-size: 40px;
@@ -43,4 +61,48 @@
 }
 .myOrders:hover {
     font-weight: 600;
+}
+
+@media screen and (max-width: 940px){
+    .wrapper {
+        flex-direction: column;
+        min-height: 70vh;
+    }
+    .countContainer {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 16px;
+
+    }
+    .wrapTit {
+        /*align-items: flex-start;*/
+    }
+    .wrapBtns {
+        /*align-items: flex-start;*/
+    }
+}
+/*@media screen and (max-width: 685px) {*/
+@media screen and (max-width: 599px) {
+    .wrapper {
+        /*min-height: 40vh;*/
+    }
+    .mainTitle {
+        font-size: 20px;
+        margin: 8px;
+        border-bottom: 2px solid #A26B2A
+    }
+    .infoContainer {
+        margin: 8px;
+    }
+    .countContainer {
+        margin: 8px;
+    }
+    .totalPrice {
+        font-size: 14px;
+        margin: 10px;
+    }
+    .myOrders {
+        font-size: 14px;
+    }
 }

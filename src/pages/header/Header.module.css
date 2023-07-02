@@ -10,10 +10,21 @@
     margin-right: 10px;
 }
 
+.cartBtnContainer {
+
+}
+
 .cart {
     width: 45px;
     height: 45px;
+    /*margin-left: 50px;*/
     /*border: 1px solid red;*/
 }
+/*@media screen and (max-width: 690px) {*/
+/*    .logo {*/
+/*        width: 200px;*/
+/*        height: 200px;*/
+/*    }*/
+/*}*/
 
 

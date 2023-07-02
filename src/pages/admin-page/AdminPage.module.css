@@ -30,3 +30,18 @@
 .link:hover {
     color: olivedrab;
 }
+@media screen and (max-width: 650px){
+    .link {
+        margin: 10px;
+        font-size: 14px;
+        /*font-weight: 600;*/
+    }
+
+    .activeLink {
+        margin: 10px;
+        font-size: 14px;
+        /*font-weight: 600;*/
+
+    }
+
+}

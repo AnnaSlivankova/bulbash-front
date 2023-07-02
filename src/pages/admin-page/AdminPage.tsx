@@ -56,7 +56,7 @@ export const AdminPage = () => {
 
 	return (
 		<div className={s.wrapper}>
-			<h1>Страница администратора</h1>
+			<h2>Страница администратора</h2>
 			<div className={s.linksContainer}>
 				{/*<div className={`${s.link} ${s.active}`}>*/}
 				{/*	<NavLink to={'/admin-categories'}>Categories</NavLink>*/}

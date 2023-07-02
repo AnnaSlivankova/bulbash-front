@@ -13,6 +13,8 @@ import { useActions } from '../../common/hooks'
 import { CreateNewOrder } from '../../common/components/modals/create-new-order/CreateNewOrder'
 import { orderThunks } from '../../features/order/order-slice'
 import { userCartThunks } from '../../features/cart/userCart-slice'
+import { _InfoBlock } from '../../common/components/info-block/test/_InfoBlock'
+import { ButtonBack } from '../../common/components/button-back/ButtonBack'
 
 export const CartPage = () => {
 	const cartProducts = useSelector<RootState, CartItemType[]>(state => state.userCart.userCart.data)
@@ -44,9 +46,12 @@ export const CartPage = () => {
 
 	return (
 		<div>
-			<InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>
-				{/*{<Button onClick={redirectToCategories}>Назад</Button>}*/}
-			</InfoBlock>
+			{/*<InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>*/}
+			{/*	/!*{<Button onClick={redirectToCategories}>Назад</Button>}*!/*/}
+			{/*</InfoBlock>*/}
+			<_InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>
+				{/*{<ButtonBack callback={redirectToCategories} />}*/}
+			</_InfoBlock>
 
 			<div className={s.wrapper}>
 				<div className={s.infoContainer}>
@@ -72,16 +77,20 @@ export const CartPage = () => {
 					</Button>
 				</div>
 				<div className={s.countContainer}>
-					<div className={s.mainTitle}>Стоимость</div>
-					<div className={s.totalPrice}>{`Итого: ${totalPrice} руб.`}</div>
-					<CreateNewOrder
-						btnTitle='Оформить'
-						title='Оформление заказа'
-						callback={onClickHandler}
-						disabled={cartProducts.length === 0}
-					/>
-					<div onClick={redirectToUserOrders} className={s.myOrders}>
-						Мои заказы
+					<div className={s.wrapTit}>
+						<div className={s.mainTitle}>Стоимость</div>
+						<div className={s.totalPrice}>{`Итого: ${totalPrice} руб.`}</div>
+					</div>
+					<div className={s.wrapBtns}>
+						<CreateNewOrder
+							btnTitle='Оформить'
+							title='Оформление заказа'
+							callback={onClickHandler}
+							disabled={cartProducts.length === 0}
+						/>
+						<div onClick={redirectToUserOrders} className={s.myOrders}>
+							Мои заказы
+						</div>
 					</div>
 				</div>
 			</div>

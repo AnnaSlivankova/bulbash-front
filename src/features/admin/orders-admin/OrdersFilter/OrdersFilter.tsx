@@ -6,6 +6,7 @@ import { orderAdminThunks } from '../orders-admin-slice'
 import { paymentMethodData } from '../../../../common/data/payment-method-data'
 import { statusOrderData } from '../../../../common/data/status-order-data'
 import { SelectFilterStr } from '../../../../common/components/select-filter/SelectFilterStr'
+import s from './OrdersFilter.module.css'
 
 export const OrdersFilter = () => {
 	const { getAllOrders } = useActions(orderAdminThunks)
@@ -32,7 +33,7 @@ export const OrdersFilter = () => {
 	}, [searchParams])
 
 	return (
-		<div style={{ display: 'flex', gap: '15px' }}>
+		<div className={s.wrapper}>
 			<SelectFilterStr data={paymentMethodData} title={'метод оплаты'} callback={searchByPaymentMethod} />
 			<SelectFilterStr data={statusOrderData} title={'статус заказа'} callback={searchByStatus} />
 			<Button onClick={resetFilterHandler} color='error'>

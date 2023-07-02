@@ -26,3 +26,13 @@
 .counterInput::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
+@media screen and (max-width: 599px){
+    .counterInput {
+        width: 25px;
+        height: 25px;
+        font-size: 10px;
+    }
+    .counter {
+        justify-content: center;
+    }
+}

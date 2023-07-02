@@ -12,6 +12,8 @@
     padding: 15px;
     /*margin-top: 10px;*/
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+
+    /*font-size: 16px;*/
 }
 
 .valuesContainer {
@@ -56,4 +58,38 @@
 .sliderInput::-webkit-outer-spin-button,
 .sliderInput::-webkit-inner-spin-button {
     -webkit-appearance: none;
+}
+
+@media screen and (max-width: 1050px) {
+    .sliderWrapper {
+        font-size: 14px;
+        padding: 8px;
+        margin: 6px;
+    }
+
+    /*.slider {*/
+    /*    margin: 0 10px 0 10px;*/
+    /*}*/
+    .valuesContainer {
+        margin: 8px;
+    }
+
+    .sliderInput {
+        font-size: 10px;
+
+        width: 50px;
+        height: 20px;
+    }
+
+    .title {
+        width: 120px;
+    }
+}
+
+@media screen and (max-width: 704px) {
+    .title {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
 }

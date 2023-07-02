@@ -58,7 +58,7 @@ export const Header: React.FC = () => {
 			position='fixed'
 			style={{
 				transition: 'all 0.3s ease-in-out',
-				// backgroundColor: isScrolled ? '#3d4b9a' : 'transparent',
+				// backgroundColor: isScrolled ?  : 'transparent',
 				backgroundColor: isScrolled ? '#F0E56F' : 'transparent',
 				boxShadow: isScrolled ? '0px 2px 5px rgba(0, 0, 0, 0.25)' : 'none'
 			}}
@@ -79,7 +79,7 @@ export const Header: React.FC = () => {
 				>
 					{isScrolled && (
 						<span className={s.logoContainer}>
-							<img src={logo} className={s.logoSm} alt='logo picture' />
+							<img src={logo} className={s.logoSm} alt='logo' />
 							<span onClick={redirectToHome}>Bulbash</span>
 						</span>
 					)}
@@ -95,14 +95,20 @@ export const Header: React.FC = () => {
 									<Button onClick={redirectToSignup}>Зарегестрироваться</Button>
 								</ButtonGroup>
 							) : (
-								<>
-									<Button onClick={logoutHandler} variant='outlined' color='secondary' aria-label='logout button'>
+								<div>
+									<Button
+										onClick={logoutHandler}
+										variant='outlined'
+										color='secondary'
+										aria-label='logout button'
+										style={{ marginRight: '10px' }}
+									>
 										Выйти
 									</Button>
 									<IconButton onClick={redirectToCart} className={s.cart}>
 										<CartBadge />
 									</IconButton>
-								</>
+								</div>
 							)}
 						</>
 					)}
