@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import Button from '@mui/material/Button'
 import { useNavigate } from 'react-router-dom'
@@ -30,15 +30,15 @@ export const CartPage = () => {
 	}
 	const { createNewOrder } = useActions(orderThunks)
 
-	const onClickHandler = (data: any) => {
-		const products = cartProducts.map(({ id: cart_id, product_id, quantity, product_price: product_cost }) => ({
-			cart_id,
-			product_id,
-			quantity,
-			product_cost
-		}))
-		createNewOrder({ ...data, product_list: products, total_cost: totalPrice })
-	}
+	// const onClickHandler = (data: any) => {
+	// 	const products = cartProducts.map(({ id: cart_id, product_id, quantity, product_price: product_cost }) => ({
+	// 		cart_id,
+	// 		product_id,
+	// 		quantity,
+	// 		product_cost
+	// 	}))
+	// 	createNewOrder({ ...data, product_list: products, total_cost: totalPrice })
+	// }
 
 	// useEffect(() => {
 	// 	getCardItems({})
@@ -62,7 +62,8 @@ export const CartPage = () => {
 							<InfoCart
 								key={el.id}
 								id={el.id}
-								image_path={image_path}
+								// image_path={image_path}
+								image_path={el.image_path}
 								title={el.name}
 								weight={el.weight}
 								price={el.price}
@@ -85,8 +86,8 @@ export const CartPage = () => {
 						<CreateNewOrder
 							btnTitle='Оформить'
 							title='Оформление заказа'
-							callback={onClickHandler}
-							disabled={cartProducts.length === 0}
+							// callback={onClickHandler}
+							disabled={cartProducts?.length === 0}
 						/>
 						<div onClick={redirectToUserOrders} className={s.myOrders}>
 							Мои заказы

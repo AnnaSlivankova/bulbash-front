@@ -72,7 +72,9 @@ export const ProductPage = () => {
 			<div className={s.container}>
 				<div className={s.leftBlock}>
 					<div className={s.leftContainer}>
-						<img src={image_path} className={s.img} alt='pruduct picture' />
+						{/*<img src={image_path} className={s.img} alt='pruduct picture' />*/}
+						{/*for prod img_path bellow*/}
+						<img src={product.image_path} className={s.img} alt='pruduct picture' />
 					</div>
 				</div>
 				<div className={s.rightBlock}>

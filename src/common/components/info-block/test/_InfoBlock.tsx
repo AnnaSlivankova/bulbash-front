@@ -18,7 +18,7 @@ export const _InfoBlock: React.FC<InfoBlockType> = ({ title, description, childr
 	const finalClassName = type === 'HomePage' ? `${s.descriptionHP}` : `${s.description}`
 
 	const redirectToHomePage = () => {
-		navigate('/home')
+		navigate('/')
 	}
 
 	return (
@@ -30,7 +30,7 @@ export const _InfoBlock: React.FC<InfoBlockType> = ({ title, description, childr
 						<a
 							target={'_blank'}
 							rel='noreferrer'
-							href={'https://www.instagram.com/kirill_babaryka/?igshid=MzRlODBiNWFlZA%3D%3D'}
+							href={'https://foodpicasso.com/x/1456x5e7'}
 							style={{ color: 'inherit' }}
 						>
 							<svg className={s.iconMedia}>
@@ -38,18 +38,18 @@ export const _InfoBlock: React.FC<InfoBlockType> = ({ title, description, childr
 							</svg>
 						</a>
 
-						<a target={'_blank'} rel='noreferrer' href={'https://t.me./Bulbashfood'} style={{ color: 'inherit' }}>
+						<a
+							target={'_blank'}
+							rel='noreferrer'
+							href={'https://www.instagram.com/kirill_babaryka/?igshid=MzRlODBiNWFlZA%3D%3D'}
+							style={{ color: 'inherit' }}
+						>
 							<svg className={s.iconMedia}>
 								<use xlinkHref={`${sprite}#instagram`} />
 							</svg>
 						</a>
 
-						<a
-							target={'_blank'}
-							rel='noreferrer'
-							href={'https://foodpicasso.com/x/1456x5e7'}
-							style={{ color: 'inherit' }}
-						>
+						<a target={'_blank'} rel='noreferrer' href={'https://t.me./Bulbashfood'} style={{ color: 'inherit' }}>
 							<svg className={s.iconMedia}>
 								<use xlinkHref={`${sprite}#telegram`} />
 							</svg>

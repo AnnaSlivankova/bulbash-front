@@ -73,7 +73,7 @@ export const Signup = () => {
 		signup(data)
 			.unwrap()
 			.then(() => {
-				navigate('/home')
+				navigate('/')
 			})
 	}
 

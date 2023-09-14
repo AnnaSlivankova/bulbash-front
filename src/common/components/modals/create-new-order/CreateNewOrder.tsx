@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import s from './CreateNewOrder.module.css'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { BaseModal } from '../BaseModal'
@@ -6,6 +6,12 @@ import Button from '@mui/material/Button'
 import { FormControlLabel, Radio, RadioGroup, useMediaQuery, useTheme } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { RequestNewOrderType } from '../../../../features/order/order-api'
+import { useActions } from '../../../hooks'
+import { orderThunks } from '../../../../features/order/order-slice'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../../app/store'
+import { CartItemType } from '../../../../features/cart/userCart-api'
+import { userCartThunks } from '../../../../features/cart/userCart-slice'
 
 const style = {
 	checkbox: {
@@ -19,8 +25,14 @@ const style = {
 	}
 }
 
-export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, callback, disabled }) => {
+export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, disabled }) => {
 	const [open, setOpen] = useState(false)
+	const { getCardItems } = useActions(userCartThunks)
+
+	const { createNewOrder } = useActions(orderThunks)
+	const cartProducts = useSelector<RootState, CartItemType[]>(state => state.userCart.userCart.data)
+	const totalPrice = useSelector<RootState, number>(state => state.userCart.userCart.total_price)
+
 	const handleOpen = () => setOpen(true)
 	const handleClose = () => setOpen(false)
 
@@ -31,14 +43,30 @@ export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, callback, disa
 	})
 
 	const onSubmit: SubmitHandler<any> = async data => {
-		callback(data)
-		setOpen(false)
-		handleClose()
+		const products = cartProducts?.map(({ id: cart_id, product_id, quantity, product_price: product_cost }) => ({
+			cart_id,
+			product_id,
+			quantity,
+			product_cost
+		}))
+		createNewOrder({ ...data, product_list: products, total_cost: totalPrice })
+			.unwrap()
+			.then(() => {
+				setOpen(false)
+				handleClose()
+				reset()
+			})
+		// callback(data)
+
 		// reset()
 	}
 
 	const theme = useTheme()
 	const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
+
+	// useEffect(() => {
+	// 	getCardItems({})
+	// }, [])
 
 	return (
 		<BaseModal
@@ -187,6 +215,6 @@ export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, callback, disa
 type Type = {
 	btnTitle: string
 	title: string
-	callback: (data: any) => void
+	callback?: (data: any) => void
 	disabled: boolean
 }

@@ -16,7 +16,7 @@ export const InfoBlock: React.FC<InfoBlockType> = ({ title, description, childre
 	const finalClassName = type === 'HomePage' ? `${s.descriptionHP}` : `${s.description}`
 
 	const redirectToHomePage = () => {
-		navigate('/home')
+		navigate('/')
 	}
 
 	return (

@@ -48,7 +48,8 @@ export const OrderUserModal: React.FC<Type> = ({ id }) => {
 						<List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }} key={el.name}>
 							<ListItem>
 								<ListItemAvatar>
-									<Avatar src={image_path} alt={`${el.name} picture`} />
+									{/*<Avatar src={image_path} alt={`${el.name} picture`} />*/}
+									<Avatar src={el.image_path} alt={`${el.name} picture`} />
 								</ListItemAvatar>
 								<ListItemText
 									primary={el.name}

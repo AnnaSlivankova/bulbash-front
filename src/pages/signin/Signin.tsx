@@ -52,7 +52,7 @@ export const Signin = () => {
 			// 	getCardItems({})
 			// })
 			.then(() => {
-				navigate('/home')
+				navigate('/')
 			})
 	}
 

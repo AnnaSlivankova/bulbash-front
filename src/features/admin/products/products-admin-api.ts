@@ -3,7 +3,12 @@ import { instanceUser } from '../../../app/common-api'
 export const productsAdminAPI = {
 	fetchProducts(params: RequestFetchProductsParamsType) {
 		return instanceUser
-			.get<ResponseFetchProducts[]>('/api/v1/bulbash_admin/get_list_products', { params })
+			.get<ResponseFetchProducts[]>('/api/v1/bulbash_admin/get_list_products', {
+				params,
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
+			})
 			.then(res => res.data)
 	},
 	addNewProduct(params: RequestPostProduct, img_file: FormData) {
@@ -12,7 +17,8 @@ export const productsAdminAPI = {
 				params,
 				headers: {
 					'Content-Type': 'multipart/form-data',
-					Accept: 'application/json'
+					Accept: 'application/json',
+					Authorization: `Bearer ${localStorage.getItem('token')}`
 				}
 			})
 			.then(res => res.data)
@@ -21,13 +27,21 @@ export const productsAdminAPI = {
 		return instanceUser
 			.patch<ResponseChangeProduct>(`/api/v1/bulbash_admin/update_product_${product_id}`, img_file, {
 				params,
-				headers: { 'Content-Type': 'multipart/form-data', Accept: 'application/json' }
+				headers: {
+					'Content-Type': 'multipart/form-data',
+					Accept: 'application/json',
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
 			})
 			.then(res => res.data)
 	},
 	deleteProduct(product_id: number) {
 		return instanceUser
-			.delete<ResponseChangeProduct>(`/api/v1/bulbash_admin/delete_product_${product_id}`)
+			.delete<ResponseChangeProduct>(`/api/v1/bulbash_admin/delete_product_${product_id}`, {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
+			})
 			.then(res => res.data)
 	}
 }

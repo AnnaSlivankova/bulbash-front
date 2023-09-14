@@ -18,12 +18,12 @@ const getAllOrders = createAppAsyncThunk<OrderAdminType[], Partial<GetAllOrdersA
 
 		try {
 			const res = await orderAdminApi.getAllOrders(params)
-			// dispatch(authActions.setIsAdmin({ isAdmin: true }))
+			dispatch(authActions.setIsAdmin({ isAdmin: true }))
 			return res.data
 		} catch (e) {
 			// handleAxiosError(dispatch, e)
 
-			dispatch(authActions.setIsAdmin({ isAdmin: false }))
+			// dispatch(authActions.setIsAdmin({ isAdmin: false }))
 
 			return rejectWithValue(null)
 		}

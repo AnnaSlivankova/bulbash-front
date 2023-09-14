@@ -50,7 +50,9 @@ export const Categories = () => {
 								zoom={true}
 								title={el.name}
 								description={el.description}
-								imgPath={imgPath}
+								// imgPath={imgPath}
+								//for prod img_path bellow
+								imgPath={el.image_path}
 								onClick={() => redirectToSub(el.id, el.name, el.description)}
 							/>
 						)

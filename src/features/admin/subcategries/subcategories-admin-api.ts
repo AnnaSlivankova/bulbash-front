@@ -4,27 +4,48 @@ import { instanceUser } from '../../../app/common-api'
 export const subcategoriesAdminAPI = {
 	fetchSubcategories(params: RequestFetchSubCategoriesParamsType) {
 		return instanceUser
-			.get<ResponseFetchSubcategoryType[]>('/api/v1/bulbash_admin/get_list_subcategories', { params })
+			.get<ResponseFetchSubcategoryType[]>('/api/v1/bulbash_admin/get_list_subcategories', {
+				params,
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
+			})
 			.then(res => res.data)
 	},
 	fetchShortSubcategories() {
 		return instanceUser
-			.get<ResponseFetchShortSubcategoryType[]>('/api/v1/bulbash_admin/get-list-short-subcategories')
+			.get<ResponseFetchShortSubcategoryType[]>('/api/v1/bulbash_admin/get-list-short-subcategories', {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
+			})
 			.then(res => res.data)
 	},
 	addNewSubcategory(data: RequestPostSubCategoryDataType) {
 		return instanceUser
-			.post<ResponsePostSubcategoryType>('/api/v1/bulbash_admin/create_subcategory', data)
+			.post<ResponsePostSubcategoryType>('/api/v1/bulbash_admin/create_subcategory', data, {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
+			})
 			.then(res => res.data)
 	},
 	updateSubcategory(subcategory_id: number, data: RequestPatchSubCategoryDataType) {
 		return instanceUser
-			.patch<ResponseChangeSubcategoryType>(`/api/v1/bulbash_admin/update_subcategory_${subcategory_id}`, data)
+			.patch<ResponseChangeSubcategoryType>(`/api/v1/bulbash_admin/update_subcategory_${subcategory_id}`, data, {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
+			})
 			.then(res => res.data)
 	},
 	deleteSubcategory(subcategory_id: number) {
 		return instanceUser
-			.delete<ResponseChangeSubcategoryType>(`/api/v1/bulbash_admin/delete_subcategory_${subcategory_id}`)
+			.delete<ResponseChangeSubcategoryType>(`/api/v1/bulbash_admin/delete_subcategory_${subcategory_id}`, {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
+			})
 			.then(res => res.data)
 	}
 }

@@ -49,7 +49,7 @@ export const Header: React.FC = () => {
 		logout({})
 			.unwrap()
 			.then(() => {
-				navigate('/home')
+				navigate('/')
 			})
 	}
 

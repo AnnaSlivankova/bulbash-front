@@ -71,7 +71,8 @@ export const TableBodyProdComponent: React.FC<Type> = ({ bodyData, deleteTitle, 
 						</TableCell>
 						{/*<TableCell>{el.id}</TableCell>*/}
 						<TableCell sx={style.cell}>
-							<img src={image_path} style={{ width: '50%', height: '50%' }} alt='ava' />
+							{/*<img src={image_path} style={{ width: '50%', height: '50%' }} alt='ava' />*/}
+							<img src={el.image_path} style={{ width: '50%', height: '50%' }} alt='ava' />
 						</TableCell>
 						<TableCell sx={style.cell}>{el.name}</TableCell>
 						<TableCell sx={style.cell}>{el.description}</TableCell>
@@ -94,7 +95,8 @@ export const TableBodyProdComponent: React.FC<Type> = ({ bodyData, deleteTitle, 
 										title={`${updateTitle}: ${el.name}`}
 										prevDescription={el.description}
 										prevStatus={el.status_enabled}
-										prevImg={image_path}
+										// prevImg={image_path}
+										prevImg={el.image_path}
 										callback={onClickhandler}
 										prevCategoryId={el.category_id}
 										prevIngredients={el.ingredients}

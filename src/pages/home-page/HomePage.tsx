@@ -7,7 +7,6 @@ import { _InfoBlock } from '../../common/components/info-block/test/_InfoBlock'
 export const HomePage = () => {
 	return (
 		<>
-			{/*<info-delete />*/}
 			{/*<InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'} />*/}
 			<_InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'} />
 			<Carusel />

@@ -149,7 +149,7 @@ const slice = createSlice({
 		authStatus: 'idle' as RequestStatusType,
 		message: null as string | null,
 		severity: '' as SeverityType,
-		isAdmin: true
+		isAdmin: false
 	},
 	reducers: {
 		setIsInitialized: (state, action: PayloadAction<{ isInitialized: boolean }>) => {

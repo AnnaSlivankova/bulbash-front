@@ -38,6 +38,7 @@
 .burgAndCartMinContainer {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 20px;
 }
 
@@ -50,13 +51,27 @@
 }
 
 .burgerIcon:hover {
+    cursor: pointer;
+
     border-radius: 50%;
     background-color: rgba(0, 0, 0, 0.1);
     /*box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);*/
 }
+.capIcon {
+    width: 25px;
+    height: 25px;
+    fill: #000000;
+    margin-right: 14px;
+}
+
+.capIcon:hover {
+    cursor: pointer;
+    fill: var(--secondary-color)
+}
 
 .navItem {
     display: flex;
+    align-items: center;
 }
 
 .navItem:hover {
@@ -80,6 +95,9 @@
 }
 
 @media (max-width: 767px) {
+    .capIcon {
+        margin-right: 0;
+    }
     /* Стили для узких экранов */
     .navItem {
         display: none;

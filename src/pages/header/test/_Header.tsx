@@ -7,13 +7,14 @@ import Typography from '@mui/material/Typography'
 import { useNavigate } from 'react-router-dom'
 import { Button, ButtonGroup, Drawer } from '@mui/material'
 import { useSelector } from 'react-redux'
-import { useActions } from '../../../common/hooks'
+import { useActions, useAppSelector } from '../../../common/hooks'
 import { RootState } from '../../../app/store'
 import { authThunks } from '../../../features/auth/auth-slice'
 import { CartBadge } from 'features/client/cart/cart-badge/CartBadge'
 import sprite from '../../../assets/styles/sprite.svg'
 
 export const _Header: React.FC = () => {
+	const isAdmin = useAppSelector<boolean>(state => state.auth.isAdmin)
 	const [isScrolled, setIsScrolled] = useState(false)
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false) // боковое меню
 	const navigate = useNavigate()
@@ -55,7 +56,7 @@ export const _Header: React.FC = () => {
 		logout({})
 			.unwrap()
 			.then(() => {
-				navigate('/home')
+				navigate('/')
 			})
 		setIsDrawerOpen(false)
 	}
@@ -102,6 +103,11 @@ export const _Header: React.FC = () => {
 								</div>
 							) : (
 								<div className={s.navItem}>
+									{isAdmin && (
+										<svg className={s.capIcon} onClick={() => navigate('/bulbash_admin/admin')}>
+											<use xlinkHref={`${sprite}#cap`} />
+										</svg>
+									)}
 									<Button
 										onClick={logoutHandler}
 										variant='outlined'
@@ -119,6 +125,11 @@ export const _Header: React.FC = () => {
 							)}
 
 							<div className={s.burgAndCartMinContainer}>
+								{isAdmin && (
+									<svg className={s.capIcon} onClick={() => navigate('/bulbash_admin/admin')}>
+										<use xlinkHref={`${sprite}#cap`} />
+									</svg>
+								)}
 								{isLogin && (
 									<div onClick={redirectToCart} className={s.cart}>
 										<CartBadge />

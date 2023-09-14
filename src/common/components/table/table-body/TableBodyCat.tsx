@@ -63,7 +63,8 @@ export const TableBodyCatComponent: React.FC<Type> = ({ bodyData, deleteTitle, u
 						{/*</TableCell>*/}
 						<TableCell sx={style.cell}>
 							{/*{el.image_path}*/}
-							<img src={image_path} style={{ width: '50%', height: '50%' }} alt='ava' />
+							{/*<img src={image_path} style={{ width: '50%', height: '50%' }} alt='ava' />*/}
+							<img src={el.image_path} style={{ width: '50%', height: '50%' }} alt='ava' />
 						</TableCell>
 						<TableCell sx={style.cell}>{el.name}</TableCell>
 						<TableCell sx={style.cell}>{el.description}</TableCell>
@@ -86,7 +87,8 @@ export const TableBodyCatComponent: React.FC<Type> = ({ bodyData, deleteTitle, u
 										prevPosition={el.position}
 										prevDescription={el.description}
 										prevStatus={el.status_enabled}
-										prevImg={image_path}
+										// prevImg={image_path}
+										prevImg={el.image_path}
 										callback={onClickhandler}
 									/>
 								</IconButton>

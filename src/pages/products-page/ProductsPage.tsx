@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import s from './ProductsPage.module.css'
 import { Products } from '../../features/client/products/Products'
 import { useActions } from '../../common/hooks'
@@ -56,8 +56,23 @@ export const ProductsPage = () => {
 	const searchByPeople = (people_of_numbers: number) => {
 		setSearchParams({ ...Object.fromEntries(searchParams), people_of_numbers: people_of_numbers.toString() })
 	}
+	const searchByMinPrice = (people_of_numbers: number) => {
+		setSearchParams({ ...Object.fromEntries(searchParams), price_min: people_of_numbers.toString() })
+	}
+	const searchByMaxPrice = (people_of_numbers: number) => {
+		setSearchParams({ ...Object.fromEntries(searchParams), price_max: people_of_numbers.toString() })
+	}
+	const searchByMinWeight = (people_of_numbers: number) => {
+		setSearchParams({ ...Object.fromEntries(searchParams), weight_min: people_of_numbers.toString() })
+	}
+	const searchByMaxWeight = (people_of_numbers: number) => {
+		setSearchParams({ ...Object.fromEntries(searchParams), weight_max: people_of_numbers.toString() })
+	}
+
+	const [searchValue, setSearchValue] = useState('')
 
 	const resetFilterHandler = () => {
+		setSearchValue('')
 		;['page', 'people_of_numbers', 'price_min', 'price_max', 'weight_min', 'weight_max', 'subcategory_id'].forEach(el =>
 			searchParams.delete(el)
 		)
@@ -87,12 +102,32 @@ export const ProductsPage = () => {
 						<Button variant='contained' onClick={resetFilterHandler} style={{ margin: '8px' }}>
 							Сбросить фильтр
 						</Button>
-						<PriceSlider minPriceState={minPriceState} maxPriceState={maxPriceState} />
-						<WeightSlider minWeightState={minWeightState} maxWeightState={maxWeightState} />
+						<div className={s.peopleWrapper}>
+							<div className={s.peopleTitle}>Сортировать по цене</div>
+							<div className={s.peopleSubText}>{`от ${minPriceState} руб. - до ${maxPriceState} руб.`}</div>
+							<div className={s.searchMultiple}>
+								от
+								<SearchByPeople callback={searchByMinPrice} searchValue={searchValue} />
+								до
+								<SearchByPeople callback={searchByMaxPrice} searchValue={searchValue} />
+							</div>
+						</div>
+						<div className={s.peopleWrapper}>
+							<div className={s.peopleTitle}>Сортировать по весу</div>
+							<div className={s.peopleSubText}>{`от ${minWeightState} гр. - до ${maxWeightState} гр.`}</div>
+							<div className={s.searchMultiple}>
+								от
+								<SearchByPeople callback={searchByMinWeight} searchValue={searchValue} />
+								до
+								<SearchByPeople callback={searchByMaxWeight} searchValue={searchValue} />
+							</div>
+						</div>
+						{/*<PriceSlider minPriceState={minPriceState} maxPriceState={maxPriceState} />*/}
+						{/*<WeightSlider minWeightState={minWeightState} maxWeightState={maxWeightState} />*/}
 						<div className={s.peopleWrapper}>
 							<div className={s.peopleTitle}>Сортировать по количеству человек</div>
 							<div className={s.peopleSubText}>{`от ${minPeopleState} чел. - до ${maxPeopleState} чел.`}</div>
-							<SearchByPeople callback={searchByPeople} />
+							<SearchByPeople callback={searchByPeople} searchValue={searchValue} />
 						</div>
 					</div>
 				</div>
@@ -106,23 +141,29 @@ export const ProductsPage = () => {
 						</div>
 						{/*<div>Sort by price/by popularity/</div>*/}
 						<div className={s.products}>
-							{products.map(el => {
-								const imgPath = changeImgPath(el.image_path)
+							{!products.length ? (
+								<h2>по Вашему запросу ничего не найдено</h2>
+							) : (
+								products.map(el => {
+									const imgPath = changeImgPath(el.image_path)
 
-								return (
-									<Products
-										key={el.id}
-										zoom={true}
-										id={el.id}
-										imgPath={imgPath}
-										name={el.name}
-										description={el.description}
-										price={el.price}
-										peopleNumber={el.people_numbers}
-										weight={el.weight}
-									/>
-								)
-							})}
+									return (
+										<Products
+											key={el.id}
+											zoom={true}
+											id={el.id}
+											// imgPath={imgPath}
+											//for prod img_path bellow
+											imgPath={el.image_path}
+											name={el.name}
+											description={el.description}
+											price={el.price}
+											peopleNumber={el.people_numbers}
+											weight={el.weight}
+										/>
+									)
+								})
+							)}
 						</div>
 					</div>
 				</div>

@@ -18,7 +18,8 @@ export const CategoryCard: React.FC<AdminCardType> = ({ children, title, descrip
 				<Card
 					// sx={{ width: 300 }}
 					sx={{
-						width: isSmallScreen ? 140 : 300
+						// width: isSmallScreen ? 140 : 300
+						width: isSmallScreen ? 140 : 280
 					}}
 				>
 					<CardActionArea onClick={onClick}>

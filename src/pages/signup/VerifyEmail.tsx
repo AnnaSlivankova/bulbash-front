@@ -20,7 +20,7 @@ export const VerifyEmail = () => {
 			dispatch(authThunks.verifyEmail(token))
 				.unwrap()
 				.then(() => {
-					navigate('/home')
+					navigate('/')
 				})
 			// localStorage.setItem('token', token)
 		}

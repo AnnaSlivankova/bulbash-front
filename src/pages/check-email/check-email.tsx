@@ -7,7 +7,7 @@ export const CheckEmail = () => {
 	const navigate = useNavigate()
 
 	const redirectToHomeHandler = () => {
-		navigate('/home')
+		navigate('/')
 	}
 
 	return (

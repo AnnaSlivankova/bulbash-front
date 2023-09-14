@@ -9,12 +9,20 @@ import { instanceUser } from '../../../app/common-api'
 export const categoriesAdminAPI = {
 	fetchCategories() {
 		return instanceUser
-			.get<FetchCategoryResponseType[]>('/api/v1/bulbash_admin/get_list_categories', {})
+			.get<FetchCategoryResponseType[]>('/api/v1/bulbash_admin/get_list_categories', {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
+			})
 			.then(res => res.data)
 	},
 	fetchShortCategories() {
 		return instanceUser
-			.get<ResponseFetchShortCategories[]>('/api/v1/bulbash_admin/get-list-short-categories')
+			.get<ResponseFetchShortCategories[]>('/api/v1/bulbash_admin/get-list-short-categories', {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
+			})
 			.then(res => res.data)
 	},
 	addNewCategory(args: { data: Omit<CategoryDataType, 'img_file'>; img_file: FormData }) {
@@ -23,7 +31,8 @@ export const categoriesAdminAPI = {
 				params: args.data,
 				headers: {
 					'Content-Type': 'multipart/form-data',
-					Accept: 'application/json'
+					Accept: 'application/json',
+					Authorization: `Bearer ${localStorage.getItem('token')}`
 				}
 			})
 			.then(res => res.data)
@@ -34,14 +43,19 @@ export const categoriesAdminAPI = {
 				params: args.data,
 				headers: {
 					'Content-Type': 'multipart/form-data',
-					Accept: 'application/json'
+					Accept: 'application/json',
+					Authorization: `Bearer ${localStorage.getItem('token')}`
 				}
 			})
 			.then(res => res.data)
 	},
 	deleteCategory(category_id: number) {
 		return instanceUser
-			.delete<ChangeCategoryResponseType>(`/api/v1/bulbash_admin/delete_category_${category_id}`)
+			.delete<ChangeCategoryResponseType>(`/api/v1/bulbash_admin/delete_category_${category_id}`, {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('token')}`
+				}
+			})
 			.then(res => res.data)
 	}
 }

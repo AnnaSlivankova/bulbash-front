@@ -21,8 +21,8 @@ import { OrdersAdmin } from '../features/admin/orders-admin/OrdersAdmin'
 export const Routers = () => {
 	return (
 		<Routes>
-			<Route path={'/'} element={<Navigate to={'/home'} />} />
-			<Route path={'/home'} element={<HomePage />} />
+			{/*<Route path={'/'} element={<Navigate to={'/home'} />} />*/}
+			<Route path={'/'} element={<HomePage />} />
 			<Route path={'/products'} element={<ProductsPage />} />
 			{/*<Route path={'/products/:id'} element={<ProductsPage />} />*/}
 			<Route path={'/product/:id'} element={<ProductPage />} />

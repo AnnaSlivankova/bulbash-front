@@ -1,10 +1,7 @@
 import React from 'react'
-import Button from '@mui/material/Button'
-import { useNavigate } from 'react-router-dom'
 import s from './Footer.module.css'
 
 export const Footer = () => {
-	const navigate = useNavigate()
 	return (
 		<div className={s.container}>
 			<p className={s.textBox}>
@@ -16,9 +13,6 @@ export const Footer = () => {
 				<div>Пн-Пт 08:00-21:00 Сб-Вс 10:00-21:00</div>
 			</div>
 			<p className={s.textBox}>© 2023 БУЛЬБАШ — Кейтеринг.</p>
-			{/*<Button onClick={() => navigate('/bulbash_admin/admin')} color='error'>*/}
-			{/*	admin*/}
-			{/*</Button>*/}
 		</div>
 	)
 }

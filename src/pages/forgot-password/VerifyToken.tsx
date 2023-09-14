@@ -69,7 +69,7 @@ export const VerifyToken = () => {
 		dispatch(authThunks.setNewPassword(finalData))
 			.unwrap()
 			.then(() => {
-				navigate('/home')
+				navigate('/')
 			})
 	}
 
