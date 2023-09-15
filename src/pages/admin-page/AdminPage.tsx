@@ -12,6 +12,7 @@ import { Navigate } from 'react-router-dom'
 export const AdminPage = () => {
 	const { fetchShortCategoriesList } = useActions(adminCategoriesThunks)
 	const { fetchShortSubcategoriesList } = useActions(adminSubcategoriesThunks)
+	const { fetchSubcategoriesList } = useActions(adminSubcategoriesThunks)
 
 	const isAdmin = useAppSelector<boolean>(state => state.auth.isAdmin)
 
@@ -48,6 +49,7 @@ export const AdminPage = () => {
 	useEffect(() => {
 		fetchShortCategoriesList({})
 		fetchShortSubcategoriesList({})
+		fetchSubcategoriesList({})
 	}, [])
 
 	if (!isAdmin) {

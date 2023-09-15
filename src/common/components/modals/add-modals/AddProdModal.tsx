@@ -18,7 +18,10 @@ import { createFormData } from '../../../utils/createFormData'
 import { RequestPostProduct } from '../../../../features/admin/products/products-admin-api'
 import { useAppSelector } from '../../../hooks'
 import { ResponseFetchShortCategories } from '../../../../features/admin/categories/categories-admin-api'
-import { ResponseFetchShortSubcategoryType } from '../../../../features/admin/subcategries/subcategories-admin-api'
+import {
+	ResponseFetchShortSubcategoryType,
+	ResponseFetchSubcategoryType
+} from '../../../../features/admin/subcategries/subcategories-admin-api'
 
 const style = {
 	checkbox: {
@@ -37,6 +40,10 @@ export const AddProdModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 	)
 	const shortSubcategiriesList = useAppSelector<ResponseFetchShortSubcategoryType[]>(
 		state => state.adminSubcategories.shortSubcategoriesList
+	)
+
+	const subcategoriesList = useAppSelector<ResponseFetchSubcategoryType[]>(
+		state => state.adminSubcategories.subcategories
 	)
 
 	const [open, setOpen] = useState(false)
@@ -61,9 +68,20 @@ export const AddProdModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 	const [ava, setAva] = useState(defaultAva)
 	const [formData, setFormData] = useState<FormData>(new FormData())
 
+	const [chosenCategory, setChosenCategory] = useState<string | number>('')
+	const [chosenSucategory, setChosenSubcategory] = useState<string | number>('')
+	const handleCategoryRadioChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setChosenCategory(+e.target.value)
+	}
+	const handleSubcategoryRadioChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setChosenSubcategory(+e.target.value)
+		console.log(chosenCategory, chosenSucategory)
+	}
+
 	const onSubmit: SubmitHandler<RequestPostProduct> = data => {
 		// callback(data, formData)
-		callback({ ...data, category_id: +data.category_id, subcategory_id: +data.subcategory_id }, formData)
+		// callback({ ...data, category_id: +data.category_id, subcategory_id: +data.subcategory_id }, formData)
+		callback({ ...data, category_id: chosenCategory as number, subcategory_id: chosenSucategory as number }, formData)
 		setOpen(false)
 		handleClose()
 		reset()
@@ -97,7 +115,7 @@ export const AddProdModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 			}
 		>
 			<div style={{ margin: '10px 0 10px 0' }}>
-				<img src={ava || defaultAva} style={{ width: '100px' }} alt='picture' />
+				<img src={ava || defaultAva} style={{ width: '100px' }} alt='product_cover' />
 				<label>
 					<input type='file' onChange={handleFileUpload} style={{ display: 'none' }} />
 					<IconButton component='span'>
@@ -105,6 +123,30 @@ export const AddProdModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 					</IconButton>
 				</label>
 			</div>
+
+			<>
+				<h3 style={style.btn}>Выберите категорию</h3>
+				<RadioGroup row value={chosenCategory} onChange={handleCategoryRadioChange}>
+					{shortCategoriesList.map(el => {
+						return <FormControlLabel control={<Radio />} label={el.name} value={el.id} key={el.id} />
+					})}
+				</RadioGroup>
+			</>
+
+			<>
+				<h3 style={style.btn}>Выберите подкатегорию</h3>
+				<RadioGroup row value={chosenSucategory} onChange={handleSubcategoryRadioChange}>
+					{!chosenCategory
+						? shortSubcategiriesList.map(el => {
+								return <FormControlLabel control={<Radio />} label={el.name} value={el.id} key={el.id} />
+						  })
+						: subcategoriesList
+								.filter(el => el.category_id === chosenCategory)
+								.map(el => {
+									return <FormControlLabel control={<Radio />} label={el.name} value={el.id} key={el.id} />
+								})}
+				</RadioGroup>
+			</>
 
 			<form onSubmit={handleSubmit(onSubmit)} className={s.formWrapper}>
 				<Controller
@@ -198,63 +240,33 @@ export const AddProdModal: React.FC<Type> = ({ btnTitle, title, callback }) => {
 					)}
 				/>
 				{/*<Controller*/}
+				{/*	control={control}*/}
 				{/*	name='category_id'*/}
-				{/*	control={control}*/}
 				{/*	render={({ field }) => (*/}
-				{/*		<TextField*/}
-				{/*			fullWidth*/}
-				{/*			label='id категории'*/}
-				{/*			type='number'*/}
-				{/*			variant='outlined'*/}
-				{/*			color='secondary'*/}
-				{/*			{...field}*/}
-				{/*			sx={style.textfield}*/}
-				{/*		/>*/}
+				{/*		<>*/}
+				{/*			<h3 style={style.btn}>Выберите категорию</h3>*/}
+				{/*			<RadioGroup row {...field}>*/}
+				{/*				{shortCategoriesList.map(el => {*/}
+				{/*					return <FormControlLabel control={<Radio />} label={el.name} value={el.id} key={el.id} />*/}
+				{/*				})}*/}
+				{/*			</RadioGroup>*/}
+				{/*		</>*/}
 				{/*	)}*/}
 				{/*/>*/}
-				<Controller
-					control={control}
-					name='category_id'
-					render={({ field }) => (
-						<>
-							<h3 style={style.btn}>Выберите категорию</h3>
-							<RadioGroup row {...field}>
-								{shortCategoriesList.map(el => {
-									return <FormControlLabel control={<Radio />} label={el.name} value={el.id} key={el.id} />
-								})}
-							</RadioGroup>
-						</>
-					)}
-				/>
 				{/*<Controller*/}
-				{/*	name='subcategory_id'*/}
 				{/*	control={control}*/}
+				{/*	name='subcategory_id'*/}
 				{/*	render={({ field }) => (*/}
-				{/*		<TextField*/}
-				{/*			fullWidth*/}
-				{/*			label='id подкатегории'*/}
-				{/*			type='number'*/}
-				{/*			variant='outlined'*/}
-				{/*			color='secondary'*/}
-				{/*			{...field}*/}
-				{/*			sx={style.textfield}*/}
-				{/*		/>*/}
+				{/*		<>*/}
+				{/*			<h3 style={style.btn}>Выберите подкатегорию</h3>*/}
+				{/*			<RadioGroup row {...field}>*/}
+				{/*				{shortSubcategiriesList.map(el => {*/}
+				{/*					return <FormControlLabel control={<Radio />} label={el.name} value={el.id} key={el.id} />*/}
+				{/*				})}*/}
+				{/*			</RadioGroup>*/}
+				{/*		</>*/}
 				{/*	)}*/}
 				{/*/>*/}
-				<Controller
-					control={control}
-					name='subcategory_id'
-					render={({ field }) => (
-						<>
-							<h3 style={style.btn}>Выберите подкатегорию</h3>
-							<RadioGroup row {...field}>
-								{shortSubcategiriesList.map(el => {
-									return <FormControlLabel control={<Radio />} label={el.name} value={el.id} key={el.id} />
-								})}
-							</RadioGroup>
-						</>
-					)}
-				/>
 				<Controller
 					name='status_enabled'
 					control={control}
