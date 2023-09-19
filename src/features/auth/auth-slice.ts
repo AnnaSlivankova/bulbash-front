@@ -130,7 +130,7 @@ const verifyEmail = createAppAsyncThunk<any, string>('auth/verifyEmail', async (
 		localStorage.setItem('token', res.access_token)
 		dispatch(authActions.setMessage({ message: 'Ваш email успешно подтвержден' }))
 		dispatch(authActions.setSeverity({ severity: 'success' }))
-		dispatch(authActions.setLogin({ isLogin: true }))
+		// dispatch(authActions.setLogin({ isLogin: true }))
 	} catch (e) {
 		handleAxiosError(dispatch, e)
 
