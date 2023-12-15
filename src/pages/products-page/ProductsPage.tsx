@@ -104,7 +104,7 @@ export const ProductsPage = () => {
 						</Button>
 						<div className={s.peopleWrapper}>
 							<div className={s.peopleTitle}>Сортировать по цене</div>
-							<div className={s.peopleSubText}>{`от ${minPriceState} руб. - до ${maxPriceState} руб.`}</div>
+							<div className={s.peopleSubText}>{`от ${minPriceState ?? 0} руб. - до ${maxPriceState ?? 0} руб.`}</div>
 							<div className={s.searchMultiple}>
 								от
 								<SearchByPeople callback={searchByMinPrice} searchValue={searchValue} />
@@ -114,7 +114,7 @@ export const ProductsPage = () => {
 						</div>
 						<div className={s.peopleWrapper}>
 							<div className={s.peopleTitle}>Сортировать по весу</div>
-							<div className={s.peopleSubText}>{`от ${minWeightState} гр. - до ${maxWeightState} гр.`}</div>
+							<div className={s.peopleSubText}>{`от ${minWeightState ?? 0} гр. - до ${maxWeightState ?? 0} гр.`}</div>
 							<div className={s.searchMultiple}>
 								от
 								<SearchByPeople callback={searchByMinWeight} searchValue={searchValue} />
@@ -126,7 +126,7 @@ export const ProductsPage = () => {
 						{/*<WeightSlider minWeightState={minWeightState} maxWeightState={maxWeightState} />*/}
 						<div className={s.peopleWrapper}>
 							<div className={s.peopleTitle}>Сортировать по количеству человек</div>
-							<div className={s.peopleSubText}>{`от ${minPeopleState} чел. - до ${maxPeopleState} чел.`}</div>
+							<div className={s.peopleSubText}>{`от ${minPeopleState ?? 0} чел. - до ${maxPeopleState ?? 0} чел.`}</div>
 							<SearchByPeople callback={searchByPeople} searchValue={searchValue} />
 						</div>
 					</div>

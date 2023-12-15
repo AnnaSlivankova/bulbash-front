@@ -4,7 +4,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { authThunks } from '../../features/auth/auth-slice'
 
 export const VerifyEmail = () => {
-	debugger
+	// debugger
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 
@@ -16,7 +16,7 @@ export const VerifyEmail = () => {
 
 	useEffect(() => {
 		if (token) {
-			debugger
+			// debugger
 			dispatch(authThunks.verifyEmail(token))
 				.unwrap()
 				.then(() => {
@@ -24,6 +24,7 @@ export const VerifyEmail = () => {
 				})
 			// localStorage.setItem('token', token)
 		}
+		navigate('/')
 	}, [])
 
 	return <div>VerifyEmail</div>
