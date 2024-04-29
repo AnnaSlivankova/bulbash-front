@@ -58,11 +58,16 @@ export const EditSubModal: React.FC<EditType> = ({ id, prevName, prevStatus, tit
 			modifiedData.category_id = data.category_id
 		}
 
-		const params = { ...modifiedData, category_id: Number(modifiedData.category_id) }
+		const params = {
+			...modifiedData,
+			category_id: modifiedData.category_id ? Number(modifiedData.category_id) : category_id
+		}
 		const finaldata = { subcategory_id: id, params }
 
-		console.log(finaldata)
+		console.log('finaldata', finaldata)
+
 		callback(id, params)
+
 		setOpen(false)
 		handleClose()
 		reset(data)

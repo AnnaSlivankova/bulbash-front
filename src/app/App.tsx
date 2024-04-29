@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react'
 import 'app/App.css'
 import { Layout } from 'pages/layout/Layout'
-import { BrowserRouter, Navigate } from 'react-router-dom'
-import { Header } from 'pages/header/Header'
+import { BrowserRouter } from 'react-router-dom'
 import { SnackBar } from '../common/components/snack-bar/SnackBar'
 import { authThunks } from '../features/auth/auth-slice'
-import { useAppDispatch, useAppSelector } from '../common/hooks'
+import { useAppDispatch } from '../common/hooks'
 import { CookieConsent } from 'react-cookie-consent'
-import { _Header } from '../pages/header/test/_Header'
-import { AdminPage } from '../pages/admin-page/AdminPage'
 import { Footer } from '../pages/footer/Footer'
+import { Header } from '../pages/header/Header'
 
 function App() {
 	const dispatch = useAppDispatch()
@@ -27,7 +25,7 @@ function App() {
 			</CookieConsent>
 			<SnackBar />
 			{/*<Header />*/}
-			<_Header />
+			<Header />
 			<Layout />
 			<Footer />
 		</BrowserRouter>

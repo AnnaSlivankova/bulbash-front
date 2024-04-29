@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../../../app/store'
 import { CartItemType } from '../../../../features/cart/userCart-api'
 import { userCartThunks } from '../../../../features/cart/userCart-slice'
+import Checkbox from '@mui/material/Checkbox'
 
 const style = {
 	checkbox: {
@@ -28,6 +29,8 @@ const style = {
 export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, disabled }) => {
 	const [open, setOpen] = useState(false)
 	const { getCardItems } = useActions(userCartThunks)
+
+	const [checked, setChecked] = useState(false)
 
 	const { createNewOrder } = useActions(orderThunks)
 	const cartProducts = useSelector<RootState, CartItemType[]>(state => state.userCart.userCart.data)
@@ -203,8 +206,11 @@ export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, disabled }) =>
 						</>
 					)}
 				/>
-
-				<Button type='submit' variant='contained' color='secondary' sx={style.btn}>
+				<FormControlLabel
+					control={<Checkbox checked={checked} onChange={() => setChecked(!checked)} color='primary' />}
+					label='Согласие на обработку персональных данных'
+				/>
+				<Button type='submit' variant='contained' color='secondary' sx={style.btn} disabled={!checked}>
 					оформить
 				</Button>
 			</form>
