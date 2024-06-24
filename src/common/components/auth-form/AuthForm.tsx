@@ -7,8 +7,10 @@ const style = {
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
-		minHeight: '100vh', // установка минимальной высоты на весь экран
-		flexWrap: 'wrap'
+		minHeight: '40vh', // установка минимальной высоты на весь экран
+		padding: '15px',
+		flexWrap: 'wrap',
+		backgroundColor: '#f4f4f4'
 	},
 	container: {
 		display: 'flex',

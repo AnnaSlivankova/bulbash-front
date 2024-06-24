@@ -18,11 +18,26 @@ import { authThunks } from '../../features/auth/auth-slice'
 import { RequestLoginType } from '../../features/auth/auth-api'
 import { AuthForm } from '../../common/components/auth-form/AuthForm'
 import { userCartThunks } from '../../features/cart/userCart-slice'
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 const style = {
 	email: { margin: '24px 0 12px 0' },
 	password: { margin: '12px 0 24px 0' }
 }
+
+const schema = yup
+	.object({
+		email: yup.string().email('Вы ввели некорректный email!').required('Заполните поле!'),
+		password: yup
+			.string()
+			.min(6, 'Пароль должен быть от 6 до 32 символов')
+			.max(32, 'Пароль должен быть от 6 до 32 символов')
+			.required('Заполните поле!')
+	})
+	.required('Заполните поле!')
+
+type FormData = yup.InferType<typeof schema>
 
 export const Signin = () => {
 	// const authIsSignin = useSelector(selectAuthIsSignin)
@@ -35,11 +50,16 @@ export const Signin = () => {
 	const [passwordShown, setPasswordShown] = useState(false)
 	const togglePassword = () => setPasswordShown(!passwordShown)
 
-	const { control, handleSubmit } = useForm({
+	const {
+		control,
+		handleSubmit,
+		formState: { errors }
+	} = useForm<FormData>({
+		resolver: yupResolver(schema),
 		defaultValues: {
 			email: '',
-			password: '',
-			rememberMe: false
+			password: ''
+			// rememberMe: false
 		}
 	})
 	// const onSubmit: SubmitHandler<SigninParamsType> = data => {
@@ -75,6 +95,7 @@ export const Signin = () => {
 								<TextField fullWidth label='Email' variant='standard' {...field} sx={style.email} />
 							)}
 						/>
+						<div className={s.errorMsg}>{errors.email?.message}</div>
 						<Controller
 							name='password'
 							control={control}
@@ -98,6 +119,7 @@ export const Signin = () => {
 								/>
 							)}
 						/>
+						<div className={s.errorMsg}>{errors.password?.message}</div>
 						{/*<div className={s.rememberMeWrapper}>*/}
 						{/*	<Controller*/}
 						{/*		name='rememberMe'*/}

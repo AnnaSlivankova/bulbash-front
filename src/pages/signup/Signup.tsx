@@ -30,16 +30,20 @@ const style = {
 
 const schema = yup
 	.object({
-		name: yup.string().required(),
-		surname: yup.string().required(),
-		email: yup.string().email().required(),
-		password: yup.string().min(6).max(32).required(),
+		name: yup.string().required('Заполните поле!'),
+		surname: yup.string().required('Заполните поле!'),
+		email: yup.string().email('Вы ввели некорректный email!').required('Заполните поле!'),
+		password: yup
+			.string()
+			.min(6, 'Пароль должен быть от 6 до 32 символов')
+			.max(32, 'Пароль должен быть от 6 до 32 символов')
+			.required('Заполните поле!'),
 		confirm_password: yup
 			.string()
-			.oneOf([yup.ref('password')], "Passwords don't match")
-			.required()
+			.oneOf([yup.ref('password')], 'Пароли не совпадают!')
+			.required('Заполните поле!')
 	})
-	.required()
+	.required('Заполните поле!')
 
 type FormData = yup.InferType<typeof schema>
 
@@ -91,12 +95,12 @@ export const Signup = () => {
 				<>
 					<form onSubmit={handleSubmit(onSubmit)} className={s.formWrapper}>
 						<TextField {...register('name')} label='Имя' fullWidth variant='standard' sx={style.email} />
-						<div>{errors.name?.message}</div>
+						<div className={s.errorMsg}>{errors.name?.message}</div>
 						<TextField {...register('surname')} label='Фамилия' fullWidth variant='standard' sx={style.email} />
-						<div>{errors.surname?.message}</div>
+						<div className={s.errorMsg}>{errors.surname?.message}</div>
 
 						<TextField {...register('email')} label='Email' fullWidth variant='standard' sx={style.email} />
-						<div>{errors.email?.message}</div>
+						<div className={s.errorMsg}>{errors.email?.message}</div>
 						<TextField
 							{...register('password')}
 							label='Пароль'
@@ -114,7 +118,7 @@ export const Signup = () => {
 								)
 							}}
 						/>
-						<div>{errors.password?.message}</div>
+						<div className={s.errorMsg}>{errors.password?.message}</div>
 						<TextField
 							{...register('confirm_password')}
 							label='Повторите пароль'
@@ -132,7 +136,7 @@ export const Signup = () => {
 								)
 							}}
 						/>
-						<div>{errors.confirm_password?.message}</div>
+						<div className={s.errorMsg}>{errors.confirm_password?.message}</div>
 						<Button type='submit' variant='contained' fullWidth sx={{ mt: 5 }}>
 							Зарегестрироваться
 						</Button>

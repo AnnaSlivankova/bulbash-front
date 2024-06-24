@@ -8,7 +8,9 @@
 .wrp {
     display: flex;
     flex-direction: row;
-    margin-top: 40px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #f4f4f4;
 }
 
 .leftBlock {
@@ -40,10 +42,15 @@
 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
+.peopleTitle {
+    text-transform: uppercase;
+    padding: 8px;
+}
 
 .peopleSubText {
     margin: 10px;
 }
+
 .searchMultiple {
     display: flex;
     flex-direction: row;
@@ -92,7 +99,7 @@
     margin: 20px;
 }
 
-@media screen and (max-width: 1324px){
+@media screen and (max-width: 1324px) {
     .products {
         /*display: flex;*/
         /*flex-direction: row;*/
@@ -108,7 +115,7 @@
 @media screen and (max-width: 1050px) {
     .wrp {
         flex-direction: column;
-        margin-top: 12px;
+        /*margin-top: 12px;*/
     }
 
     .leftBlock {
@@ -144,6 +151,7 @@
     .peopleTitle {
         width: 120px;
     }
+
     .subcategories {
         gap: 6px;
     }
@@ -162,8 +170,12 @@
 
     .subcategories {
         gap: 6px;
+        margin-top: 10px;
     }
+
     .wrp {
-        margin-top: 6px;
+        /*margin-top: 6px;*/
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 }

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import s from './ProductPage.module.css'
-import { InfoBlock } from '../../common/components/info-block/InfoBlock'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
 import { ResponseFetchProduct } from '../../features/client/products/products-api'
@@ -8,12 +7,12 @@ import { useActions } from '../../common/hooks'
 import { productsThunks } from '../../features/client/products/products-slice'
 import { changeImgPath } from '../../common/utils/changeImgPath'
 import Button from '@mui/material/Button'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { CartCounter } from '../../common/components/counter/cart-counter/CartCounter'
 import { userCartThunks } from '../../features/cart/userCart-slice'
-import { _InfoBlock } from '../../common/components/info-block/test/_InfoBlock'
 import { ButtonBack } from '../../common/components/button-back/ButtonBack'
 import { useMediaQuery, useTheme } from '@mui/material'
+import { InfoBlock } from '../../common/components/info-block/InfoBlock'
 
 export const ProductPage = () => {
 	const product = useSelector<RootState, ResponseFetchProduct>(state => state.products.product)
@@ -28,7 +27,6 @@ export const ProductPage = () => {
 	const { id } = useParams()
 
 	const redirectToProducts = () => {
-		// navigate(`/products/${product.category_id}`)
 		navigate(`/products?category_id=${product.category_id}`)
 	}
 
@@ -59,16 +57,9 @@ export const ProductPage = () => {
 
 	return (
 		<div className={s.wrapper}>
-			{/*<InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>*/}
-			{/*	{*/}
-			{/*		<Button onClick={redirectToProducts} variant='contained' color='secondary'>*/}
-			{/*			Назад*/}
-			{/*		</Button>*/}
-			{/*	}*/}
-			{/*</InfoBlock>*/}
-			<_InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>
+			<InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>
 				{<ButtonBack callback={redirectToProducts} />}
-			</_InfoBlock>
+			</InfoBlock>
 			<div className={s.container}>
 				<div className={s.leftBlock}>
 					<div className={s.leftContainer}>
@@ -85,7 +76,19 @@ export const ProductPage = () => {
 						<div className={s.ingredients}>{`на ${product.people_numbers} чел., ${product.weight} гр.`}</div>
 
 						{!isLogin ? (
-							<div className={s.price} style={{ margin: '10px' }}>{`Цена ${product.price} руб. `}</div>
+							<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<div className={s.price} style={{ margin: '10px' }}>{`Цена ${product.price} руб. `}</div>
+								<div style={{ margin: '10px', fontSize: '12px' }}>
+									Для того чтобы сделать заказ,{' '}
+									<Link style={{ textDecoration: 'underline', color: '#366eff' }} to='/signin'>
+										Войдите
+									</Link>{' '}
+									или{' '}
+									<Link style={{ textDecoration: 'underline', color: '#366eff' }} to='/signup'>
+										Зарегистрируйтесь
+									</Link>
+								</div>
+							</div>
 						) : (
 							<div className={s.orderContainer}>
 								<div className={s.price}>{`Цена ${product.price} руб. `}</div>

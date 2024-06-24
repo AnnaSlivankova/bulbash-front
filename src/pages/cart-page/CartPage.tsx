@@ -8,13 +8,12 @@ import { RootState } from '../../app/store'
 import { changeImgPath } from '../../common/utils/changeImgPath'
 import { CartItemType } from '../../features/cart/userCart-api'
 import { InfoCart } from './info-cart/InfoCart'
-import { InfoBlock } from 'common/components/info-block/InfoBlock'
 import { useActions } from '../../common/hooks'
 import { CreateNewOrder } from '../../common/components/modals/create-new-order/CreateNewOrder'
 import { orderThunks } from '../../features/order/order-slice'
 import { userCartThunks } from '../../features/cart/userCart-slice'
-import { _InfoBlock } from '../../common/components/info-block/test/_InfoBlock'
 import { ButtonBack } from '../../common/components/button-back/ButtonBack'
+import { InfoBlock } from '../../common/components/info-block/InfoBlock'
 
 export const CartPage = () => {
 	const cartProducts = useSelector<RootState, CartItemType[]>(state => state.userCart.userCart.data)
@@ -46,12 +45,9 @@ export const CartPage = () => {
 
 	return (
 		<div>
-			{/*<InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>*/}
-			{/*	/!*{<Button onClick={redirectToCategories}>Назад</Button>}*!/*/}
-			{/*</InfoBlock>*/}
-			<_InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>
+			<InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>
 				{/*{<ButtonBack callback={redirectToCategories} />}*/}
-			</_InfoBlock>
+			</InfoBlock>
 
 			<div className={s.wrapper}>
 				<div className={s.infoContainer}>

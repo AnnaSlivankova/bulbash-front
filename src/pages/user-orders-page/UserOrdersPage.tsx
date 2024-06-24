@@ -5,10 +5,8 @@ import { OrderType } from '../../features/order/order-api'
 import { TableComponent } from '../../common/components/table/Table'
 import { userOrdersData } from '../../common/data/table-head-data'
 import s from './UserOrdersPage.module.css'
-import { InfoBlock } from '../../common/components/info-block/InfoBlock'
-import Button from '@mui/material/Button'
 import { useNavigate } from 'react-router-dom'
-import { _InfoBlock } from '../../common/components/info-block/test/_InfoBlock'
+import { InfoBlock } from '../../common/components/info-block/InfoBlock'
 import { ButtonBack } from '../../common/components/button-back/ButtonBack'
 
 export const UserOrdersPage = () => {
@@ -26,19 +24,11 @@ export const UserOrdersPage = () => {
 	}, [])
 	return (
 		<>
-			<_InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>
+			<InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>
 				{<ButtonBack callback={redirectToCart} />}
-			</_InfoBlock>
-			{/*<InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'}>*/}
-			{/*	{*/}
-			{/*		<Button onClick={redirectToCart} variant='contained' color='secondary'>*/}
-			{/*			Назад*/}
-			{/*		</Button>*/}
-			{/*	}*/}
-			{/*</InfoBlock>*/}
-
+			</InfoBlock>
 			<div className={s.wrapper}>
-				<h3>Мои заказы</h3>
+				<h3 className={s.title}>Мои заказы</h3>
 				<TableComponent
 					type='UORD'
 					headData={userOrdersData}

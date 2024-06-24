@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState, FocusEvent } from 'react'
 import s from './CartCounter.module.css'
 import IconButton from '@mui/material/IconButton'
 import RemoveIcon from '@mui/icons-material/Remove'
@@ -22,6 +22,17 @@ export const CartCounter: React.FC<PropsType> = ({ callback, count, isDisabled }
 		setCounterValue(+e.currentTarget.value)
 	}
 
+	const handleWheel = (event: React.WheelEvent<HTMLInputElement>) => {
+		event.preventDefault()
+	}
+	// const handleFocus = (event: FocusEvent<HTMLInputElement>) => {
+	// 	event.currentTarget.addEventListener('wheel', () => handleWheel)
+	// }
+	//
+	// const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
+	// 	event.currentTarget.removeEventListener('wheel', () => handleWheel)
+	// }
+
 	useEffect(() => {
 		callback(debouncedValue)
 	}, [debouncedValue])
@@ -37,6 +48,13 @@ export const CartCounter: React.FC<PropsType> = ({ callback, count, isDisabled }
 				value={counterValue}
 				className={s.counterInput}
 				onChange={onChangeValueHandler}
+				inputMode={'numeric'}
+				onWheel={handleWheel}
+				min={1}
+				max={1000}
+				step={1}
+				// onFocus={handleFocus}
+				// onBlur={handleBlur}
 			/>
 			<IconButton onClick={incCounterValue} disabled={isDisabled}>
 				<AddIcon />

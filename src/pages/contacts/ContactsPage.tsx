@@ -1,14 +1,11 @@
 import React from 'react'
 import s from './ContactsPage.module.css'
-import { _InfoBlock } from '../../common/components/info-block/test/_InfoBlock'
-import { Carusel } from '../home-page/carusel/Carusel'
-import { CartCounter } from '../../common/components/counter/cart-counter/CartCounter'
-import Button from '@mui/material/Button'
+import { InfoBlock } from 'common/components/info-block/InfoBlock'
 
 export const ContactsPage = () => {
 	return (
 		<div className={s.wrapper}>
-			<_InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'} />
+			<InfoBlock title={'bulbash food'} description={'catering'} type={'HomePage'} />
 
 			<div className={s.container}>
 				<div className={s.leftBlock}>

@@ -13,6 +13,8 @@ import { RootState } from '../../../../app/store'
 import { CartItemType } from '../../../../features/cart/userCart-api'
 import { userCartThunks } from '../../../../features/cart/userCart-slice'
 import Checkbox from '@mui/material/Checkbox'
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 const style = {
 	checkbox: {
@@ -25,6 +27,25 @@ const style = {
 		marginTop: '32px'
 	}
 }
+
+const schema = yup
+	.object({
+		first_name: yup.string().required('Заполните поле!'),
+		last_name: yup.string().required('Заполните поле!'),
+		surname: yup.string().required('Заполните поле!'),
+		contact_phone: yup
+			.string()
+			.matches(/^375(25|29|44|33|17)\d{3}\d{2}\d{2}$/, {
+				message: 'Введите номер телефона в формате 375ХХХХХХХХХ'
+			})
+			.required('Заполните поле!'),
+		contact_email: yup.string().email('Вы ввели некорректный email!'),
+		delivery_address: yup.string(),
+		payment_method: yup.string()
+	})
+	.required('Заполните поле!')
+
+type FormData = yup.InferType<typeof schema>
 
 export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, disabled }) => {
 	const [open, setOpen] = useState(false)
@@ -39,10 +60,23 @@ export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, disabled }) =>
 	const handleOpen = () => setOpen(true)
 	const handleClose = () => setOpen(false)
 
-	const { control, handleSubmit, reset, register } = useForm({
+	const {
+		control,
+		handleSubmit,
+		reset,
+		register,
+		formState: { errors }
+	} = useForm<FormData>({
+		resolver: yupResolver(schema),
 		defaultValues: {
-			delivery_address: null
-		} as Omit<RequestNewOrderType, 'total_cost' | 'product_list'>
+			first_name: '',
+			last_name: '',
+			surname: '',
+			contact_phone: '',
+			contact_email: '',
+			payment_method: 'cash',
+			delivery_address: undefined
+		}
 	})
 
 	const onSubmit: SubmitHandler<any> = async data => {
@@ -52,7 +86,12 @@ export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, disabled }) =>
 			quantity,
 			product_cost
 		}))
-		createNewOrder({ ...data, product_list: products, total_cost: totalPrice })
+		createNewOrder({
+			...data,
+			delivery_address: data.delivery_address || null,
+			product_list: products,
+			total_cost: totalPrice
+		})
 			.unwrap()
 			.then(() => {
 				setOpen(false)
@@ -99,10 +138,9 @@ export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, disabled }) =>
 					control={control}
 					render={({ field }) => (
 						<TextField
-							required
 							multiline
 							fullWidth
-							label='Имя'
+							label='Имя*'
 							variant='outlined'
 							color='secondary'
 							{...field}
@@ -110,15 +148,15 @@ export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, disabled }) =>
 						/>
 					)}
 				/>
+				<div className={s.errorMsg}>{errors.first_name?.message}</div>
 				<Controller
 					name='last_name'
 					control={control}
 					render={({ field }) => (
 						<TextField
-							required
 							multiline
 							fullWidth
-							label='Фамилия'
+							label='Фамилия*'
 							variant='outlined'
 							color='secondary'
 							{...field}
@@ -126,15 +164,15 @@ export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, disabled }) =>
 						/>
 					)}
 				/>
+				<div className={s.errorMsg}>{errors.last_name?.message}</div>
 				<Controller
 					name='surname'
 					control={control}
 					render={({ field }) => (
 						<TextField
-							required
 							multiline
 							fullWidth
-							label='Отчество'
+							label='Отчество*'
 							variant='outlined'
 							color='secondary'
 							{...field}
@@ -142,15 +180,15 @@ export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, disabled }) =>
 						/>
 					)}
 				/>
+				<div className={s.errorMsg}>{errors.surname?.message}</div>
 				<Controller
 					name='contact_phone'
 					control={control}
 					render={({ field }) => (
 						<TextField
-							required
 							multiline
 							fullWidth
-							label='Номер телефона в формате 375 XX XXX XX XX'
+							label='Номер телефона в формате 375XXXXXXXXX *'
 							variant='outlined'
 							color='secondary'
 							{...field}
@@ -158,6 +196,7 @@ export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, disabled }) =>
 						/>
 					)}
 				/>
+				<div className={s.errorMsg}>{errors.contact_phone?.message}</div>
 
 				<Controller
 					name='contact_email'
@@ -174,7 +213,7 @@ export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, disabled }) =>
 						/>
 					)}
 				/>
-
+				<div className={s.errorMsg}>{errors.contact_email?.message}</div>
 				<Controller
 					name='delivery_address'
 					control={control}
@@ -191,7 +230,7 @@ export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, disabled }) =>
 						/>
 					)}
 				/>
-
+				<div className={s.errorMsg}>{errors.delivery_address?.message}</div>
 				<Controller
 					control={control}
 					name='payment_method'
@@ -206,6 +245,7 @@ export const CreateNewOrder: React.FC<Type> = ({ btnTitle, title, disabled }) =>
 						</>
 					)}
 				/>
+				<div className={s.errorMsg}>{errors.payment_method?.message}</div>
 				<FormControlLabel
 					control={<Checkbox checked={checked} onChange={() => setChecked(!checked)} color='primary' />}
 					label='Согласие на обработку персональных данных'

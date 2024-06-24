@@ -1,30 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import s from './ProductsPage.module.css'
 import { Products } from '../../features/client/products/Products'
-import { useActions } from '../../common/hooks'
+import { useActions, useAppDispatch } from '../../common/hooks'
 import { productsThunks } from '../../features/client/products/products-slice'
 import { useSelector } from 'react-redux'
 import { selectCategory, selectProducts, selectSubcategories } from '../../features/client/products/products-selectors'
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { SubcategoryButton } from '../../common/components/subcategory-button/subcategoryButton'
-import { InfoBlock } from '../../common/components/info-block/InfoBlock'
 import { RootState } from '../../app/store'
 import { PaginationComponent } from '../../common/components/pagination/Pagination'
 import { ProductsListParamsType } from '../../features/client/products/products-types'
 import { productsParamsActions } from '../../features/client/products/products-params-slice'
-import { PriceSlider } from '../../common/components/slider/price-slider/PriceSlider'
-import { WeightSlider } from '../../common/components/slider/weight-slider/WeightSlider'
 import Button from '@mui/material/Button'
 import { changeImgPath } from '../../common/utils/changeImgPath'
-import { CartCounter } from '../../common/components/counter/cart-counter/CartCounter'
-import { SearchByPeople } from '../../common/components/search-by-people/SearchByPeople'
-import { _InfoBlock } from '../../common/components/info-block/test/_InfoBlock'
-import { makeStyles, useMediaQuery, useTheme } from '@mui/material'
+import { SearchByValue } from '../../common/components/search-by-value/SearchByValue'
 import { ButtonBack } from '../../common/components/button-back/ButtonBack'
+import { InfoBlock } from '../../common/components/info-block/InfoBlock'
 
 export const ProductsPage = () => {
 	console.log('ProductsPage rendering')
-
+	const dispatch = useAppDispatch()
 	const { fetchProductsList, fetchSubCategories } = useActions(productsThunks)
 	const {
 		page,
@@ -91,11 +86,9 @@ export const ProductsPage = () => {
 
 	return (
 		<div className={s.container}>
-			<_InfoBlock title={category_name} description={category_description} type={''}>
-				{/*<InfoBlock title={category_name} description={category_description}>*/}
+			<InfoBlock title={category_name} description={category_description} type={''}>
 				{<ButtonBack callback={redirectToHome} />}
-				{/*</InfoBlock>*/}
-			</_InfoBlock>
+			</InfoBlock>
 			<div className={s.wrp}>
 				<div className={s.leftBlock}>
 					<div className={s.leftContainer}>
@@ -103,31 +96,52 @@ export const ProductsPage = () => {
 							Сбросить фильтр
 						</Button>
 						<div className={s.peopleWrapper}>
-							<div className={s.peopleTitle}>Сортировать по цене</div>
-							<div className={s.peopleSubText}>{`от ${minPriceState ?? 0} руб. - до ${maxPriceState ?? 0} руб.`}</div>
+							{/*<div className={s.peopleTitle}>Сортировать по цене</div>*/}
+							<div className={s.peopleTitle}>Цена</div>
+							{/*<div className={s.peopleSubText}>{`от ${minPriceState ?? 0} руб. - до ${maxPriceState ?? 0} руб.`}</div>*/}
 							<div className={s.searchMultiple}>
-								от
-								<SearchByPeople callback={searchByMinPrice} searchValue={searchValue} />
-								до
-								<SearchByPeople callback={searchByMaxPrice} searchValue={searchValue} />
+								{/*от*/}
+								<SearchByValue
+									callback={searchByMinPrice}
+									searchValue={searchValue}
+									fromTo={`от ${minPriceState ?? 0} руб.`}
+								/>
+								{/*до*/}
+								<SearchByValue
+									callback={searchByMaxPrice}
+									searchValue={searchValue}
+									fromTo={`до ${maxPriceState ?? 0} руб.`}
+								/>
 							</div>
 						</div>
 						<div className={s.peopleWrapper}>
-							<div className={s.peopleTitle}>Сортировать по весу</div>
-							<div className={s.peopleSubText}>{`от ${minWeightState ?? 0} гр. - до ${maxWeightState ?? 0} гр.`}</div>
+							{/*<div className={s.peopleTitle}>Сортировать по весу</div>*/}
+							<div className={s.peopleTitle}>Вес</div>
+							{/*<div className={s.peopleSubText}>{`от ${minWeightState ?? 0} гр. - до ${maxWeightState ?? 0} гр.`}</div>*/}
 							<div className={s.searchMultiple}>
-								от
-								<SearchByPeople callback={searchByMinWeight} searchValue={searchValue} />
-								до
-								<SearchByPeople callback={searchByMaxWeight} searchValue={searchValue} />
+								{/*от*/}
+								<SearchByValue
+									callback={searchByMinWeight}
+									searchValue={searchValue}
+									fromTo={`от ${minWeightState ?? 0} гр.`}
+								/>
+								{/*до*/}
+								<SearchByValue
+									callback={searchByMaxWeight}
+									searchValue={searchValue}
+									fromTo={`до ${maxWeightState ?? 0} гр.`}
+								/>
 							</div>
 						</div>
-						{/*<PriceSlider minPriceState={minPriceState} maxPriceState={maxPriceState} />*/}
-						{/*<WeightSlider minWeightState={minWeightState} maxWeightState={maxWeightState} />*/}
 						<div className={s.peopleWrapper}>
-							<div className={s.peopleTitle}>Сортировать по количеству человек</div>
-							<div className={s.peopleSubText}>{`от ${minPeopleState ?? 0} чел. - до ${maxPeopleState ?? 0} чел.`}</div>
-							<SearchByPeople callback={searchByPeople} searchValue={searchValue} />
+							{/*<div className={s.peopleTitle}>Сортировать по количеству человек</div>*/}
+							<div className={s.peopleTitle}>Количество человек</div>
+							{/*<div className={s.peopleSubText}>{`от ${minPeopleState ?? 0} чел. - до ${maxPeopleState ?? 0} чел.`}</div>*/}
+							<SearchByValue
+								callback={searchByPeople}
+								searchValue={searchValue}
+								fromTo={`от ${minPeopleState ?? 0} чел. - до ${maxPeopleState ?? 0} чел.`}
+							/>
 						</div>
 					</div>
 				</div>
@@ -139,7 +153,6 @@ export const ProductsPage = () => {
 								return <SubcategoryButton key={el.id} name={el.name} callback={() => searchBySubcategory(el.id)} />
 							})}
 						</div>
-						{/*<div>Sort by price/by popularity/</div>*/}
 						<div className={s.products}>
 							{!products.length ? (
 								<h2>по Вашему запросу ничего не найдено</h2>
@@ -174,6 +187,9 @@ export const ProductsPage = () => {
 					pageCount={page_count}
 					productsTotalCount={total_products}
 					total_pages={total_pages}
+					setPage={(newPage: number) =>
+						setSearchParams({ ...Object.fromEntries(searchParams), page: newPage.toString() })
+					}
 				/>
 			</div>
 		</div>

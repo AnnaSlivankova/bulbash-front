@@ -18,3 +18,8 @@
 .link:hover {
     font-weight: bold;
 }
+
+.errorMsg{
+    color: red;
+    font-size: 12px;
+}

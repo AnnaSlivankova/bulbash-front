@@ -5,6 +5,8 @@
     min-height: 100vh;
     background-color: #f4f4f4;
     align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 .container {
    width: 80%;

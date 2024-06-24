@@ -4,6 +4,7 @@
     align-items: center;
     width: 100%;
     margin: 16px 0 31px 0;
+
 }
 
 .rememberMeWrapper {
@@ -44,4 +45,9 @@
 
 .linkSUP:hover {
     font-weight: bold;
+}
+
+.errorMsg{
+    color: red;
+    font-size: 12px;
 }

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, FocusEvent, useEffect, useState } from 'react'
 import IconButton from '@mui/material/IconButton'
 import RemoveIcon from '@mui/icons-material/Remove'
 import AddIcon from '@mui/icons-material/Add'
@@ -32,6 +32,10 @@ export const Counter: React.FC<PropsType> = ({ count, callback }) => {
 	const theme = useTheme()
 	const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
 
+	const handleWheel = (event: React.WheelEvent<HTMLInputElement>) => {
+		event.preventDefault()
+	}
+
 	return (
 		<div className={s.counterContainer}>
 			<div className={s.counter}>
@@ -41,7 +45,17 @@ export const Counter: React.FC<PropsType> = ({ count, callback }) => {
 				{/*<IconButton onClick={decCounterValue}>*/}
 				{/*	<RemoveIcon />*/}
 				{/*</IconButton>*/}
-				<input type='number' value={counterValue} className={s.counterInput} onChange={onChangeValueHandler} />
+				<input
+					type='number'
+					value={counterValue}
+					className={s.counterInput}
+					onChange={onChangeValueHandler}
+					inputMode={'numeric'}
+					onWheel={handleWheel}
+					min={1}
+					max={1000}
+					step={1}
+				/>
 				<svg className={s.icon} onClick={incCounterValue}>
 					<use xlinkHref={`${sprite}#plus`} />
 				</svg>

@@ -68,15 +68,12 @@ export const Products: React.FC<ProductsType> = ({
 
 	return (
 		<Zoom in={zoom} style={{ transitionDuration: '500ms' }}>
-			{/*<Card sx={{ width: 300 }}>*/}
 			<Card
-				// sx={{ width: 160 }}
 				sx={{
 					width: isSmallScreen ? 160 : 300
 				}}
 			>
 				<CardActionArea onClick={redirectToProduct}>
-					{/*<CardMedia component='img' height='200' image={imgPath} alt={name} sx={{*/}
 					<CardMedia
 						component='img'
 						height='200'
