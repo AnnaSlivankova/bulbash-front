@@ -11,16 +11,31 @@ export const SearchByValue: React.FC<PropsType> = ({ callback, searchValue, from
 	const onChangeValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		setValue(e.currentTarget.value)
 	}
+	const handleWheel = (event: React.WheelEvent<HTMLInputElement>) => {
+		event.preventDefault()
+	}
 
 	useEffect(() => {
 		callback(+debouncedValue)
 	}, [debouncedValue])
 
-	useEffect(() => {
-		if (searchValue) setValue(searchValue)
-	}, [searchValue])
-
-	// return <input type='number' value={value} onChange={onChangeValueHandler} className={s.peopleInput} />
+	// return (
+	// 	<>
+	// 		<label inputMode={'numeric'} htmlFor='outlined-basic'>
+	// 			{fromTo || 'от:'}
+	// 		</label>
+	// 		<input
+	// 			id='outlined-basic'
+	// 			type='number'
+	// 			value={value}
+	// 			onChange={onChangeValueHandler}
+	// 			className={s.peopleInput}
+	// 			inputMode={'numeric'}
+	// 			min={0}
+	// 			max={1000}
+	// 		/>
+	// 	</>
+	// )
 	return (
 		<TextField
 			id='outlined-basic'
@@ -29,9 +44,11 @@ export const SearchByValue: React.FC<PropsType> = ({ callback, searchValue, from
 			color={'secondary'}
 			size={'small'}
 			onChange={onChangeValueHandler}
-			// value={searchValue}
 			value={value}
 			type={'number'}
+			inputMode={'numeric'}
+			onWheel={handleWheel}
+			inputProps={{ min: 0, step: 1 }}
 		/>
 	)
 }
