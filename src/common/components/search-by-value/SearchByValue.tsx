@@ -31,6 +31,7 @@ export const SearchByValue: React.FC<PropsType> = ({ callback, searchValue, from
 			onChange={onChangeValueHandler}
 			// value={searchValue}
 			value={value}
+			type={'number'}
 		/>
 	)
 }
