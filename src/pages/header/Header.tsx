@@ -65,6 +65,11 @@ export const Header: React.FC = () => {
 		setIsDrawerOpen(false)
 	}
 
+	const redirectToHowToOrder = () => {
+		navigate('/how-to-order')
+		setIsDrawerOpen(false)
+	}
+
 	return (
 		<AppBar
 			position='fixed'
@@ -98,9 +103,15 @@ export const Header: React.FC = () => {
 					<span onClick={redirectToHome} className={s.navItem}>
 						категории
 					</span>
+
 					<span className={s.navItem} onClick={redirectToContacts}>
 						контакты
 					</span>
+
+					<span className={s.navItem} onClick={redirectToHowToOrder}>
+						доставка и оплата
+					</span>
+
 					{isScrolled && (
 						<>
 							{!isLogin ? (
@@ -165,6 +176,11 @@ export const Header: React.FC = () => {
 								<div onClick={redirectToContacts} className={s.drawerLink}>
 									контакты
 								</div>
+
+								<div onClick={redirectToHowToOrder} className={s.drawerLink}>
+									доставка и оплата
+								</div>
+
 								{!isLogin ? (
 									<>
 										<div onClick={redirectToLogin} className={s.drawerLink}>

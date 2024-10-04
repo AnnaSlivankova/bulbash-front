@@ -49,7 +49,7 @@ export const infoData: Info = {
 		issued_by: 'Выдан Минским горисполкомом',
 		organization_address: '220066 г. Минск, ул. Голодеда 47 кв. 49',
 		physical_address: '220066 г. Минск, ул. Голодеда 47 кв. 49',
-		photo_certificate: 'https://bulbashfood.ru/media/certificate/certificate_ip.jpg',
+		photo_certificate: 'https://bulbash-food.by/media/certificate/certificate_ip.jpg',
 		bank_current_account: 'р/с BY89ALFA30132D71980010270000',
 		bank_identification_code: 'BIC-ALFABY2X УНП 101541947, ОКПО 37526626',
 		bank_address: 'в ЗАО «Альфа-Альфа-банк» 220013 г.Минск  ул.Сурганова43 47',

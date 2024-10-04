@@ -80,7 +80,8 @@
 }
 
 
-@media (min-width: 768px) {
+/*@media (min-width: 768px) {*/
+@media (min-width: 951px) {
     /* Стили для широких экранов */
     .drawer {
         display: none;
@@ -94,7 +95,8 @@
     }
 }
 
-@media (max-width: 767px) {
+/*@media (max-width: 767px) {*/
+@media (max-width: 950px) {
     .capIcon {
         margin-right: 0;
     }

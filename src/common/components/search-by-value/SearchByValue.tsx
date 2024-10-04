@@ -19,23 +19,6 @@ export const SearchByValue: React.FC<PropsType> = ({ callback, searchValue, from
 		callback(+debouncedValue)
 	}, [debouncedValue])
 
-	// return (
-	// 	<>
-	// 		<label inputMode={'numeric'} htmlFor='outlined-basic'>
-	// 			{fromTo || 'от:'}
-	// 		</label>
-	// 		<input
-	// 			id='outlined-basic'
-	// 			type='number'
-	// 			value={value}
-	// 			onChange={onChangeValueHandler}
-	// 			className={s.peopleInput}
-	// 			inputMode={'numeric'}
-	// 			min={0}
-	// 			max={1000}
-	// 		/>
-	// 	</>
-	// )
 	return (
 		<TextField
 			id='outlined-basic'

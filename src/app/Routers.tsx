@@ -19,6 +19,7 @@ import { UserOrdersPage } from 'pages/user-orders-page/UserOrdersPage'
 import { OrdersAdmin } from '../features/admin/orders-admin/OrdersAdmin'
 import { Contacts } from '@mui/icons-material'
 import { ContactsPage } from '../pages/contacts/ContactsPage'
+import { HowToOrderPage } from '../pages/how-to-order/HowToOrderPage'
 
 export const Routers = () => {
 	return (
@@ -34,6 +35,9 @@ export const Routers = () => {
 			{/*<Route path={'/user-orders/:id'} element={<UserOrdersPage />} />*/}
 			{/*<Route path={'/products/:id'} element={<ProductPage />} />*/}
 			<Route path={'/contacts'} element={<ContactsPage />} />
+
+			<Route path={'/how-to-order'} element={<HowToOrderPage />} />
+
 			<Route path={'/signin'} element={<Signin />} />
 			<Route path={'/signup'} element={<Signup />} />
 			<Route path={'/forgot-password'} element={<ForgotPassword />} />
