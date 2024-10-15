@@ -28,30 +28,31 @@ export const Products: React.FC<ProductsType> = ({
 	weight
 }) => {
 	const { setProductId } = useActions(productsActions)
-
 	const { addItemToCard } = useActions(userCartThunks)
-
+	const { setNotification } = useActions(userCartThunks)
 	const isLogin = useSelector<RootState, boolean>(state => state.auth.isLogin)
-
 	const dispatch = useAppDispatch()
-
 	const navigate = useNavigate()
+
 	const redirectToProduct = () => {
 		setProductId({ product_id: id })
-		// navigate('/product')
 		navigate(`/product/${id}`)
 	}
 
 	const [showCartBtn, setShowCartBtn] = useState(false)
-
 	const [isDisabled, setIsDisabled] = useState(false)
-
 	const [count, setCount] = useState(1)
+
 	const setCountHandler = (countValue: number) => {
 		setCount(countValue)
 	}
 
 	const addToCartHandler = () => {
+		if (!isLogin) {
+			setNotification({ msg: 'Для заказа необходимо ВОЙТИ или ЗАРЕГЕСТРИРОВАТЬСЯ!', severity: 'warning' })
+			return
+		}
+
 		setShowCartBtn(!showCartBtn)
 		setIsDisabled(true)
 		addItemToCard({
@@ -133,9 +134,11 @@ export const Products: React.FC<ProductsType> = ({
 							{`на ${peopleNumber} чел., ${weight} гр.`}
 						</Typography>
 					</div>
-					{isLogin && (
+					{
+						// isLogin &&
 						<div className={s.counter}>
 							<CartCounter callback={setCountHandler} count={1} isDisabled={isDisabled} />
+
 							{showCartBtn ? (
 								<Button
 									variant='contained'
@@ -159,7 +162,7 @@ export const Products: React.FC<ProductsType> = ({
 								</Button>
 							)}
 						</div>
-					)}
+					}
 				</div>
 			</Card>
 		</Zoom>

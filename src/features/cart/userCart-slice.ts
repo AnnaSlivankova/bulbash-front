@@ -9,7 +9,7 @@ import {
 	ResponseGetCartItemsType,
 	userCartApi
 } from './userCart-api'
-import { authActions, authThunks } from '../auth/auth-slice'
+import { authActions, authThunks, SeverityType } from '../auth/auth-slice'
 import { productsAdminAPI } from '../admin/products/products-admin-api'
 import { adminProductsThunks } from '../admin/products/products-admin-slice'
 
@@ -75,6 +75,15 @@ const deleteCardItem = createAppAsyncThunk<void, number>('userCart/deleteItem', 
 	}
 })
 
+const setNotification = createAppAsyncThunk<void, { msg: string; severity: SeverityType }>(
+	'userCart/notification',
+	async (data, thunkAPI) => {
+		const { dispatch } = thunkAPI
+		dispatch(authActions.setMessage({ message: data.msg }))
+		dispatch(authActions.setSeverity({ severity: data.severity }))
+	}
+)
+
 const slice = createSlice({
 	name: 'userCart',
 	initialState: {
@@ -94,4 +103,4 @@ const slice = createSlice({
 
 export const userCartSlice = slice.reducer
 export const userCartActions = slice.actions
-export const userCartThunks = { getCardItems, addItemToCard, updateCardItem, deleteCardItem }
+export const userCartThunks = { getCardItems, addItemToCard, updateCardItem, deleteCardItem, setNotification }

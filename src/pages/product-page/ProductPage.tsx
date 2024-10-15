@@ -16,6 +16,7 @@ import { InfoBlock } from '../../common/components/info-block/InfoBlock'
 
 export const ProductPage = () => {
 	const product = useSelector<RootState, ResponseFetchProduct>(state => state.products.product)
+	const { setNotification } = useActions(userCartThunks)
 	const isLogin = useSelector<RootState, boolean>(state => state.auth.isLogin)
 
 	const navigate = useNavigate()
@@ -39,6 +40,11 @@ export const ProductPage = () => {
 	}
 
 	const addToCartHandler = () => {
+		if (!isLogin) {
+			setNotification({ msg: 'Для заказа необходимо ВОЙТИ или ЗАРЕГЕСТРИРОВАТЬСЯ!', severity: 'warning' })
+			return
+		}
+
 		setShowCartBtn(!showCartBtn)
 		setIsDisabled(true)
 		addItemToCard({ product_id: product.id, quantity: count })
@@ -78,6 +84,15 @@ export const ProductPage = () => {
 						{!isLogin ? (
 							<div style={{ display: 'flex', flexDirection: 'column' }}>
 								<div className={s.price} style={{ margin: '10px' }}>{`Цена ${product.price} руб. `}</div>
+								<Button
+									variant='contained'
+									onClick={addToCartHandler}
+									sx={{
+										fontSize: isSmallScreen ? 10 : 18
+									}}
+								>
+									Заказать
+								</Button>
 								<div style={{ margin: '10px', fontSize: '12px' }}>
 									Для того чтобы сделать заказ,{' '}
 									<Link style={{ textDecoration: 'underline', color: '#366eff' }} to='/signin'>
