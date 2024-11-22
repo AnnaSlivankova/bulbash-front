@@ -17,9 +17,9 @@ import { VerifyToken } from '../pages/forgot-password/VerifyToken'
 import { VerifyEmail } from '../pages/signup/VerifyEmail'
 import { UserOrdersPage } from 'pages/user-orders-page/UserOrdersPage'
 import { OrdersAdmin } from '../features/admin/orders-admin/OrdersAdmin'
-import { Contacts } from '@mui/icons-material'
 import { ContactsPage } from '../pages/contacts/ContactsPage'
 import { HowToOrderPage } from '../pages/how-to-order/HowToOrderPage'
+import { AboutUsPage } from '../pages/about-us-page/AboutUsPage'
 
 export const Routers = () => {
 	return (
@@ -37,6 +37,7 @@ export const Routers = () => {
 			<Route path={'/contacts'} element={<ContactsPage />} />
 
 			<Route path={'/how-to-order'} element={<HowToOrderPage />} />
+			<Route path={'/about-us'} element={<AboutUsPage />} />
 
 			<Route path={'/signin'} element={<Signin />} />
 			<Route path={'/signup'} element={<Signup />} />
